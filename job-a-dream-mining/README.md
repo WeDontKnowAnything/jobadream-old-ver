@@ -1,6 +1,6 @@
-# 프로젝트 이름
+# job-a-dream-mining
 
-프로젝트에 대한 간단한 설명을 여기에 추가하세요.
+This template should help get you started developing with Python.
 
 ## 요구 사항
 
