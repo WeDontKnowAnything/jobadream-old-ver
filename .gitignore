@@ -10,6 +10,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# settings
+env/
+
 # Unit test / coverage reports
 htmlcov/
 .tox/
