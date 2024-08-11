@@ -28,6 +28,8 @@ coverage.xml
 .pytest_cache/
 cover/
 
+*.csv
+
 # Environments
 .venv
 
@@ -60,6 +62,5 @@ coverage
 *.njsproj
 *.sln
 *.sw?
-*.csv
 
 *.tsbuildinfo
