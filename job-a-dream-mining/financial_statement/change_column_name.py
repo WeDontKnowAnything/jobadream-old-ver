@@ -13,13 +13,13 @@ def process_file(file_path):
     df.rename(columns=Column.COLUMN_NAMES.value, inplace=True)
 
     # 변환된 CSV 파일 저장 (덮어쓰기)
-    df.to_csv(file_path, index=False)
+    df.to_csv(file_path, index=False, encoding="utf-8-sig")
 
 
 def create_file_path():
     file_paths = [
-        os.path.join(Column.CSV2CHANGE_DIR.value, filename)
-        for filename in os.listdir(Column.CSV2CHANGE_DIR.value)
+        os.path.join(Path.CSV2CHANGE_DIR.value, filename)
+        for filename in os.listdir(Path.CSV2CHANGE_DIR.value)
         # if filename.endswith(".csv")
     ]
     return file_paths

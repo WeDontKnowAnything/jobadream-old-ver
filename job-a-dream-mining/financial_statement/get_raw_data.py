@@ -68,14 +68,15 @@ def get_report(corp_df, corp_name, bsns_year, report_code):
             # print(f"{corp_name}사의 {bsns_year}년 {report_name} 재무제표가 없습니다.")
             pass
         else:
-            financial_report = pd.DataFrame(data)
-            financial_report.to_csv(
+            financial_report_df = pd.DataFrame(data)
+            financial_report_df.to_csv(
                 f"../data/financial_reports/{corp_name} {bsns_year}년 {report_name} 재무보고서.csv",
                 index=True,
+                encoding="utf-8-sig",
             )
     else:
-        financial_report = pd.DataFrame(data)
-        financial_report.to_csv(
+        financial_report_df = pd.DataFrame(data)
+        financial_report_df.to_csv(
             f"../data/financial_reports/{corp_name} {bsns_year}년 {report_name} 연결재무보고서.csv",
             index=True,
         )
