@@ -1,0 +1,29 @@
+1. stck_bsop_date: 주식의 거래일자.
+
+2. stck_clpr: 주식의 종가.
+
+3. stck_oprc: 주식의 시가.
+
+4. stck_hgpr: 주식의 고가.
+
+5. stck_lwpr: 주식의 저가.
+
+6. acml_vol: 누적 거래량.
+
+7. acml_tr_pbmn: 누적 거래 대금.
+
+8. flng_cls_code: 주식의 등락 코드.
+
+9. prtt_rate: 배당률.
+
+10. mod_yn: 수정 여부.
+
+11.	prdy_vrss_sign: 전일 대비 변동 표시.
+
+12.	prdy_vrss:전일 대비 변동.
+
+13. revl_issu_reas: 이슈 발생 이유.
+
+14.	stock_name: 종목명.
+
+15. item_code: 종목 코드.
