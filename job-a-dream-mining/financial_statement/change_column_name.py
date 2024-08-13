@@ -2,34 +2,7 @@ import os
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
 import pandas as pd
-
-# 변경할 칼럼명 딕셔너리
-COLUMN_NAMES = {
-    "rcept_no": "접수번호",
-    "reprt_code": "보고서 코드",
-    "bsns_year": "사업 연도",
-    "corp_code": "고유번호",
-    "sj_div": "재무제표구분",
-    "sj_nm": "재무제표명",
-    "account_id": "계정ID",
-    "account_nm": "계정명",
-    "account_detail": "계정상세",
-    "thstrm_nm": "당기명",
-    "thstrm_amount": "당기금액",
-    "thstrm_add_amount": "당기누적금액",
-    "frmtrm_nm": "전기명",
-    "frmtrm_amount": "전기금액",
-    "frmtrm_q_nm": "전기명(분/반기)",
-    "frmtrm_q_amount": "전기금액(분/반기)",
-    "frmtrm_add_amount": "전기누적금액",
-    "bfefrmtrm_nm": "전전기명",
-    "bfefrmtrm_amount": "전전기금액",
-    "ord": "계정과목 정렬순서",
-    "currency": "통화 단위",
-}
-
-# 지정된 디렉토리 경로
-directory = "../data/financial_reports"
+from constants import Column, Path
 
 
 def process_file(file_path):
@@ -37,7 +10,7 @@ def process_file(file_path):
     df = pd.read_csv(file_path)
 
     # 칼럼명 변환
-    df.rename(columns=COLUMN_NAMES, inplace=True)
+    df.rename(columns=Column.COLUMN_NAMES.value, inplace=True)
 
     # 변환된 CSV 파일 저장 (덮어쓰기)
     df.to_csv(file_path, index=False)
@@ -45,8 +18,8 @@ def process_file(file_path):
 
 def create_file_path():
     file_paths = [
-        os.path.join(directory, filename)
-        for filename in os.listdir(directory)
+        os.path.join(Column.CSV2CHANGE_DIR.value, filename)
+        for filename in os.listdir(Column.CSV2CHANGE_DIR.value)
         # if filename.endswith(".csv")
     ]
     return file_paths

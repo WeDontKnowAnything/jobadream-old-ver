@@ -1,30 +1,8 @@
-from enum import Enum
-
 import dart_fss
 import pandas as pd
 from env import settings
 
-
-class Path(Enum):
-    CSV2COMPARE_PATH = "../data/listed_corps/상장법인목록_2024_08_09.csv"
-
-
-class Report(Enum):
-    BSNS_YEARS = [
-        "2020",
-    ]  # (1) 사업연도(4자리) ※ 2015년 이후 부터 정보제공
-    REPORT_LIST = {
-        "11013": "1분기",
-        "11012": "반기",
-        "11014": "3분기",
-        "11011": "사업",
-    }  # (3) 1분기보고서 : 11013 반기보고서 : 11012 3분기보고서 : 11014 사업보고서 : 11011
-    FS_DIV = ["CFS", "OFS"]  # (4) CFS : 연결재무제표 OFS : 재무제표
-    START_CORP_NAME = "케이티앤지"
-
-
-class SystemLimits(Enum):
-    MAX_CALL_COUNT = 19500
+from .constants import Path, Report
 
 
 def set_api_key():
@@ -46,7 +24,7 @@ def get_corps_df() -> pd.DataFrame:
 def remove_delisted_corps(corp_df) -> pd.DataFrame:
     # CSV 파일 읽기
 
-    compare_df = pd.read_csv(Path.CSV2COMPARE_PATH.value)
+    compare_df = pd.read_csv(Path.CSV2COMPARE_FILE.value)
 
     # 데이터 타입 변환
     corp_df["stock_code"] = corp_df["stock_code"].astype(int)

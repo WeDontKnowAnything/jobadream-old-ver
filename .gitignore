@@ -28,8 +28,6 @@ coverage.xml
 .pytest_cache/
 cover/
 
-*.csv
-
 # Environments
 .venv
 
