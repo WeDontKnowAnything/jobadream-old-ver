@@ -22,10 +22,10 @@ def load_stock_data(file_path: str, sheet_name: str, market: str) -> pd.DataFram
     Returns:
         pd.DataFrame: 필터링된 데이터프레임.
     """
-    df = pd.read_excel(file_path, sheet_name=sheet_name)
+    stock_code_df = pd.read_excel(file_path, sheet_name=sheet_name)
 
     if market == "KOSPI":
-        df = df.rename(
+        stock_code_df = stock_code_df.rename(
             columns={
                 "단축코드": "item_code",
                 "한글명": "stock_name",
@@ -33,7 +33,7 @@ def load_stock_data(file_path: str, sheet_name: str, market: str) -> pd.DataFram
             }
         )
     elif market == "KOSDAQ":
-        df = df.rename(
+        stock_code_df = stock_code_df.rename(
             columns={
                 "단축코드": "item_code",
                 "한글종목명": "stock_name",
@@ -41,7 +41,7 @@ def load_stock_data(file_path: str, sheet_name: str, market: str) -> pd.DataFram
             }
         )
     elif market == "KONEX":
-        df = df.rename(
+        stock_code_df = stock_code_df.rename(
             columns={
                 "단축코드": "item_code",
                 "종목명": "stock_name",
@@ -49,10 +49,12 @@ def load_stock_data(file_path: str, sheet_name: str, market: str) -> pd.DataFram
             }
         )
 
-    df = df[df["group_code"] == "ST"]
-    df["item_code"] = df["item_code"].apply(lambda x: f"{int(x):06d}")
+    stock_code_df = stock_code_df[stock_code_df["group_code"] == "ST"]
+    stock_code_df["item_code"] = stock_code_df["item_code"].apply(
+        lambda x: f"{int(x):06d}"
+    )
 
-    return df[["item_code", "stock_name", "group_code"]]
+    return stock_code_df[["item_code", "stock_name", "group_code"]]
 
 
 def inquire_daily_itemchart_price(
@@ -151,7 +153,7 @@ def save_market_data(file_paths: dict, start_date: str, output_filename: str) ->
         start_date (str): 데이터 수집 시작 날짜 (예: '20200101').
         output_filename (str): 결과를 저장할 CSV 파일 이름.
     """
-    all_data = pd.DataFrame()
+    all_market_data = pd.DataFrame()
 
     for market, path_info in file_paths.items():
         print(f"{market} 데이터 수집을 시작합니다.")
@@ -166,12 +168,14 @@ def save_market_data(file_paths: dict, start_date: str, output_filename: str) ->
             if not monthly_data.empty:
                 monthly_data["stock_name"] = stock_name
                 monthly_data["item_code"] = item_code
-                all_data = pd.concat([all_data, monthly_data], ignore_index=True)
+                all_market_data = pd.concat(
+                    [all_market_data, monthly_data], ignore_index=True
+                )
 
         print(f"{market} 데이터 수집 완료.")
 
-    if not all_data.empty:
-        all_data.to_csv(output_filename, index=False)
+    if not all_market_data.empty:
+        all_market_data.to_csv(output_filename, index=False)
         print(f"{output_filename} 파일에 저장 완료")
     else:
         print("수집된 데이터가 없어 파일 저장을 건너뜁니다.")
@@ -181,9 +185,18 @@ def main() -> None:
     start_date = "20200101"
 
     file_paths = {
-        "KOSPI": {"file_path": "test/kospi_code.xlsx", "sheet_name": "Sheet1"},
-        "KOSDAQ": {"file_path": "test/kosdaq_code.xlsx", "sheet_name": "Sheet1"},
-        "KONEX": {"file_path": "test/konex_code.xlsx", "sheet_name": "Sheet1"},
+        "KOSPI": {
+            "file_path": "job-a-dream-mining/data/stock_code/kospi_code.xlsx",
+            "sheet_name": "Sheet1",
+        },
+        "KOSDAQ": {
+            "file_path": "job-a-dream-mining/data/stock_code/kosdaq_code.xlsx",
+            "sheet_name": "Sheet1",
+        },
+        "KONEX": {
+            "file_path": "job-a-dream-mining/data/stock_code/konex_code.xlsx",
+            "sheet_name": "Sheet1",
+        },
     }
 
     save_market_data(file_paths, start_date, "stocks_data_markets.csv")
