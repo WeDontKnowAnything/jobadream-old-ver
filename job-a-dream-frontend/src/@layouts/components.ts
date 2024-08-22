@@ -1,6 +1,0 @@
-export { default as HorizontalNav } from './components/HorizontalNav.vue'
-export { default as HorizontalNavGroup } from './components/HorizontalNavGroup.vue'
-export { default as HorizontalNavLayout } from './components/HorizontalNavLayout.vue'
-export { default as HorizontalNavLink } from './components/HorizontalNavLink.vue'
-export { default as HorizontalNavPopper } from './components/HorizontalNavPopper.vue'
-export { default as TransitionExpand } from './components/TransitionExpand.vue'
