@@ -1,3 +1,4 @@
+// import type { Component, VNode } from 'vue'
 import type { RouteLocationRaw } from 'vue-router'
 import type { AppContentLayoutNav, ContentWidth, FooterType, HorizontalNavType, NavbarType } from '@layouts/enums'
 
@@ -8,11 +9,6 @@ export interface LayoutConfig {
     contentWidth: typeof ContentWidth[keyof typeof ContentWidth]
     contentLayoutNav: typeof AppContentLayoutNav[keyof typeof AppContentLayoutNav]
     overlayNavFromBreakpoint: number
-
-    // isRTL: boolean
-    i18n: {
-      enable: boolean
-    }
     iconRenderer: Component
   }
   navbar: {
@@ -22,10 +18,6 @@ export interface LayoutConfig {
   footer: {
     type: typeof FooterType[keyof typeof FooterType]
   }
-  verticalNav: {
-    isVerticalNavCollapsed: boolean
-    defaultNavItemIconProps: unknown
-  }
   horizontalNav: {
     type: typeof HorizontalNavType[keyof typeof HorizontalNavType]
     transition: string | Component
@@ -34,8 +26,6 @@ export interface LayoutConfig {
     chevronDown: any
     chevronRight: any
     close: any
-    verticalNavPinned: any
-    verticalNavUnPinned: any
     sectionTitlePlaceholder: any
   }
 }
@@ -92,16 +82,9 @@ export interface NavGroup extends Partial<AclProperties> {
   disable?: boolean
 }
 
-export declare type VerticalNavItems = (NavLink | NavGroup | NavSectionTitle)[]
 export declare type HorizontalNavItems = (NavLink | NavGroup)[]
 
 // 👉 Components ========================
-
-export interface I18nLanguage {
-  label: string
-  i18nLang: string
-  isRTL: boolean
-}
 
 // avatar | text | icon
 // Thanks: https://stackoverflow.com/a/60617060/10796681

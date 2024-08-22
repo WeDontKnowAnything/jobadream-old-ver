@@ -4,8 +4,7 @@ import { getScatterChartConfig } from '@core/libs/apex-chart/apexCharConfig'
 
 const vuetifyTheme = useTheme()
 
-const scatterChartConfig = computed(() => getScatterChartConfig(vuetifyTheme.current.value),
-)
+const scatterChartConfig = computed(() => getScatterChartConfig(vuetifyTheme.current.value))
 
 const series = [
   {

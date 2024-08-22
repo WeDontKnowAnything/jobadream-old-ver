@@ -1,18 +1,11 @@
 import type { LiteralUnion, ValueOf } from 'type-fest'
 import type { Skins } from './enums'
-import type { I18nLanguage, LayoutConfig } from '@layouts/types'
+import type { LayoutConfig } from '@layouts/types'
 
 interface ExplicitThemeConfig {
   app: {
-    i18n: {
-      defaultLocale: string
-      langConfig: I18nLanguage[]
-    }
     theme: LiteralUnion<'light' | 'dark' | 'system', string>
     skin: ValueOf<typeof Skins>
-  }
-  verticalNav: {
-    isVerticalNavSemiDark: boolean
   }
 }
 

@@ -11,9 +11,7 @@ export const defineThemeConfig = (userConfig: UserThemeConfig): { themeConfig: U
         contentWidth: userConfig.app.contentWidth,
         contentLayoutNav: userConfig.app.contentLayoutNav,
         overlayNavFromBreakpoint: userConfig.app.overlayNavFromBreakpoint,
-        i18n: {
-          enable: userConfig.app.i18n.enable,
-        },
+
         iconRenderer: userConfig.app.iconRenderer,
       },
       navbar: {
@@ -21,10 +19,6 @@ export const defineThemeConfig = (userConfig: UserThemeConfig): { themeConfig: U
         navbarBlur: userConfig.navbar.navbarBlur,
       },
       footer: { type: userConfig.footer.type },
-      verticalNav: {
-        isVerticalNavCollapsed: userConfig.verticalNav.isVerticalNavCollapsed,
-        defaultNavItemIconProps: userConfig.verticalNav.defaultNavItemIconProps,
-      },
       horizontalNav: {
         type: userConfig.horizontalNav.type,
         transition: userConfig.horizontalNav.transition,
@@ -33,8 +27,6 @@ export const defineThemeConfig = (userConfig: UserThemeConfig): { themeConfig: U
         chevronDown: userConfig.icons.chevronDown,
         chevronRight: userConfig.icons.chevronRight,
         close: userConfig.icons.close,
-        verticalNavPinned: userConfig.icons.verticalNavPinned,
-        verticalNavUnPinned: userConfig.icons.verticalNavUnPinned,
         sectionTitlePlaceholder: userConfig.icons.sectionTitlePlaceholder,
       },
     },

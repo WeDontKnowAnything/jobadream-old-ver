@@ -1,5 +1,4 @@
 import type { Router } from 'vue-router'
-import { layoutConfig } from '@layouts/config'
 import { AppContentLayoutNav } from '@layouts/enums'
 import { useLayoutConfigStore } from '@layouts/stores/config'
 import type { NavGroup, NavLink, NavLinkProps } from '@layouts/types'
@@ -83,22 +82,6 @@ export const _setDirAttr = (dir: 'ltr' | 'rtl') => {
   // Check if document exists for SSR
   if (typeof document !== 'undefined')
     document.documentElement.setAttribute('dir', dir)
-}
-
-/**
- * Return dynamic i18n props based on i18n plugin is enabled or not
- * @param key i18n translation key
- * @param tag tag to wrap the translation with
- */
-export const getDynamicI18nProps = (key: string, tag = 'span') => {
-  if (!layoutConfig.app.i18n.enable)
-    return {}
-
-  return {
-    keypath: key,
-    tag,
-    scope: 'global',
-  }
 }
 
 export const switchToVerticalNavOnLtOverlayNavBreakpoint = () => {

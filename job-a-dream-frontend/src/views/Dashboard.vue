@@ -1,12 +1,8 @@
 <script setup lang="ts">
 import ChartJsBarChart from '@/views/charts/chartjs/ChartJsBarChart.vue'
-import ChartJsBubbleChart from '@/views/charts/chartjs/ChartJsBubbleChart.vue'
 import ChartJsHorizontalBarChart from '@/views/charts/chartjs/ChartJsHorizontalBarChart.vue'
-import ChartJsLineAreaChart from '@/views/charts/chartjs/ChartJsLineAreaChart.vue'
-import ChartJsLineChart from '@/views/charts/chartjs/ChartJsLineChart.vue'
 import ChartJsPolarAreaChart from '@/views/charts/chartjs/ChartJsPolarAreaChart.vue'
 import ChartJsRadarChart from '@/views/charts/chartjs/ChartJsRadarChart.vue'
-import ChartJsScatterChart from '@/views/charts/chartjs/ChartJsScatterChart.vue'
 import type { ChartJsCustomColors } from '@/views/charts/chartjs/types'
 
 const chartJsCustomColors: ChartJsCustomColors = {
@@ -33,18 +29,6 @@ const chartJsCustomColors: ChartJsCustomColors = {
 
 <template>
   <VRow id="chartjs-wrapper">
-    <!-- 👉 Statistics Line Chart  -->
-    <VCol cols="12">
-      <VCard
-        title="Statistics"
-        subtitle="Commercial networks and enterprises"
-      >
-        <VCardText>
-          <ChartJsLineChart :colors="chartJsCustomColors" />
-        </VCardText>
-      </VCard>
-    </VCol>
-
     <!-- 👉 Radar Chart -->
     <VCol
       cols="12"
@@ -68,72 +52,6 @@ const chartJsCustomColors: ChartJsCustomColors = {
         </VCardText>
       </VCard>
     </VCol>
-
-    <!-- 👉  Bubble Chart -->
-    <VCol cols="12">
-      <VCard title="Bubble Chart">
-        <template #append>
-          <span class="text-subtitle-2">$ 100,000</span>
-        </template>
-
-        <VCardText>
-          <ChartJsBubbleChart :colors="chartJsCustomColors" />
-        </VCardText>
-      </VCard>
-    </VCol>
-
-    <!-- 👉 New Product Data Scatter Chart -->
-    <VCol cols="12">
-      <VCard>
-        <VCardItem class="d-flex flex-wrap justify-space-between gap-4">
-          <VCardTitle>New Product Data</VCardTitle>
-
-          <template #append>
-            <VBtnToggle
-              color="primary"
-              variant="outlined"
-              density="compact"
-            >
-              <VBtn>Daily</VBtn>
-              <VBtn>Monthly</VBtn>
-              <VBtn>Yearly</VBtn>
-            </VBtnToggle>
-          </template>
-        </VCardItem>
-
-        <VCardText>
-          <ChartJsScatterChart :colors="chartJsCustomColors" />
-        </VCardText>
-      </VCard>
-    </VCol>
-
-    <!-- 👉 Data Science Area Line Chart -->
-    <VCol cols="12">
-      <VCard>
-        <VCardItem class="d-flex flex-wrap justify-space-between gap-4">
-          <VCardTitle>
-            Data Science
-          </VCardTitle>
-
-          <template #append>
-            <div class="date-picker-wrapper">
-              <AppDateTimePicker
-                model-value="2022-06-09"
-                prepend-inner-icon="tabler-calendar"
-                density="compact"
-                placeholder="Select Date"
-                :config="$vuetify.display.smAndDown ? { position: 'auto center' } : { position: 'auto right' }"
-              />
-            </div>
-          </template>
-        </VCardItem>
-
-        <VCardText>
-          <ChartJsLineAreaChart :colors="chartJsCustomColors" />
-        </VCardText>
-      </VCard>
-    </VCol>
-
     <!-- 👉 Latest Statistics -->
     <VCol
       cols="12"
@@ -192,15 +110,3 @@ const chartJsCustomColors: ChartJsCustomColors = {
     </VCol>
   </VRow>
 </template>
-
-<style lang="scss">
-.date-picker-wrapper {
-  inline-size: 10.5rem;
-}
-
-#chartjs-wrapper {
-  .v-card-item__append {
-    padding-inline-start: 0;
-  }
-}
-</style>

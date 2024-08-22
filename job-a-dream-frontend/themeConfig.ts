@@ -10,32 +10,11 @@ import { AppContentLayoutNav, ContentWidth, FooterType, NavbarType } from '@layo
 
 export const { themeConfig, layoutConfig } = defineThemeConfig({
   app: {
-    title: 'vuexy',
+    title: 'jobadream',
     logo: h('div', { innerHTML: logo, style: 'line-height:0; color: rgb(var(--v-global-theme-primary))' }),
     contentWidth: ContentWidth.Boxed,
     contentLayoutNav: AppContentLayoutNav.Vertical,
     overlayNavFromBreakpoint: breakpointsVuetify.md + 16, // 16 for scrollbar. Docs: https://next.vuetifyjs.com/en/features/display-and-platform/
-    i18n: {
-      enable: true,
-      defaultLocale: 'en',
-      langConfig: [
-        {
-          label: 'English',
-          i18nLang: 'en',
-          isRTL: false,
-        },
-        {
-          label: 'French',
-          i18nLang: 'fr',
-          isRTL: false,
-        },
-        {
-          label: 'Arabic',
-          i18nLang: 'ar',
-          isRTL: true,
-        },
-      ],
-    },
     theme: 'system',
     skin: Skins.Default,
     iconRenderer: VIcon,
@@ -45,11 +24,6 @@ export const { themeConfig, layoutConfig } = defineThemeConfig({
     navbarBlur: true,
   },
   footer: { type: FooterType.Static },
-  verticalNav: {
-    isVerticalNavCollapsed: false,
-    defaultNavItemIconProps: { icon: 'tabler-circle', size: 10 },
-    isVerticalNavSemiDark: false,
-  },
   horizontalNav: {
     type: 'sticky',
     transition: 'slide-y-reverse-transition',
@@ -63,8 +37,6 @@ export const { themeConfig, layoutConfig } = defineThemeConfig({
     chevronDown: { icon: 'tabler-chevron-down' },
     chevronRight: { icon: 'tabler-chevron-right', size: 18 },
     close: { icon: 'tabler-x' },
-    verticalNavPinned: { icon: 'tabler-circle-dot' },
-    verticalNavUnPinned: { icon: 'tabler-circle' },
     sectionTitlePlaceholder: { icon: 'tabler-separator' },
   },
 })

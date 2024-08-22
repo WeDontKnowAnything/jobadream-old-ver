@@ -21,7 +21,14 @@ const data = {
       borderWidth: 0,
       label: 'Population (millions)',
       data: [19, 17.5, 15, 13.5, 11, 9],
-      backgroundColor: [props.colors.primary, props.colors.yellow, props.colors.polarChartWarning, props.colors.polarChartInfo, props.colors.polarChartGrey, props.colors.polarChartGreen],
+      backgroundColor: [
+        props.colors.primary,
+        props.colors.yellow,
+        props.colors.polarChartWarning,
+        props.colors.polarChartInfo,
+        props.colors.polarChartGrey,
+        props.colors.polarChartGreen,
+      ],
     },
   ],
 }

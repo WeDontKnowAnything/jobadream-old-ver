@@ -9,11 +9,6 @@ export const layoutConfig: LayoutConfig = {
     contentWidth: ContentWidth.Boxed,
     contentLayoutNav: AppContentLayoutNav.Vertical,
     overlayNavFromBreakpoint: breakpointsVuetify.md,
-
-    // isRTL: false,
-    i18n: {
-      enable: true,
-    },
     iconRenderer: h('div'),
   },
   navbar: {
@@ -23,10 +18,6 @@ export const layoutConfig: LayoutConfig = {
   footer: {
     type: FooterType.Static,
   },
-  verticalNav: {
-    isVerticalNavCollapsed: false,
-    defaultNavItemIconProps: { icon: 'tabler-circle' },
-  },
   horizontalNav: {
     type: HorizontalNavType.Sticky,
     transition: 'none',
@@ -35,8 +26,6 @@ export const layoutConfig: LayoutConfig = {
     chevronDown: { icon: 'tabler-chevron-down' },
     chevronRight: { icon: 'tabler-chevron-right' },
     close: { icon: 'tabler-x' },
-    verticalNavPinned: { icon: 'tabler-circle-dot' },
-    verticalNavUnPinned: { icon: 'tabler-circle' },
     sectionTitlePlaceholder: { icon: 'tabler-minus' },
   },
 }

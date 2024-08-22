@@ -20,10 +20,6 @@ export const useConfigStore = defineStore('config', () => {
 
   const theme = cookieRef('theme', themeConfig.app.theme)
 
-  // 👉 isVerticalNavSemiDark
-  const isVerticalNavSemiDark = cookieRef('isVerticalNavSemiDark', themeConfig.verticalNav.isVerticalNavSemiDark)
-
-  // 👉 isVerticalNavSemiDark
   const skin = cookieRef('skin', themeConfig.app.skin)
 
   // ℹ️ We need to use `storeToRefs` to forward the state
@@ -33,14 +29,12 @@ export const useConfigStore = defineStore('config', () => {
     navbarType,
     isNavbarBlurEnabled,
     appContentLayoutNav,
-    isVerticalNavCollapsed,
     footerType,
     isAppRTL,
   } = storeToRefs(useLayoutConfigStore())
 
   return {
     theme,
-    isVerticalNavSemiDark,
     skin,
 
     // @layouts exports
@@ -49,7 +43,6 @@ export const useConfigStore = defineStore('config', () => {
     navbarType,
     isNavbarBlurEnabled,
     appContentLayoutNav,
-    isVerticalNavCollapsed,
     footerType,
     isAppRTL,
   }

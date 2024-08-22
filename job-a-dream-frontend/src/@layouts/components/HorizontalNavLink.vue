@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { layoutConfig } from '@layouts'
 import { can } from '@layouts/plugins/casl'
 import type { NavLink } from '@layouts/types'
-import { getComputedNavLinkToProp, getDynamicI18nProps, isNavLinkActive } from '@layouts/utils'
+import { getComputedNavLinkToProp, isNavLinkActive } from '@layouts/utils'
 
 interface Props {
   item: NavLink
@@ -30,18 +29,7 @@ const props = withDefaults(defineProps<Props>(), {
       v-bind="getComputedNavLinkToProp(item)"
       :class="{ 'router-link-active router-link-exact-active': isNavLinkActive(item, $router) }"
     >
-      <Component
-        :is="layoutConfig.app.iconRenderer || 'div'"
-        class="nav-item-icon"
-        v-bind="item.icon || layoutConfig.verticalNav.defaultNavItemIconProps"
-      />
-      <Component
-        :is="layoutConfig.app.i18n.enable ? 'i18n-t' : 'span'"
-        class="nav-item-title"
-        v-bind="getDynamicI18nProps(item.title, 'span')"
-      >
-        {{ item.title }}
-      </Component>
+      {{ item.title }}
     </Component>
   </li>
 </template>
