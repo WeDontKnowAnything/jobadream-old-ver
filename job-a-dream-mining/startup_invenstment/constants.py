@@ -1,12 +1,16 @@
+from pathlib import Path
 import enum
 
-# 'data' folder directory
-DATA_PATH = './job-a-dream-mining/data'
+# Root directory
+PROJECT_ROOT_DIR = Path(__file__).parent.parent
 
-# stratup investment information '혁신의 숲' url
+# 'data' folder directory
+DATA_DIR = PROJECT_ROOT_DIR/'data'
+
+# Stratup investment information '혁신의 숲' url
 STARTUP_URL = "https://www.innoforest.co.kr/dataroom?page="
 
-# csv columns
+# CSV columns
 class STARTUP_COLUMNS(enum.Enum):
     CORPORATION = (enum.auto(), 'corporation')
     PRODUCT = (enum.auto(), 'product')
