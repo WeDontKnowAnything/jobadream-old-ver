@@ -1,6 +1,9 @@
 from fastapi import FastAPI
-from database.connector import engine
 from sqlalchemy import text
+from database.connector import engine
+from database import models
+
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -10,7 +13,7 @@ def root():
     return {"message": "Welcome to jobAdream"}
 
 
-# DB 연동 확인
+# DB 연동 확인용 -> 확인 후 지울 것
 @app.get("/db_name")
 def get_database_name():
     with engine.connect() as connection:
