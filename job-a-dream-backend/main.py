@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from sqlalchemy import text
 from database.connector import engine
 from database import models
+import uvicorn
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -20,3 +21,7 @@ def get_database_name():
         result = connection.execute(text("SELECT current_database();"))
         db_name = result.scalar()  # 단일 값을 가져옵니다.
     return {"database_name": db_name}
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", reload=True)
