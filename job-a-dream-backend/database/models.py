@@ -1,6 +1,6 @@
 from sqlalchemy import Column, INT, TIMESTAMP, VARCHAR, Text
 from sqlalchemy.orm import relationship
-from database.connector import Base
+from .connector import Base
 
 
 class Code(Base):
@@ -23,8 +23,16 @@ class Corporation(Base):
     reg_gender = Column(INT)
     tempo_gender = Column(INT)
 
-    startup = relationship("StartupIR", back_populates="corporation")
-    news = relationship("News", back_populates="subject")
+    # startup = relationship(
+    #     "StartupIR",
+    #     back_populates="corporation",
+    #     primaryjoin="Corporation.corp_id == foreign(StartupIR.corp_id)",
+    # )
+    # news = relationship(
+    #     "News",
+    #     back_populates="subject",
+    #     primaryjoin="Corporation.corp_id == foreign(News.corp_id)",
+    # )
 
 
 class StartupIR(Base):
@@ -38,7 +46,11 @@ class StartupIR(Base):
     ir_code = Column(INT)
     corp_id = Column(VARCHAR, nullable=False)
 
-    corporation = relationship("Corporation", back_populates="startup")
+    corporation = relationship(
+        "Corporation",
+        back_populates="startup",
+        primaryjoin="StartupIR.corp_id == foreign(Corporation.corp_id)",
+    )
 
 
 class News(Base):
@@ -51,7 +63,11 @@ class News(Base):
     news_time = Column(TIMESTAMP)
     corp_id = Column(VARCHAR, nullable=False)
 
-    subject = relationship("Corporation", back_populates="news")
+    subject = relationship(
+        "Corporation",
+        back_populates="news",
+        primaryjoin="News.corp_id == Corporation.corp_id",
+    )
 
 
 class Post(Base):
@@ -62,7 +78,11 @@ class Post(Base):
     contents = Column(Text, nullable=False)
     posting_date = Column(TIMESTAMP, nullable=False)
 
-    comments = relationship("Comment", back_populates="post")
+    comments = relationship(
+        "Comment",
+        back_populates="post",
+        primaryjoin="Post.post_id == Comment.post_id",
+    )
 
 
 class Comment(Base):
@@ -73,4 +93,8 @@ class Comment(Base):
     comment_date = Column(TIMESTAMP, nullable=False)
     post_id = Column(INT, nullable=False)
 
-    post = relationship("Post", back_populates="comments")
+    post = relationship(
+        "Post",
+        back_populates="comments",
+        primaryjoin="Comment.post_id == Post.post_id",
+    )

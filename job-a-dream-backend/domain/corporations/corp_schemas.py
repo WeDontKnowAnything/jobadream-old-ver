@@ -13,7 +13,7 @@ class Code(CodeBase):
     code: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # Corporation schema
@@ -30,4 +30,4 @@ class Corporation(CorporationBase):
     tempo_gender: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
