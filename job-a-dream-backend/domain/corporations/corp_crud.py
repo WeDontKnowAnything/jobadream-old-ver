@@ -1,6 +1,9 @@
 from sqlalchemy.orm import Session
-from database.models import Corporation
+from sqlalchemy import select
+from domain.corporations.corp_schemas import Corporation
+from models import Corporation
 
 
-def get_all_corporations(db: Session, limit: int = 20):
-    return db.query(Corporation).limit(limit).all()
+def get_all_corporations(db: Session):
+    result = db.execute(select(Corporation)).scalars().all()
+    return result

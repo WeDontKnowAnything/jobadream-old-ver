@@ -23,11 +23,12 @@ class CorporationBase(BaseModel):
 
 
 class Corporation(CorporationBase):
-    category_code: str
-    size_code: str
-    employee_cnt: int
-    reg_gender: int
-    tempo_gender: int
+    # category_code: str
+    # size_code: str
+    # employee_cnt: int
+    # reg_gender: int
+    # tempo_gender: int
+    pass
 
     class Config:
         from_attributes = True

@@ -7,6 +7,7 @@ engine = create_engine(DATABASE_URL, future=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine, future=True)
 
 Base = declarative_base()
+Base.metadata.create_all(bind=engine)
 
 
 def get_db():
