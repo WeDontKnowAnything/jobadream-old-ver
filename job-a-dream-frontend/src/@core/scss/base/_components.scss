@@ -47,9 +47,9 @@
 
 // 👉 Custom Input
 .v-label.custom-input {
-  padding: 1rem;
   border: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
   opacity: 1;
+  padding-inline: 1rem;
   white-space: normal;
 
   &:hover {

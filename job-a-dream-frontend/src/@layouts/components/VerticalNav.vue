@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import type { Component } from 'vue'
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
-import { VNodeRenderer } from './VNodeRenderer'
 import { layoutConfig } from '@layouts'
 import { VerticalNavGroup, VerticalNavLink, VerticalNavSectionTitle } from '@layouts/components'
 import { useLayoutConfigStore } from '@layouts/stores/config'
@@ -77,8 +76,6 @@ const hideTitleAndIcon = configStore.isVerticalNavMini(isHovered)
           to="/"
           class="app-logo app-title-wrapper"
         >
-          <VNodeRenderer :nodes="layoutConfig.app.logo" />
-
           <Transition name="vertical-nav-app-title">
             <h1
               v-show="!hideTitleAndIcon"

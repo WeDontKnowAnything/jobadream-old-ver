@@ -3,7 +3,7 @@ import type { AppContentLayoutNav, ContentWidth, FooterType, HorizontalNavType, 
 
 export interface LayoutConfig {
   app: {
-    title: Lowercase<string>
+    title: string
     logo: VNode
     contentWidth: typeof ContentWidth[keyof typeof ContentWidth]
     contentLayoutNav: typeof AppContentLayoutNav[keyof typeof AppContentLayoutNav]

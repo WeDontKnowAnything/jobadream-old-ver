@@ -6,8 +6,8 @@ import { themeConfig } from '@themeConfig'
 // Components
 import NavSearchBar from '@/layouts/components/NavSearchBar.vue'
 import NavbarThemeSwitcher from '@/layouts/components/NavbarThemeSwitcher.vue'
+import logo from '@images/logo.png'
 import { HorizontalNavLayout } from '@layouts'
-import { VNodeRenderer } from '@layouts/components/VNodeRenderer'
 
 // SECTION: Loading Indicator
 const isFallbackStateActive = ref(false)
@@ -32,7 +32,10 @@ watch([isFallbackStateActive, refLoadingIndicator], () => {
         to="/"
         class="app-logo d-flex align-center gap-x-3"
       >
-        <VNodeRenderer :nodes="themeConfig.app.logo" />
+        <VImg
+          :src="logo"
+          class="w-50"
+        />
 
         <h1 class="app-title font-weight-bold leading-normal text-xl text-capitalize">
           {{ themeConfig.app.title }}

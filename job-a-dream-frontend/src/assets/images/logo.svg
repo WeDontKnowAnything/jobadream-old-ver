@@ -1,6 +1,7 @@
-<svg width="32" height="22" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M0.00183571 0.3125V7.59485C0.00183571 7.59485 -0.141502 9.88783 2.10473 11.8288L14.5469 23.6837L21.0172 23.6005L19.9794 10.8126L17.5261 7.93369L9.81536 0.3125H0.00183571Z" fill="currentColor"/>
-<path opacity="0.06" fill-rule="evenodd" clip-rule="evenodd" d="M8.17969 17.7762L13.3027 3.75173L17.589 8.02192L8.17969 17.7762Z" fill="#161616"/>
-<path opacity="0.06" fill-rule="evenodd" clip-rule="evenodd" d="M8.58203 17.2248L14.8129 5.24231L17.6211 8.05247L8.58203 17.2248Z" fill="#161616"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M8.25781 17.6914L25.1339 0.3125H33.9991V7.62657C33.9991 7.62657 33.8144 10.0645 32.5743 11.3686L21.0179 23.6875H14.5487L8.25781 17.6914Z" fill="currentColor"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="164.52" height="157.006" viewBox="0 0 164.52 157.006">
+  <text id="b" transform="translate(32 124.006)" fill="#ff0" font-size="153" font-family="Ownglyph_konghae-Rg, Ownglyph konghae"><tspan x="-31.365" y="0">b</tspan></text>
+  <circle id="타원_2" data-name="타원 2" cx="5.571" cy="5.571" r="5.571" transform="translate(31.868 82.577)" fill="#ff0"/>
+  <text id="d" transform="translate(134.52 122)" fill="#7367f0" font-size="152" font-family="Ownglyph_konghae-Rg, Ownglyph konghae"><tspan x="-29.412" y="0">d</tspan></text>
+  <circle id="타원_3" data-name="타원 3" cx="5.571" cy="5.571" r="5.571" transform="translate(125.023 83.023)" fill="#7367f0"/>
+  <text id="A" transform="translate(114.211 138.9) rotate(180)" fill="#39de8b" font-size="100" font-family="Ownglyph_konghae-Rg, Ownglyph konghae"><tspan x="-25.05" y="80">A</tspan></text>
 </svg>

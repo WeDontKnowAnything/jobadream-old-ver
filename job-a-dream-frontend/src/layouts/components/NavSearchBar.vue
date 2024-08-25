@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { SearchResults } from '@db/app-bar-search/types'
 import Shepherd from 'shepherd.js'
 import { withQuery } from 'ufo'
 import type { RouteLocationRaw } from 'vue-router'
+import type { SearchResults } from '@db/app-bar-search/types'
 import { useConfigStore } from '@core/stores/config'
 
 interface Suggestion {

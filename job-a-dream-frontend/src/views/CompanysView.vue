@@ -1,0 +1,240 @@
+<script setup lang="ts">
+import { paginationMeta } from '@api-utils/paginationMeta'
+
+const widgetData = ref([
+  { title: '기업 수', value: 12689, icon: 'tabler-clipboard-check' },
+])
+
+const searchQuery = ref('')
+
+// Data table options
+const itemsPerPage = ref(12)
+const page = ref(1)
+const sortBy = ref()
+const orderBy = ref()
+
+// Fetch Orders
+const { data: ordersData } = await useApi<any>(createUrl('/apps/ecommerce/orders',
+  {
+    query: {
+      q: searchQuery,
+      page,
+      itemsPerPage,
+      sortBy,
+      orderBy,
+    },
+  },
+))
+
+const totalOrder = computed(() => ordersData.value.total)
+
+const solidCardData = [
+  {
+    title: '삼성전자',
+    text: 'Samsung Electronics Co., Ltd. is a South Korean multinational electronics company headquartered in the Yeongtong District of Suwon.',
+    count: '80',
+  },
+  {
+    title: 'Apple Inc.',
+    text: 'Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software, and online services.',
+    count: '49',
+  },
+  {
+    title: 'LinkedIn',
+    text: 'LinkedIn is an American business and employment-oriented online service that operates via websites and mobile apps.',
+    count: '80',
+  },
+  {
+    title: '삼성전자',
+    text: 'Samsung Electronics Co., Ltd. is a South Korean multinational electronics company headquartered in the Yeongtong District of Suwon.',
+    count: '80',
+  },
+  {
+    title: 'Apple Inc.',
+    text: 'Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software, and online services.',
+    count: '49',
+  },
+  {
+    title: 'LinkedIn',
+    text: 'LinkedIn is an American business and employment-oriented online service that operates via websites and mobile apps.',
+    count: '80',
+  },
+  {
+    title: '삼성전자',
+    text: 'Samsung Electronics Co., Ltd. is a South Korean multinational electronics company headquartered in the Yeongtong District of Suwon.',
+    count: '80',
+  },
+  {
+    title: 'Apple Inc.',
+    text: 'Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software, and online services.',
+    count: '49',
+  },
+  {
+    title: 'LinkedIn',
+    text: 'LinkedIn is an American business and employment-oriented online service that operates via websites and mobile apps.',
+    count: '80',
+  },
+  {
+    title: '삼성전자',
+    text: 'Samsung Electronics Co., Ltd. is a South Korean multinational electronics company headquartered in the Yeongtong District of Suwon.',
+    count: '80',
+  },
+  {
+    title: 'Apple Inc.',
+    text: 'Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software, and online services.',
+    count: '49',
+  },
+  {
+    title: 'LinkedIn',
+    text: 'LinkedIn is an American business and employment-oriented online service that operates via websites and mobile apps.',
+    count: '80',
+  },
+]
+</script>
+
+<template>
+  <div>
+    <VCard class="mb-6">
+      <!-- 👉 Widgets  -->
+      <VCol
+        cols="12"
+        class="px-6 py-6"
+      >
+        <AppTextField
+          label="기업 검색"
+          prepend-inner-icon="tabler-search"
+          placeholder="기업 이름"
+        />
+      </VCol>
+      <VDivider />
+      <VCardText>
+        <VRow>
+          <template
+            v-for="(data, id) in widgetData"
+            :key="id"
+          >
+            <VCol
+              cols="12"
+              sm="6"
+              md="3"
+              class="px-6"
+            >
+              <div
+                class="d-flex justify-space-between"
+                :class="$vuetify.display.xs
+                  ? 'product-widget'
+                  : $vuetify.display.sm
+                    ? id < 2 ? 'product-widget' : ''
+                    : ''"
+              >
+                <div class="d-flex flex-column gap-y-1">
+                  <h4 class="text-h4">
+                    {{ data.value }}
+                  </h4>
+
+                  <h6 class="text-h6">
+                    {{ data.title }}
+                  </h6>
+                </div>
+
+                <VAvatar
+                  variant="tonal"
+                  rounded
+                  size="38"
+                >
+                  <VIcon
+                    :icon="data.icon"
+                    size="28"
+                  />
+                </VAvatar>
+              </div>
+            </VCol>
+          </template>
+        </VRow>
+      </VCardText>
+    </VCard>
+    <VRow>
+      <VCol
+        v-for="data in solidCardData"
+        :key="data.title"
+        cols="12"
+        md="6"
+        lg="4"
+      >
+        <VCard>
+          <VCardItem>
+            <VCardTitle class="text-white">
+              <RouterLink
+                :to="{ name: 'home' }"
+                class="font-weight-medium"
+              >
+                {{ data.title }}
+              </RouterLink>
+            </VCardTitle>
+          </VCardItem>
+
+          <VCardText>
+            <p class="clamp-text text-white mb-0">
+              {{ data.text }}
+            </p>
+          </VCardText>
+
+          <VCardText class="d-flex justify-space-between align-center flex-wrap">
+            <div class="d-flex align-center">
+              <IconBtn
+                icon="tabler-eye-check"
+                color="white"
+                class="me-1"
+              />
+              <span class="text-subtitle-2 text-white mt-1">{{ data.count }}</span>
+            </div>
+          </VCardText>
+        </VCard>
+      </VCol>
+    </VRow>
+    <div class="d-flex align-center justify-sm-space-between justify-center flex-wrap gap-3 pa-5 pt-3">
+      <p class="text-sm text-disabled mb-0">
+        {{ paginationMeta({ page, itemsPerPage }, totalOrder) }}
+      </p>
+
+      <VPagination
+        v-model="page"
+        :length="Math.ceil(totalOrder / itemsPerPage)"
+        :total-visible="$vuetify.display.xs ? 1 : Math.min(Math.ceil(totalOrder / itemsPerPage), 5)"
+      >
+        <template #prev="slotProps">
+          <VBtn
+            variant="tonal"
+            color="default"
+            v-bind="slotProps"
+            :icon="false"
+          >
+            Previous
+          </VBtn>
+        </template>
+
+        <template #next="slotProps">
+          <VBtn
+            variant="tonal"
+            color="default"
+            v-bind="slotProps"
+            :icon="false"
+          >
+            Next
+          </VBtn>
+        </template>
+      </VPagination>
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.customer-title:hover{
+  color: rgba(var(--v-theme-primary)) !important;
+}
+
+.product-widget{
+  border-block-end: 1px solid rgba(var(--v-theme-on-surface), var(--v-border-opacity));
+  padding-block-end: 1rem;
+}
+</style>

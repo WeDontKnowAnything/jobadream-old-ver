@@ -16,8 +16,10 @@ const orderBy = ref()
 
 // Data table Headers
 const headers = [
-  { title: '제목', key: 'order' },
+  { title: '번호', key: 'order' },
+  { title: '제목', key: 'title' },
   { title: '날짜', key: 'date' },
+  { title: '조회수', key: 'count' },
 ]
 
 // Update data table options
@@ -90,14 +92,6 @@ const totalOrder = computed(() => ordersData.value.total)
                 </VAvatar>
               </div>
             </VCol>
-            <VDivider
-              v-if="$vuetify.display.mdAndUp ? id !== widgetData.length - 1
-                : $vuetify.display.smAndUp ? id % 2 === 0
-                  : false"
-              vertical
-              inset
-              length="55"
-            />
           </template>
         </VRow>
       </VCardText>
@@ -111,7 +105,7 @@ const totalOrder = computed(() => ordersData.value.total)
             v-model="searchQuery"
             density="compact"
             placeholder="게시글 검색"
-            style=" max-inline-size: 200px; min-inline-size: 200px;"
+            style=" max-inline-size: 400px; min-inline-size: 400px;"
           />
 
           <div class="d-flex gap-x-4 align-center">
@@ -139,57 +133,26 @@ const totalOrder = computed(() => ordersData.value.total)
       >
         <!-- Order ID -->
         <template #item.order="{ item }">
-          <!--
-            <RouterLink
-            :to="{ name: 'apps-ecommerce-order-details-id', params: { id: item.order } }"
+          {{ item.order }}
+        </template>
+        <!-- Order ID -->
+        <template #item.title="{ item }">
+          <RouterLink
+            :to="{ name: 'home', params: { id: item.order } }"
             class="font-weight-medium"
-            >
-          -->
-          #{{ item.order }}
-          <!-- </RouterLink> -->
+          >
+            #{{ item.order }}
+          </RouterLink>
         </template>
 
         <!-- Date -->
         <template #item.date="{ item }">
           {{ new Date(item.date).toDateString() }}
         </template>
-
-        <!-- Payments -->
-        <!--
-          <template #item.payment="{ item }">
-          <li
-          :class="`text-${resolvePaymentStatus(item.payment)?.color}`"
-          class="font-weight-medium"
-          >
-          {{ resolvePaymentStatus(item.payment)?.text }}
-          </li>
-          </template>
-        -->
-
-        <!-- Actions -->
-        <!--
-          <template #item.actions="{ item }">
-          <IconBtn>
-          <VIcon icon="tabler-dots-vertical" />
-          <VMenu activator="parent">
-          <VList>
-          <VListItem
-          value="view"
-          :to="{ name: 'apps-ecommerce-order-details-id', params: { id: item.order } }"
-          >
-          View
-          </VListItem>
-          <VListItem
-          value="delete"
-          @click="deleteOrder(item.id)"
-          >
-          Delete
-          </VListItem>
-          </VList>
-          </VMenu>
-          </IconBtn>
-          </template>
-        -->
+        <!-- Count -->
+        <template #item.count="{ item }">
+          {{ item.order }}
+        </template>
 
         <!-- pagination -->
         <template #bottom>

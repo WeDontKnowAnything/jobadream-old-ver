@@ -1,0 +1,325 @@
+<script setup lang="ts">
+import { paginationMeta } from '@api-utils/paginationMeta'
+
+const regionCheckboxContent = [
+  '서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기', '강원', '충북', '충남', '전북', '전남', '경북', '경남', '제주',
+]
+
+const positionCheckboxContent = [
+  '인공지능', '빅데이터', '블록체인', '클라우드', '사물인터넷', '보안', '개발', '디자인', '마케팅', '영업', '기획', '경영', '인사', '재무', '회계', '법무', '연구개발', '생산', '품질', '구매', '물류', '생산', '기술영업', '영업관리', '영업기획',
+]
+
+const selectedCheckbox = ref(['discount'])
+
+const numberedSteps = [
+  {
+    title: '지역 선택',
+    subtitle: '찾고 싶은 지역을 선택하세요.',
+  },
+  {
+    title: '포지션 선택',
+    subtitle: '원하는 포지션을 선택하세요.',
+  },
+  {
+    title: '키워드 입력',
+    subtitle: '해당되는 키워드를 입력하세요.',
+  },
+]
+
+const currentStep = ref(0)
+
+const formData = ref({
+  username: '',
+  email: '',
+  password: '',
+  cPassword: '',
+  firstName: '',
+  lastName: '',
+  country: undefined,
+  language: undefined,
+  twitter: '',
+  facebook: '',
+  googlePlus: '',
+  LinkedIn: '',
+})
+
+const onSubmit = () => {
+  console.log(formData.value)
+}
+
+const searchQuery = ref('')
+
+// Data table options
+const itemsPerPage = ref(12)
+const page = ref(1)
+const sortBy = ref()
+const orderBy = ref()
+
+// Fetch Orders
+const { data: ordersData } = await useApi<any>(createUrl('/apps/ecommerce/orders',
+  {
+    query: {
+      q: searchQuery,
+      page,
+      itemsPerPage,
+      sortBy,
+      orderBy,
+    },
+  },
+))
+
+const totalOrder = computed(() => ordersData.value.total)
+
+const solidCardData = [
+  {
+    corp_name: '삼성전자',
+    title: 'NLP Engineer, 생성형 AI',
+    location: '서울',
+    experience: '신입',
+  },
+  {
+    corp_name: 'Facebook',
+    title: '프론트엔드 개발자',
+    location: '인천',
+    experience: '경력 3년 이상',
+  },
+  {
+    corp_name: 'Toss',
+    title: '웹 개발자',
+    location: '부산',
+    experience: '경력 10년 이상',
+  },
+]
+</script>
+
+<template>
+  <div>
+    <!-- 검색 -->
+    <VCard class="mb-6">
+      <VRow>
+        <VCol
+          cols="12"
+          md="3"
+          :class="$vuetify.display.smAndDown ? 'border-b' : 'border-e'"
+        >
+          <VCardText>
+            <!-- 👉 Stepper -->
+            <AppStepper
+              v-model:current-step="currentStep"
+              direction="vertical"
+              :items="numberedSteps"
+            />
+          </VCardText>
+        </VCol>
+        <!-- 👉 stepper content -->
+        <VCol
+          cols="12"
+          md="9"
+        >
+          <VCardText>
+            <VForm>
+              <VWindow
+                v-model="currentStep"
+                class="disable-tab-transition"
+              >
+                <VWindowItem>
+                  <VRow>
+                    <VCol cols="12">
+                      <h5 class="text-h5 font-weight-medium">
+                        {{ numberedSteps[currentStep].title }}
+                      </h5>
+                      <p class="mb-0">
+                        {{ numberedSteps[currentStep].subtitle }}
+                      </p>
+                    </VCol>
+                    <VCol cols="12">
+                      <JadCheckboxes
+                        v-model:selected-checkbox="selectedCheckbox"
+                        :checkbox-content="regionCheckboxContent"
+                        :grid-column="{ sm: '3', lg: '2', cols: '4' }"
+                      />
+                    </VCol>
+                  </VRow>
+                </VWindowItem>
+
+                <VWindowItem>
+                  <VRow>
+                    <VCol cols="12">
+                      <h5 class="text-h5 font-weight-medium">
+                        {{ numberedSteps[currentStep].title }}
+                      </h5>
+                      <p class="mb-0">
+                        {{ numberedSteps[currentStep].subtitle }}
+                      </p>
+                    </VCol>
+
+                    <VCol cols="12">
+                      <JadCheckboxes
+                        v-model:selected-checkbox="selectedCheckbox"
+                        :checkbox-content="positionCheckboxContent"
+                        :grid-column="{ sm: '3', lg: '2', cols: '4' }"
+                      />
+                    </VCol>
+                  </VRow>
+                </VWindowItem>
+
+                <VWindowItem>
+                  <VRow>
+                    <VCol cols="12">
+                      <h5 class="text-h5 font-weight-medium">
+                        {{ numberedSteps[currentStep].title }}
+                      </h5>
+                      <p class="mb-0">
+                        {{ numberedSteps[currentStep].subtitle }}
+                      </p>
+                    </VCol>
+
+                    <VCol cols="12">
+                      <AppTextField
+                        v-model="formData.twitter"
+                        placeholder="키워드 입력"
+                        label="키워드"
+                      />
+                    </VCol>
+                  </VRow>
+                </VWindowItem>
+              </VWindow>
+
+              <div class="d-flex flex-wrap gap-4 justify-sm-space-between justify-center mt-8">
+                <VBtn
+                  color="secondary"
+                  variant="tonal"
+                  :disabled="currentStep === 0"
+                  @click="currentStep--"
+                >
+                  <VIcon
+                    icon="tabler-arrow-left"
+                    start
+                    class="flip-in-rtl"
+                  />
+                  Previous
+                </VBtn>
+
+                <VBtn
+                  v-if="numberedSteps.length - 1 === currentStep"
+                  color="success"
+                  @click="onSubmit"
+                >
+                  submit
+                </VBtn>
+
+                <VBtn
+                  v-else
+                  @click="currentStep++"
+                >
+                  Next
+
+                  <VIcon
+                    icon="tabler-arrow-right"
+                    end
+                    class="flip-in-rtl"
+                  />
+                </VBtn>
+              </div>
+            </VForm>
+          </VCardText>
+        </VCol>
+      </VRow>
+    </VCard>
+
+    <!-- 채용공고 카드 -->
+    <VRow>
+      <VCol
+        v-for="data in solidCardData"
+        :key="data.title"
+        cols="12"
+        md="6"
+        lg="4"
+      >
+        <VCard>
+          <VCardItem>
+            <VCardTitle class="text-white">
+              <RouterLink
+                :to="{ name: 'home' }"
+                class="font-weight-medium"
+              >
+                {{ data.corp_name }}
+              </RouterLink>
+            </VCardTitle>
+          </VCardItem>
+
+          <VCardText>
+            <p class="clamp-text text-white mb-0">
+              {{ data.title }}
+            </p>
+          </VCardText>
+
+          <VCardText class="d-flex justify-space-between align-center flex-wrap">
+            <div class="d-flex align-center gap-4">
+              <span>
+                <IconBtn
+                  icon="tabler-map-2"
+                  color="white"
+                  class="me-1"
+                />
+                <span class="text-subtitle-2 text-white mt-1">{{ data.location }}</span>
+              </span>
+              <span>
+                <IconBtn
+                  icon="tabler-user-circle"
+                  color="white"
+                  class="me-1"
+                />
+                <span class="text-subtitle-2 text-white mt-1">{{ data.experience }}</span>
+              </span>
+            </div>
+          </VCardText>
+        </VCard>
+      </VCol>
+    </VRow>
+    <div class="d-flex align-center justify-sm-space-between justify-center flex-wrap gap-3 pa-5 pt-3">
+      <p class="text-sm text-disabled mb-0">
+        {{ paginationMeta({ page, itemsPerPage }, totalOrder) }}
+      </p>
+
+      <VPagination
+        v-model="page"
+        :length="Math.ceil(totalOrder / itemsPerPage)"
+        :total-visible="$vuetify.display.xs ? 1 : Math.min(Math.ceil(totalOrder / itemsPerPage), 5)"
+      >
+        <template #prev="slotProps">
+          <VBtn
+            variant="tonal"
+            color="default"
+            v-bind="slotProps"
+            :icon="false"
+          >
+            Previous
+          </VBtn>
+        </template>
+
+        <template #next="slotProps">
+          <VBtn
+            variant="tonal"
+            color="default"
+            v-bind="slotProps"
+            :icon="false"
+          >
+            Next
+          </VBtn>
+        </template>
+      </VPagination>
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.customer-title:hover{
+  color: rgba(var(--v-theme-primary)) !important;
+}
+
+.product-widget{
+  border-block-end: 1px solid rgba(var(--v-theme-on-surface), var(--v-border-opacity));
+  padding-block-end: 1rem;
+}
+</style>
