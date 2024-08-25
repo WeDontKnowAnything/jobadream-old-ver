@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
-from domain.corporations.corp_schemas import Corporation
+from domain.corporations.schemas import Corporation
 from models import Corporation
 
 

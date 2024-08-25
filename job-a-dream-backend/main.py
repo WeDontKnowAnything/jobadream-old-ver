@@ -2,9 +2,9 @@ from fastapi import FastAPI
 from sqlalchemy import text
 import uvicorn
 
-from domain.corporations import corp_router
-from domain.jobs import jobs_router
-from domain.posts import posts_router
+from domain.corporations import router as corp_router
+from domain.jobs import router as jobs_router
+from domain.posts import router as posts_router
 from connector import engine
 
 app = FastAPI()

@@ -47,31 +47,31 @@ class Corporation(Base):
 #     corp_id = Column(VARCHAR, nullable=False)
 
 
-class Post(Base):
-    __tablename__ = "post"
+# class Post(Base):
+#     __tablename__ = "post"
 
-    post_id = Column(INT, primary_key=True)
-    title = Column(VARCHAR, nullable=False)
-    contents = Column(Text, nullable=False)
-    posting_date = Column(TIMESTAMP, nullable=False)
+#     post_id = Column(INT, primary_key=True)
+#     title = Column(VARCHAR, nullable=False)
+#     contents = Column(Text, nullable=False)
+#     posting_date = Column(TIMESTAMP, nullable=False)
 
-    comments = relationship(
-        "Comment",
-        back_populates="post",
-        primaryjoin="Post.post_id == Comment.post_id",
-    )
+#     comments = relationship(
+#         "Comment",
+#         back_populates="post",
+#         primaryjoin="Post.post_id == Comment.post_id",
+#     )
 
 
-class Comment(Base):
-    __tablename__ = "comment"
+# class Comment(Base):
+#     __tablename__ = "comment"
 
-    comment_id = Column(INT, primary_key=True)
-    comment = Column(Text, nullable=False)
-    comment_date = Column(TIMESTAMP, nullable=False)
-    post_id = Column(INT, nullable=False)
+#     comment_id = Column(INT, primary_key=True)
+#     comment = Column(Text, nullable=False)
+#     comment_date = Column(TIMESTAMP, nullable=False)
+#     post_id = Column(INT, nullable=False)
 
-    post = relationship(
-        "Post",
-        back_populates="comments",
-        primaryjoin="Comment.post_id == Post.post_id",
-    )
+#     post = relationship(
+#         "Post",
+#         back_populates="comments",
+#         primaryjoin="Comment.post_id == Post.post_id",
+#     )
