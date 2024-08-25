@@ -104,6 +104,7 @@ declare global {
   const onStartTyping: typeof import('@vueuse/core')['onStartTyping']
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
+  const paginationMeta: typeof import('./src/utils/paginationMeta')['paginationMeta']
   const passwordValidator: typeof import('./src/@core/utils/validators')['passwordValidator']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
   const prefixWithPlus: typeof import('./src/@core/utils/formatters')['prefixWithPlus']
@@ -415,6 +416,7 @@ declare module 'vue' {
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getIconProps: UnwrapRef<typeof import('./src/@core/utils/common')['getIconProps']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
@@ -423,6 +425,7 @@ declare module 'vue' {
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
     readonly isEmpty: UnwrapRef<typeof import('./src/@core/utils/helpers')['isEmpty']>
     readonly isEmptyArray: UnwrapRef<typeof import('./src/@core/utils/helpers')['isEmptyArray']>
+    readonly isIconProp: UnwrapRef<typeof import('./src/@core/utils/common')['isIconProp']>
     readonly isNullOrUndefined: UnwrapRef<typeof import('./src/@core/utils/helpers')['isNullOrUndefined']>
     readonly isObject: UnwrapRef<typeof import('./src/@core/utils/helpers')['isObject']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
@@ -462,6 +465,7 @@ declare module 'vue' {
     readonly onStartTyping: UnwrapRef<typeof import('@vueuse/core')['onStartTyping']>
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
+    readonly paginationMeta: UnwrapRef<typeof import('./src/utils/paginationMeta')['paginationMeta']>
     readonly passwordValidator: UnwrapRef<typeof import('./src/@core/utils/validators')['passwordValidator']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
     readonly prefixWithPlus: UnwrapRef<typeof import('./src/@core/utils/formatters')['prefixWithPlus']>
@@ -544,7 +548,6 @@ declare module 'vue' {
     readonly useCeil: UnwrapRef<typeof import('@vueuse/math')['useCeil']>
     readonly useClamp: UnwrapRef<typeof import('@vueuse/math')['useClamp']>
     readonly useClipboard: UnwrapRef<typeof import('@vueuse/core')['useClipboard']>
-    readonly useClipboardItems: UnwrapRef<typeof import('@vueuse/core')['useClipboardItems']>
     readonly useCloned: UnwrapRef<typeof import('@vueuse/core')['useCloned']>
     readonly useColorMode: UnwrapRef<typeof import('@vueuse/core')['useColorMode']>
     readonly useConfirmDialog: UnwrapRef<typeof import('@vueuse/core')['useConfirmDialog']>

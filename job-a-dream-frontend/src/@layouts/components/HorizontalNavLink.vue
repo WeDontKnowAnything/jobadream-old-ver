@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { layoutConfig } from '@layouts'
-import { can } from '@layouts/plugins/casl'
 import type { NavLink } from '@layouts/types'
 import { getComputedNavLinkToProp, getDynamicI18nProps, isNavLinkActive } from '@layouts/utils'
 
@@ -18,7 +17,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <li
-    v-if="can(item.action, item.subject)"
     class="nav-link"
     :class="[{
       'sub-item': props.isSubItem,
@@ -33,7 +31,7 @@ const props = withDefaults(defineProps<Props>(), {
       <Component
         :is="layoutConfig.app.iconRenderer || 'div'"
         class="nav-item-icon"
-        v-bind="item.icon || layoutConfig.verticalNav.defaultNavItemIconProps"
+        v-bind="getIconProps(item.icon, layoutConfig.verticalNav.defaultNavItemIconProps)"
       />
       <span
         class="nav-item-title"

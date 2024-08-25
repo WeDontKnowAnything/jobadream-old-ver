@@ -43,3 +43,4 @@ export interface Options {
   groupBy: readonly SortItem[]
   search: string | undefined
 }
+export type IconProp = Record<string, any> | undefined

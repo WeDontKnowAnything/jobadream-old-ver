@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { layoutConfig } from '@layouts'
 import { HorizontalNavLink, HorizontalNavPopper } from '@layouts/components'
-import { canViewNavMenuGroup } from '@layouts/plugins/casl'
 import { useLayoutConfigStore } from '@layouts/stores/config'
 import type { NavGroup } from '@layouts/types'
 import { getDynamicI18nProps, isNavGroupActive } from '@layouts/utils'
@@ -43,7 +42,6 @@ watch(() => route.path, () => {
 
 <template>
   <HorizontalNavPopper
-    v-if="canViewNavMenuGroup(item)"
     :is-rtl="configStore.isAppRTL"
     class="nav-group"
     tag="li"
@@ -60,7 +58,7 @@ watch(() => route.path, () => {
       <Component
         :is="layoutConfig.app.iconRenderer || 'div'"
         class="nav-item-icon"
-        v-bind="item.icon || layoutConfig.verticalNav.defaultNavItemIconProps"
+        v-bind="getIconProps(item.icon, layoutConfig.verticalNav.defaultNavItemIconProps)"
       />
       <span
         v-bind="getDynamicI18nProps(item.title, 'span')"

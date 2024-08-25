@@ -194,7 +194,7 @@ const isMounted = useMounted()
     >
       <Component
         :is="layoutConfig.app.iconRenderer || 'div'"
-        v-bind="item.icon || layoutConfig.verticalNav.defaultNavItemIconProps"
+        v-bind="getIconProps(item.icon, layoutConfig.verticalNav.defaultNavItemIconProps)"
         class="nav-item-icon"
       />
       <!--

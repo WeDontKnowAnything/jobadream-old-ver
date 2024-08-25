@@ -18,14 +18,15 @@ export const redirects: RouteRecordRaw[] = [
       //   return { name: 'access-control' }
 
       // return { name: 'login', query: to.query }
-      return { name: 'dashboard' }
+      return { name: 'home' }
     },
   },
-  {
-    path: '/pages/account-settings',
-    name: 'pages-account-settings',
-    redirect: () => ({ name: 'pages-account-settings-tab', params: { tab: 'account' } }),
-  },
+
+  // {
+  //   path: '/pages/account-settings',
+  //   name: 'pages-account-settings',
+  //   redirect: () => ({ name: 'pages-account-settings-tab', params: { tab: 'account' } }),
+  // },
 ]
 
 export const routes: RouteRecordRaw[] = []
