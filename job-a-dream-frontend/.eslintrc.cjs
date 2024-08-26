@@ -190,6 +190,18 @@ module.exports = {
     //     props: false,
     //   },
     // }],
+    'unicorn/error-message': 'off',
+    'unicorn/escape-case': 'off',
+    'unicorn/no-instanceof-array': 'off',
+    'unicorn/no-new-buffer': 'off',
+    'unicorn/number-literal-case': 'off',
+    'unicorn/prefer-includes': 'off',
+    'unicorn/prefer-string-starts-ends-with': 'off',
+    'unicorn/prefer-type-error': 'off',
+    'unicorn/throw-new-error': 'off',
+    'unicorn/prefer-node-protocol': 'off',
+    'unicorn/prefer-number-properties': 'off',
+    'unicorn/no-new-array': 'off',
 
     // Internal Rules
     'valid-appcardcode-code-prop': 'error',

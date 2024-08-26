@@ -138,7 +138,7 @@ const totalOrder = computed(() => ordersData.value.total)
         <!-- Order ID -->
         <template #item.title="{ item }">
           <RouterLink
-            :to="{ name: 'home', params: { id: item.order } }"
+            :to="{ name: 'post-id', params: { id: item.order } }"
             class="font-weight-medium"
           >
             #{{ item.order }}

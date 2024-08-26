@@ -2,14 +2,12 @@
 import { paginationMeta } from '@api-utils/paginationMeta'
 
 const regionCheckboxContent = [
-  '서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기', '강원', '충북', '충남', '전북', '전남', '경북', '경남', '제주',
+  '서울', '경기', '인천', '부산', '대구', '광주', '대전', '울산', '세종', '강원', '경남', '경북', '전남', '전북', '충남', '충북', '제주',
 ]
 
 const positionCheckboxContent = [
-  '인공지능', '빅데이터', '블록체인', '클라우드', '사물인터넷', '보안', '개발', '디자인', '마케팅', '영업', '기획', '경영', '인사', '재무', '회계', '법무', '연구개발', '생산', '품질', '구매', '물류', '생산', '기술영업', '영업관리', '영업기획',
+  '기획·전략', '마케팅·홍보·조사', '회계·세무·재무', '인사·노무·HRD', '총무·법무·사무', 'IT개발·데이터', '디자인', '영업·판매·무역', '고객상담·TM', '구매·자재·물류', '상품기획·MD', '운전·운송·배송', '서비스', '생산', '건설·건축', '의료', '연구·R&D', '교육', '미디어·문화·스포츠', '금융·보험', '공공·복지',
 ]
-
-const selectedCheckbox = ref(['discount'])
 
 const numberedSteps = [
   {
@@ -29,18 +27,9 @@ const numberedSteps = [
 const currentStep = ref(0)
 
 const formData = ref({
-  username: '',
-  email: '',
-  password: '',
-  cPassword: '',
-  firstName: '',
-  lastName: '',
-  country: undefined,
-  language: undefined,
-  twitter: '',
-  facebook: '',
-  googlePlus: '',
-  LinkedIn: '',
+  location: ['서울'],
+  position: ['기획·전략'],
+  keyword: '',
 })
 
 const onSubmit = () => {
@@ -129,12 +118,12 @@ const solidCardData = [
                         {{ numberedSteps[currentStep].title }}
                       </h5>
                       <p class="mb-0">
-                        {{ numberedSteps[currentStep].subtitle }}
+                        {{ numberedSteps[currentStep].subtitle }} (미지정 : 전국)
                       </p>
                     </VCol>
                     <VCol cols="12">
                       <JadCheckboxes
-                        v-model:selected-checkbox="selectedCheckbox"
+                        v-model:selected-checkbox="formData.location"
                         :checkbox-content="regionCheckboxContent"
                         :grid-column="{ sm: '3', lg: '2', cols: '4' }"
                       />
@@ -149,15 +138,15 @@ const solidCardData = [
                         {{ numberedSteps[currentStep].title }}
                       </h5>
                       <p class="mb-0">
-                        {{ numberedSteps[currentStep].subtitle }}
+                        {{ numberedSteps[currentStep].subtitle }} (미지정 : 전체)
                       </p>
                     </VCol>
 
                     <VCol cols="12">
                       <JadCheckboxes
-                        v-model:selected-checkbox="selectedCheckbox"
+                        v-model:selected-checkbox="formData.position"
                         :checkbox-content="positionCheckboxContent"
-                        :grid-column="{ sm: '3', lg: '2', cols: '4' }"
+                        :grid-column="{ sm: '4', lg: '3', cols: '6' }"
                       />
                     </VCol>
                   </VRow>
@@ -176,7 +165,7 @@ const solidCardData = [
 
                     <VCol cols="12">
                       <AppTextField
-                        v-model="formData.twitter"
+                        v-model="formData.keyword"
                         placeholder="키워드 입력"
                         label="키워드"
                       />
