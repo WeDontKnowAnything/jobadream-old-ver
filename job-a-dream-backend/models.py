@@ -18,7 +18,7 @@ class Corporation(Base):
     corp_id = Column(VARCHAR, primary_key=True)
     corp_name = Column(VARCHAR, nullable=False)
     category_code = Column(VARCHAR)
-    size_code = Column(VARCHAR, nullable=False)
+    size_code = Column(VARCHAR)  # nullable=False
     employee_cnt = Column(INT)
     reg_gender = Column(INT)
     tempo_gender = Column(INT)
