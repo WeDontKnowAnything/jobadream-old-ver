@@ -1,4 +1,4 @@
-from sqlalchemy import Column, INT, TIMESTAMP, VARCHAR, Text
+from sqlalchemy import Column, INT, TIMESTAMP, VARCHAR, Text, Date
 from sqlalchemy.orm import relationship
 from connector import Base
 
@@ -15,63 +15,65 @@ class Code(Base):
 class Corporation(Base):
     __tablename__ = "corporation"
 
-    corp_id = Column(VARCHAR, primary_key=True)
-    corp_name = Column(VARCHAR, nullable=False)
+    id = Column(VARCHAR, primary_key=True)
+    name = Column(VARCHAR, nullable=False)
     category_code = Column(VARCHAR)
-    size_code = Column(VARCHAR)  # nullable=False
+    size_code = Column(VARCHAR)
     employee_cnt = Column(INT)
     reg_gender = Column(INT)
     tempo_gender = Column(INT)
 
 
-# class StartupIR(Base):
-#     __tablename__ = "startup_ir"
+class Jobs(Base):
+    __tablename__ = "jobs"
 
-#     ir_id = Column(INT, primary_key=True)
-#     product = Column(VARCHAR)
-#     corp_desc = Column(Text)
-#     total_investment = Column(VARCHAR)
-#     keyword = Column(VARCHAR)
-#     ir_code = Column(INT)
-#     corp_id = Column(VARCHAR, nullable=False)
-
-
-# class News(Base):
-#     __tablename__ = "news"
-
-#     news_id = Column(INT, primary_key=True)
-#     news_title = Column(VARCHAR, nullable=False)
-#     news_summary = Column(Text, nullable=False)
-#     news_url = Column(VARCHAR, nullable=False)
-#     news_time = Column(TIMESTAMP)
-#     corp_id = Column(VARCHAR, nullable=False)
+    id = Column(VARCHAR, primary_key=True)
+    corp_name = Column(VARCHAR, nullable=False)
+    title = Column(VARCHAR)
+    category_code = Column(INT)
+    location = Column(VARCHAR, nullable=False)
+    experience_code = Column(INT)
+    job_url = Column(VARCHAR)
+    opening_date = Column(Date)
+    closing_date = Column(Date)
 
 
-# class Post(Base):
-#     __tablename__ = "post"
+class StartupIR(Base):
+    __tablename__ = "startup_ir"
 
-#     post_id = Column(INT, primary_key=True)
-#     title = Column(VARCHAR, nullable=False)
-#     contents = Column(Text, nullable=False)
-#     posting_date = Column(TIMESTAMP, nullable=False)
-
-#     comments = relationship(
-#         "Comment",
-#         back_populates="post",
-#         primaryjoin="Post.post_id == Comment.post_id",
-#     )
+    id = Column(INT, primary_key=True, autoincrement=True)
+    product = Column(VARCHAR)
+    corp_desc = Column(Text)
+    total_investment = Column(VARCHAR)
+    keyword = Column(VARCHAR)
+    ir_code = Column(INT)
+    startup_id = Column(VARCHAR, nullable=False)
 
 
-# class Comment(Base):
-#     __tablename__ = "comment"
+class News(Base):
+    __tablename__ = "news"
 
-#     comment_id = Column(INT, primary_key=True)
-#     comment = Column(Text, nullable=False)
-#     comment_date = Column(TIMESTAMP, nullable=False)
-#     post_id = Column(INT, nullable=False)
+    id = Column(INT, primary_key=True, autoincrement=True)
+    news_title = Column(VARCHAR, nullable=False)
+    news_summary = Column(Text, nullable=False)
+    news_url = Column(VARCHAR, nullable=False)
+    news_time = Column(TIMESTAMP, nullable=False)
+    corp_id = Column(VARCHAR, nullable=False)
 
-#     post = relationship(
-#         "Post",
-#         back_populates="comments",
-#         primaryjoin="Comment.post_id == Post.post_id",
-#     )
+
+class Post(Base):
+    __tablename__ = "post"
+
+    id = Column(INT, primary_key=True, autoincrement=True)
+    title = Column(VARCHAR, nullable=False)
+    contents = Column(Text, nullable=False)
+    posting_date = Column(TIMESTAMP, nullable=False)
+
+
+class Comment(Base):
+    __tablename__ = "comment"
+
+    id = Column(INT, primary_key=True, autoincrement=True)
+    comment = Column(Text, nullable=False)
+    comment_date = Column(TIMESTAMP, nullable=False)
+    post_id = Column(INT, nullable=False)
