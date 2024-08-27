@@ -8,18 +8,22 @@ router = APIRouter()
 
 
 @router.get("/api/v1/jobs", response_model=List[schemas.Jobs])
-def read_all_corporations(db: Session = Depends(get_db)) -> List[dict]:
+def read_all_jobs(db: Session = Depends(get_db)) -> List[dict]:
     try:
         jobs = crud.get_all_jobs(db)
+        for job in jobs:
+            job.job_url = crud.get_job_urls(job.id, db)
         return jobs
     except Exception as e:
         raise HTTPException(status_code=404, detail=str(e))
 
 
-@router.get("/api/v1/jobs/{job_id}", response_model=List[schemas.JobsBase])
-def read_corporation(job_id: str, db: Session = Depends(get_db)) -> List[dict]:
+@router.get("/api/v1/jobs/{job_id}", response_model=schemas.JobsBase)
+def read_job(job_id: str, db: Session = Depends(get_db)) -> List[dict]:
     try:
         job = crud.get_job(job_id, db)
+        if job:
+            job.job_url = crud.get_job_urls(job_id, db)
         return job
     except Exception as e:
         raise HTTPException(status_code=404, detail=str(e))
