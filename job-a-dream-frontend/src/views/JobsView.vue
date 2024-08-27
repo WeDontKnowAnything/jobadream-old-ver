@@ -32,34 +32,17 @@ const formData = ref({
   keyword: '',
 })
 
-const onSubmit = () => {
+const onSearch = () => {
   console.log(formData.value)
 }
-
-const searchQuery = ref('')
 
 // Data table options
 const itemsPerPage = ref(12)
 const page = ref(1)
-const sortBy = ref()
-const orderBy = ref()
 
-// Fetch Orders
-const { data: ordersData } = await useApi<any>(createUrl('/apps/ecommerce/orders',
-  {
-    query: {
-      q: searchQuery,
-      page,
-      itemsPerPage,
-      sortBy,
-      orderBy,
-    },
-  },
-))
+const totalJobs = ref<number>(1)
 
-const totalOrder = computed(() => ordersData.value.total)
-
-const solidCardData = [
+const jobs = [
   {
     corp_name: '삼성전자',
     title: 'NLP Engineer, 생성형 AI',
@@ -79,6 +62,10 @@ const solidCardData = [
     experience: '경력 10년 이상',
   },
 ]
+
+onMounted(() => {
+  totalJobs.value = jobs.length
+})
 </script>
 
 <template>
@@ -186,22 +173,22 @@ const solidCardData = [
                     start
                     class="flip-in-rtl"
                   />
-                  Previous
+                  이전
                 </VBtn>
 
                 <VBtn
                   v-if="numberedSteps.length - 1 === currentStep"
                   color="success"
-                  @click="onSubmit"
+                  @click="onSearch"
                 >
-                  submit
+                  검색
                 </VBtn>
 
                 <VBtn
                   v-else
                   @click="currentStep++"
                 >
-                  Next
+                  다음
 
                   <VIcon
                     icon="tabler-arrow-right"
@@ -219,7 +206,7 @@ const solidCardData = [
     <!-- 채용공고 카드 -->
     <VRow>
       <VCol
-        v-for="data in solidCardData"
+        v-for="data in jobs"
         :key="data.title"
         cols="12"
         md="6"
@@ -229,7 +216,7 @@ const solidCardData = [
           <VCardItem>
             <VCardTitle class="text-white">
               <RouterLink
-                :to="{ name: 'home' }"
+                :to="{ name: 'job-id', params: { id: 12 } }"
                 class="font-weight-medium"
               >
                 {{ data.corp_name }}
@@ -268,13 +255,13 @@ const solidCardData = [
     </VRow>
     <div class="d-flex align-center justify-sm-space-between justify-center flex-wrap gap-3 pa-5 pt-3">
       <p class="text-sm text-disabled mb-0">
-        {{ paginationMeta({ page, itemsPerPage }, totalOrder) }}
+        {{ paginationMeta({ page, itemsPerPage }, totalJobs) }}
       </p>
 
       <VPagination
         v-model="page"
-        :length="Math.ceil(totalOrder / itemsPerPage)"
-        :total-visible="$vuetify.display.xs ? 1 : Math.min(Math.ceil(totalOrder / itemsPerPage), 5)"
+        :length="Math.ceil(totalJobs / itemsPerPage)"
+        :total-visible="$vuetify.display.xs ? 1 : Math.min(Math.ceil(totalJobs / itemsPerPage), 5)"
       >
         <template #prev="slotProps">
           <VBtn

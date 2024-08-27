@@ -7,10 +7,19 @@ export const useJobStore = defineStore(
   'job',
   () => {
     // 객체, 함수 선언 스코프
-    const honey = ref('')
+    const job = ref({
+      corp_name: 'Toss',
+      title: 'NLP Engineer, 생성형 AI',
+      category_code: '13',
+      location: '서울',
+      experience_type: '신입',
+      job_url: [{ platform_name: '사람인', icon: 'tabler-circle-letter-s', url: 'https://...' }, { platform_name: '사람인', icon: 'tabler-circle-letter-s', url: 'https://...' }, { platform_name: '사람인', icon: 'tabler-circle-letter-s', url: 'https://...' }],
+      opening_date: '2024-08-01',
+      closing_date: '2024-09-01',
+    })
 
     return {
-      honey,
+      job,
 
       // 반환값들 (위에서 생성한 객체, 함수 등등.)
     }

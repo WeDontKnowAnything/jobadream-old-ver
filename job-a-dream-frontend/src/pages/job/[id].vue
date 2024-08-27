@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import PostView from '@/views/post/index.vue'
+import JobView from '@/views/job/index.vue'
 </script>
 
 <template>
-  <PostView />
+  <JobView />
 </template>

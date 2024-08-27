@@ -114,6 +114,14 @@ const totalOrder = computed(() => ordersData.value.total)
               style="min-inline-size: 6.25rem;"
               :items="[5, 10, 20, 50, 100]"
             />
+            <RouterLink :to="{ name: 'posts-add' }">
+              <VBtn
+                color="primary"
+                prepend-icon="tabler-plus"
+              >
+                게시글 추가
+              </VBtn>
+            </RouterLink>
           </div>
         </div>
       </VCardText>
@@ -138,7 +146,7 @@ const totalOrder = computed(() => ordersData.value.total)
         <!-- Order ID -->
         <template #item.title="{ item }">
           <RouterLink
-            :to="{ name: 'post-id', params: { id: item.order } }"
+            :to="{ name: 'posts-post-id', params: { id: item.order } }"
             class="font-weight-medium"
           >
             #{{ item.order }}

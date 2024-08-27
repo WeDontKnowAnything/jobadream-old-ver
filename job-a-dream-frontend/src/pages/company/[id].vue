@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import PostView from '@/views/post/index.vue'
+import CompanyView from '@/views/company/index.vue'
 </script>
 
 <template>
-  <PostView />
+  <CompanyView />
 </template>

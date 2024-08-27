@@ -1,149 +1,151 @@
-<script lang="ts" setup>
-const postTitle = ref('')
-const postText = ref('')
-const newComment = ref('')
+<script setup lang="ts">
+import { storeToRefs } from 'pinia'
+import { useJobStore } from '@/stores/jobStore'
 
-const comments = ref([
-  { content: '마 볶아 온나', comment_date: '2021-21-23 10:11' },
-  { content: '마 볶아 온나', comment_date: '2021-21-23 10:11' },
-  { content: '마 볶아 온나', comment_date: '2021-21-23 10:11' },
-])
+const jobStore = useJobStore()
+const { job } = storeToRefs(jobStore)
 
-const commentRules = [(v: string) => v.length <= 250 || '최대 250자까지 작성 가능']
-
-const randomName = ref(['꿈이 있는 청년', '희망을 품고 있는 청년', '가능성이 보이는 청년', '보기 드문 청년', '제육볶음 잘 볶을 것 같은 청년', '정직한 청년'])
-
-// 랜덤하게 이름을 뽑아주는 함수
-const getRandomName = () => {
-  const randomIndex = Math.floor(Math.random() * randomName.value.length)
-
-  return randomName.value[randomIndex]
-}
+// const job = ref({
+//   corp_name: 'Toss',
+//   title: 'NLP Engineer, 생성형 AI',
+//   category_code: '13',
+//   location: '서울',
+//   experience_type: '신입',
+//   job_url: [{ saramin: 'https://...' }, { jobkorea: 'https://...' }],
+//   opening_date: '2024-08-01',
+//   closing_date: '2024-09-01',
+// })
+const currentTab = ref(0)
 </script>
 
 <template>
-  <VRow>
+  <VRow class="py-6">
+    <!-- 👉 Welcome -->
     <VCol
       cols="12"
-      md="7"
+      md="8"
+      :class="$vuetify.display.mdAndUp ? 'border-e' : 'border-b'"
     >
-      <VCard>
-        <VCardText>
-          <AppTextField
-            v-model="postTitle"
-            label="제목"
-          />
-        </VCardText>
-        <VCardText>
-          <AppTextarea
-            v-model="postText"
-            label="내용"
-            placeholder="내용을 '잡어드림'"
-            auto-grow
-          />
-        </VCardText>
-      </VCard>
-    </VCol>
-    <!-- 👉 Radar Chart -->
-    <VCol
-      cols="12"
-      md="5"
-    >
-      <VCard class="mb-6">
-        <VDivider />
-        <VCardText>
-          <VRow>
-            <VCol cols="6">
-              <!-- 👉 Send Invoice -->
-              <VBtn
-                block
-                prepend-icon="tabler-send"
-              >
-                게시글 저장
-              </VBtn>
-            </VCol>
-
-            <VCol cols="6">
-              <!-- 👉 Preview -->
-              <VBtn
-                block
-                color="default"
-                variant="tonal"
-              >
-                취소
-              </VBtn>
-            </VCol>
-          </VRow>
-        </VCardtext>
-      </VCard>
-      <VCard title="댓글 목록">
-        <VCardText>
-          <AppTextarea
-            v-model="newComment"
-            prepend-inner-icon="tabler-message-2"
-            rows="2"
-            :rules="commentRules"
-            label="댓글 추가"
-            placeholder="댓글을 '잡어드림'"
-          />
-        </VCardText>
-        <VCardText>
-          <VRow>
-            <VCol cols="6">
-              <!-- 👉 Send Invoice -->
-              <VBtn
-                block
-                prepend-icon="tabler-message-2"
-              >
-                댓글
-              </VBtn>
-            </VCol>
-            <VCol cols="6">
-              <!-- 👉 Preview -->
-              <VBtn
-                block
-                color="default"
-                variant="tonal"
-              >
-                취소
-              </VBtn>
-            </VCol>
-          </VRow>
-        </VCardText>
-        <VDivider />
-        <template
-          v-for="(comment, index) in comments"
-          :key="index"
+      <div class="pe-3">
+        <div
+          class="mb-2 text-wrap"
+          style="max-inline-size: 400px;"
         >
-          <VCardText>
-            <VTimeline
-              side="end"
-              align="start"
-              line-inset="8"
-              truncate-line="both"
-              density="compact"
+          {{ job.corp_name }}
+        </div>
+        <h3 class="text-h3 text-high-emphasis mb-4">
+          {{ job.title }}
+        </h3>
+        <div class="d-flex gap-2">
+          <VChip
+            color="success"
+            label
+          >
+            {{ job.location }}
+          </VChip>
+          <VChip
+            color="info"
+            label
+          >
+            {{ job.experience_type }}
+          </VChip>
+        </div>
+      </div>
+    </VCol>
+    <!-- 👉 Time Spendings -->
+    <VCol
+      cols="12"
+      md="4"
+    >
+      <div class="d-flex justify-space-between align-center">
+        <div class="d-flex flex-column ps-3">
+          <h5 class="text-h5 text-high-emphasis mb-4 text-no-wrap">
+            일정
+          </h5>
+          <div class="d-flex mb-3 align-center">
+            <VChip
+              variant="outlined"
+              color="success"
+              class="me-2"
             >
-              <!-- SECTION Timeline Item: Flight -->
-              <VTimelineItem
-                dot-color="blue"
-                size="x-small"
-              >
-                <div class="d-flex justify-space-between align-center flex-wrap mb-1">
-                  <div class="app-timeline-title">
-                    {{ getRandomName() }}
-                  </div>
-                  <span class="app-timeline-meta">{{ comment.comment_date }}</span>
-                </div>
-
-                <div class="app-timeline-text">
-                  {{ comment.content }}
-                </div>
-              </VTimelineItem>
-              <!-- !SECTION -->
-            </VTimeline>
-          </VCardText>
-        </template>
-      </vcard>
+              시작일
+            </VChip>
+            <span class="">
+              {{ job.opening_date }}
+            </span>
+          </div>
+          <div class="d-flex align-center">
+            <VChip
+              variant="outlined"
+              color="error"
+              class="me-2"
+            >
+              종료일
+            </VChip>
+            <span>
+              {{ job.closing_date }}
+            </span>
+          </div>
+        </div>
+      </div>
     </VCol>
   </VRow>
+  <VCard>
+    <VTabs v-model="currentTab">
+      <VTab>정보</VTab>
+      <VTab>채용 공고</VTab>
+    </VTabs>
+
+    <VCardText>
+      <VWindow v-model="currentTab">
+        <VWindowItem>
+          <VCardText>
+            {{ job.corp_name }}
+          </VCardText>
+        </VWindowItem>
+        <VWindowItem>
+          <VCardText>
+            <VList class="card-list">
+              <VRow
+                no-gutters
+                class="d-flex"
+              >
+                <VCol
+                  v-for="(job_url, idx) in job.job_url"
+                  :key="idx"
+                  cols="12"
+                  md="6"
+                >
+                  <VListItem class="mb-4">
+                    <template #prepend>
+                      <VAvatar
+                        color="info"
+                        variant="tonal"
+                        size="34"
+                        rounded
+                      >
+                        <VIcon :icon="job_url.icon" />
+                      </VAvatar>
+                    </template>
+                    <VListItemTitle class="font-weight-medium">
+                      {{ job_url.platform_name }}
+                    </VListItemTitle>
+
+                    <template #append>
+                      <a
+                        :href="job_url.url"
+                        class="text-decoration-none"
+                      >
+                        <span class="font-weight-medium me-4">링크로 바로 이동</span>
+                      </a>
+                    </template>
+                  </VListItem>
+                </VCol>
+              </VRow>
+            </VList>
+          </VCardText>
+        </VWindowItem>
+      </VWindow>
+    </VCardText>
+  </VCard>
 </template>

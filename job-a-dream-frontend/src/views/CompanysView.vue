@@ -5,30 +5,27 @@ const widgetData = ref([
   { title: '기업 수', value: 12689, icon: 'tabler-clipboard-check' },
 ])
 
-const searchQuery = ref('')
-
 // Data table options
 const itemsPerPage = ref(12)
 const page = ref(1)
-const sortBy = ref()
-const orderBy = ref()
+const totalCompanys = ref<number>(1)
 
-// Fetch Orders
-const { data: ordersData } = await useApi<any>(createUrl('/apps/ecommerce/orders',
+const companys = [
   {
-    query: {
-      q: searchQuery,
-      page,
-      itemsPerPage,
-      sortBy,
-      orderBy,
-    },
+    title: '삼성전자',
+    text: 'Samsung Electronics Co., Ltd. is a South Korean multinational electronics company headquartered in the Yeongtong District of Suwon.',
+    count: '80',
   },
-))
-
-const totalOrder = computed(() => ordersData.value.total)
-
-const solidCardData = [
+  {
+    title: 'Apple Inc.',
+    text: 'Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software, and online services.',
+    count: '49',
+  },
+  {
+    title: 'LinkedIn',
+    text: 'LinkedIn is an American business and employment-oriented online service that operates via websites and mobile apps.',
+    count: '80',
+  },
   {
     title: '삼성전자',
     text: 'Samsung Electronics Co., Ltd. is a South Korean multinational electronics company headquartered in the Yeongtong District of Suwon.',
@@ -90,6 +87,17 @@ const solidCardData = [
     count: '80',
   },
 ]
+
+const paginatedData = computed(() => {
+  const start = (page.value - 1) * itemsPerPage.value
+  const end = start + itemsPerPage.value
+
+  return companys.slice(start, end)
+})
+
+onMounted(() => {
+  totalCompanys.value = companys.length
+})
 </script>
 
 <template>
@@ -155,7 +163,7 @@ const solidCardData = [
     </VCard>
     <VRow>
       <VCol
-        v-for="data in solidCardData"
+        v-for="data in paginatedData"
         :key="data.title"
         cols="12"
         md="6"
@@ -165,7 +173,7 @@ const solidCardData = [
           <VCardItem>
             <VCardTitle class="text-white">
               <RouterLink
-                :to="{ name: 'home' }"
+                :to="{ name: 'company-id', params: { id: 12 } }"
                 class="font-weight-medium"
               >
                 {{ data.title }}
@@ -192,15 +200,16 @@ const solidCardData = [
         </VCard>
       </VCol>
     </VRow>
+
     <div class="d-flex align-center justify-sm-space-between justify-center flex-wrap gap-3 pa-5 pt-3">
       <p class="text-sm text-disabled mb-0">
-        {{ paginationMeta({ page, itemsPerPage }, totalOrder) }}
+        {{ paginationMeta({ page, itemsPerPage }, totalCompanys) }}
       </p>
 
       <VPagination
         v-model="page"
-        :length="Math.ceil(totalOrder / itemsPerPage)"
-        :total-visible="$vuetify.display.xs ? 1 : Math.min(Math.ceil(totalOrder / itemsPerPage), 5)"
+        :length="Math.ceil(totalCompanys / itemsPerPage)"
+        :total-visible="$vuetify.display.xs ? 1 : Math.min(Math.ceil(totalCompanys / itemsPerPage), 5)"
       >
         <template #prev="slotProps">
           <VBtn

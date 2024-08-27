@@ -46,7 +46,8 @@ declare module 'vue-router/auto/routes' {
     'home': RouteRecordInfo<'home', '/home', Record<never, never>, Record<never, never>>,
     'job-id': RouteRecordInfo<'job-id', '/job/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     'jobs': RouteRecordInfo<'jobs', '/jobs', Record<never, never>, Record<never, never>>,
-    'post-id': RouteRecordInfo<'post-id', '/post/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    'posts-add': RouteRecordInfo<'posts-add', '/posts/add', Record<never, never>, Record<never, never>>,
+    'posts-post-id': RouteRecordInfo<'posts-post-id', '/posts/post/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
   }
 }
 

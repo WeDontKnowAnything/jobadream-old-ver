@@ -1,24 +1,32 @@
 <script lang="ts" setup>
-const postTitle = ref('')
-const postText = ref('')
-const newComment = ref('')
+import { storeToRefs } from 'pinia'
+import { useBoardStore } from '@/stores/boardStore'
 
-const comments = ref([
-  { content: '마 볶아 온나', comment_date: '2021-21-23 10:11' },
-  { content: '마 볶아 온나', comment_date: '2021-21-23 10:11' },
-  { content: '마 볶아 온나', comment_date: '2021-21-23 10:11' },
-])
+const boardStore = useBoardStore()
+const { comments, newComment, post } = storeToRefs(boardStore)
 
+const router = useRouter()
+const route = useRoute()
 const commentRules = [(v: string) => v.length <= 250 || '최대 250자까지 작성 가능']
 
-const randomName = ref(['꿈이 있는 청년', '희망을 품고 있는 청년', '가능성이 보이는 청년', '보기 드문 청년', '제육볶음 잘 볶을 것 같은 청년', '정직한 청년'])
-
-// 랜덤하게 이름을 뽑아주는 함수
-const getRandomName = () => {
-  const randomIndex = Math.floor(Math.random() * randomName.value.length)
-
-  return randomName.value[randomIndex]
+const saveComment = () => {
+  console.log(newComment.value)
 }
+
+const resetComment = () => {
+  newComment.value.content = ''
+}
+
+const backToBoard = () => {
+  router.go(-1)
+}
+
+onMounted(() => {
+  if ('id' in route.params)
+    newComment.value.post_id = route.params.id as string
+  else
+    console.error('Route parameter id is missing')
+})
 </script>
 
 <template>
@@ -28,54 +36,41 @@ const getRandomName = () => {
       md="7"
     >
       <VCard>
+        <VCardText class=" text-end">
+          <span>
+            게시일 : {{ post.posting_date }}
+          </span>
+        </VCardText>
         <VCardText>
           <AppTextField
-            v-model="postTitle"
+            v-model="post.title"
             label="제목"
+            readonly
           />
         </VCardText>
         <VCardText>
           <AppTextarea
-            v-model="postText"
+            v-model="post.content"
             label="내용"
-            placeholder="내용을 '잡어드림'"
-            auto-grow
+            readonly
           />
         </VCardText>
       </VCard>
+
+      <VBtn
+        prepend-icon="tabler-arrow-left"
+        block
+        class="mt-4"
+        color="warning"
+        @click="backToBoard"
+      >
+        이전
+      </VBtn>
     </VCol>
-    <!-- 👉 Radar Chart -->
     <VCol
       cols="12"
       md="5"
     >
-      <VCard class="mb-6">
-        <VDivider />
-        <VCardText>
-          <VRow>
-            <VCol cols="6">
-              <!-- 👉 Send Invoice -->
-              <VBtn
-                block
-                prepend-icon="tabler-send"
-              >
-                게시글 저장
-              </VBtn>
-            </VCol>
-
-            <VCol cols="6">
-              <!-- 👉 Preview -->
-              <VBtn
-                block
-                color="default"
-                variant="tonal"
-              >
-                취소
-              </VBtn>
-            </VCol>
-          </VRow>
-        </VCardtext>
-      </VCard>
       <VCard title="댓글 목록">
         <VCardText>
           <AppTextarea
@@ -94,6 +89,7 @@ const getRandomName = () => {
               <VBtn
                 block
                 prepend-icon="tabler-message-2"
+                @click="saveComment"
               >
                 댓글
               </VBtn>
@@ -104,6 +100,7 @@ const getRandomName = () => {
                 block
                 color="default"
                 variant="tonal"
+                @click="resetComment"
               >
                 취소
               </VBtn>
@@ -112,8 +109,8 @@ const getRandomName = () => {
         </VCardText>
         <VDivider />
         <template
-          v-for="(comment, index) in comments"
-          :key="index"
+          v-for="comment in comments"
+          :key="comment"
         >
           <VCardText>
             <VTimeline
@@ -130,7 +127,7 @@ const getRandomName = () => {
               >
                 <div class="d-flex justify-space-between align-center flex-wrap mb-1">
                   <div class="app-timeline-title">
-                    {{ getRandomName() }}
+                    {{ boardStore.getRandomName() }}
                   </div>
                   <span class="app-timeline-meta">{{ comment.comment_date }}</span>
                 </div>
@@ -143,7 +140,7 @@ const getRandomName = () => {
             </VTimeline>
           </VCardText>
         </template>
-      </vcard>
+      </VCard>
     </VCol>
   </VRow>
 </template>
