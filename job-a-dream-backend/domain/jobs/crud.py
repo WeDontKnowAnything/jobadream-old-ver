@@ -4,8 +4,8 @@ from models import Jobs, JobUrl
 from typing import List
 
 
-def get_all_jobs(db: Session) -> List[dict]:
-    jobs = db.execute(select(Jobs)).scalars().all()
+def get_all_jobs(skip: int, limit: int, db: Session) -> List[dict]:
+    jobs = db.execute(select(Jobs).offset(skip).limit(limit)).scalars().all()
     return jobs
 
 
@@ -14,9 +14,13 @@ def get_job(job_id: str, db: Session) -> List[dict]:
     return job
 
 
-def get_job_urls(job_id: str, db: Session) -> List[dict]:
+def get_job_urls(job_id: str, skip: int, limit: int, db: Session) -> List[dict]:
     job_urls = (
-        db.execute(select(JobUrl).filter(JobUrl.job_id == job_id)).scalars().all()
+        db.execute(
+            select(JobUrl).filter(JobUrl.job_id == job_id).offset(skip).limit(limit)
+        )
+        .scalars()
+        .all()
     )
 
     result = [
