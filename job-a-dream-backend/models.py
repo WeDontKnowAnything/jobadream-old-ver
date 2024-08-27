@@ -33,9 +33,17 @@ class Jobs(Base):
     category_code = Column(INT)
     location = Column(VARCHAR, nullable=False)
     experience_code = Column(INT)
-    job_url = Column(VARCHAR)
     opening_date = Column(Date)
     closing_date = Column(Date)
+
+
+class JobUrl(Base):
+    __tablename__ = "job_url"
+
+    id = Column(INT, primary_key=True, autoincrement=True)
+    platform_name = Column(VARCHAR, nullable=False)
+    url = Column(VARCHAR, nullable=False)
+    job_id = Column(VARCHAR, nullable=False)
 
 
 class StartupIR(Base):
