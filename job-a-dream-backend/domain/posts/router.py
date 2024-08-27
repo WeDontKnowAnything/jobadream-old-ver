@@ -35,10 +35,10 @@ def read_comments(post_id: int, db: Session = Depends(get_db)):
     comments = crud.get_comments(db, post_id=post_id)
     if not comments:
         raise HTTPException(status_code=404, detail="Comments not found")
-    return comments  # 데이터 변환 로직을 crud.py에서 처리
+    return comments
 
 
 @router.post("/api/v1/posts/comments", response_model=schemas.CommentResponse)
 def create_new_comment(comment: schemas.CommentCreate, db: Session = Depends(get_db)):
     new_comment = crud.create_comment(db=db, comment=comment)
-    return new_comment  # 데이터 변환 로직을 crud.py에서 처리
+    return new_comment

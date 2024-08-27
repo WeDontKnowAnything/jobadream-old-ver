@@ -3,7 +3,6 @@ from models import Post, Comment
 from domain.posts.schemas import PostCreate, CommentCreate
 
 
-# 댓글을 포함한 게시글 정보를 생성하는 함수
 def _build_post_response(post: Post, comments: list[Comment]):
     return {
         "post_id": post.id,
