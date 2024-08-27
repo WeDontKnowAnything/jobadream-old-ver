@@ -1,5 +1,6 @@
-from sqlalchemy import Column, INT, TIMESTAMP, VARCHAR, Text, Date
+from sqlalchemy import Column, INT, TIMESTAMP, VARCHAR, Text, Date, ForeignKey
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
 from connector import Base
 
 
@@ -74,8 +75,8 @@ class Post(Base):
 
     id = Column(INT, primary_key=True, autoincrement=True)
     title = Column(VARCHAR, nullable=False)
-    contents = Column(Text, nullable=False)
-    posting_date = Column(TIMESTAMP, nullable=False)
+    content = Column(Text, nullable=False)
+    posting_date = Column(TIMESTAMP, nullable=False, server_default=func.now())
 
 
 class Comment(Base):
@@ -83,5 +84,5 @@ class Comment(Base):
 
     id = Column(INT, primary_key=True, autoincrement=True)
     comment = Column(Text, nullable=False)
-    comment_date = Column(TIMESTAMP, nullable=False)
-    post_id = Column(INT, nullable=False)
+    comment_date = Column(TIMESTAMP, nullable=False, server_default=func.now())
+    post_id = Column(INT, ForeignKey("post.id"), nullable=False)
