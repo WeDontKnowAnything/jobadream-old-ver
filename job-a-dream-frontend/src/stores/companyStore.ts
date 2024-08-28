@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import * as corporationApi from '@/api/job'
 
 export const useCompanyStore = defineStore(
 
@@ -7,10 +8,25 @@ export const useCompanyStore = defineStore(
   'company',
   () => {
     // 객체, 함수 선언 스코프
-    const company = ref({ corp_name: '샘송' })
+    const companyList = ref([{ id: '12', name: '샘송', text: '', count: '103' }])
+    const company = ref({ id: '12', name: '샘송' })
+
+    const getCompanyList = async () => {
+      try {
+        const res = await corporationApi.getJobList()
+
+        console.log('getJobList: ', res)
+        companyList.value = res.data
+      }
+      catch (error) {
+        console.log('getJobList error: ', error)
+      }
+    }
 
     return {
       company,
+      companyList,
+      getCompanyList,
 
       // 반환값들 (위에서 생성한 객체, 함수 등등.)
     }

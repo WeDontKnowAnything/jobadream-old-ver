@@ -13,9 +13,9 @@ const { company } = storeToRefs(companyStore)
       cols="12"
       md="6"
     >
-      <VCard :title="company.corp_name">
+      <VCard :title="company.name">
         <VCardText>
-          {{ company.corp_name }}
+          {{ company.name }}
         </VCardText>
       </VCard>
     </VCol>

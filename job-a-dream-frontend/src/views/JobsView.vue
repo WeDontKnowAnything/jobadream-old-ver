@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
+import { useJobStore } from '@/stores/jobStore'
+
+const jobStore = useJobStore()
+const { jobList } = storeToRefs(jobStore)
+
 const regionCheckboxContent = [
   '서울', '경기', '인천', '부산', '대구', '광주', '대전', '울산', '세종', '강원', '경남', '경북', '전남', '전북', '충남', '충북', '제주',
 ]
@@ -25,8 +31,8 @@ const numberedSteps = [
 const currentStep = ref(0)
 
 const formData = ref({
-  location: ['서울'],
-  position: ['기획·전략'],
+  location: [],
+  position: [],
   keyword: '',
 })
 
@@ -38,35 +44,14 @@ const onSearch = () => {
 const itemsPerPage = ref(12)
 const page = ref(1)
 
-const jobs = ref([
-  {
-    corp_name: '삼성전자',
-    title: 'NLP Engineer, 생성형 AI',
-    location: '서울',
-    experience: '신입',
-  },
-  {
-    corp_name: 'Facebook',
-    title: '프론트엔드 개발자',
-    location: '인천',
-    experience: '경력 3년 이상',
-  },
-  {
-    corp_name: 'Toss',
-    title: '웹 개발자',
-    location: '부산',
-    experience: '경력 10년 이상',
-  },
-])
-
 const paginatedData = computed(() => {
   const start = (page.value - 1) * itemsPerPage.value
   const end = start + itemsPerPage.value
 
-  return jobs.value.slice(start, end)
+  return jobList.value.slice(start, end)
 })
 
-const totalJobs = computed(() => jobs.value.length)
+const totalJobs = computed(() => jobList.value.length)
 </script>
 
 <template>
@@ -247,7 +232,15 @@ const totalJobs = computed(() => jobs.value.length)
                   color="white"
                   class="me-1"
                 />
-                <span class="text-subtitle-2 text-white mt-1">{{ data.experience }}</span>
+                <span class="text-subtitle-2 text-white mt-1">{{ data.experience_type }}</span>
+              </span>
+              <span>
+                <IconBtn
+                  icon="tabler-layout-align-bottom"
+                  color="white"
+                  class="me-1"
+                />
+                <span class="text-subtitle-2 text-white mt-1">{{ data.position }}</span>
               </span>
             </div>
           </VCardText>
@@ -271,7 +264,7 @@ const totalJobs = computed(() => jobs.value.length)
             v-bind="slotProps"
             :icon="false"
           >
-            Previous
+            이전
           </VBtn>
         </template>
 
@@ -282,7 +275,7 @@ const totalJobs = computed(() => jobs.value.length)
             v-bind="slotProps"
             :icon="false"
           >
-            Next
+            다음
           </VBtn>
         </template>
       </VPagination>

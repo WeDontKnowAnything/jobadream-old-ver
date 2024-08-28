@@ -1,98 +1,26 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
+import { useCompanyStore } from '@/stores/companyStore'
+
+const companyStore = useCompanyStore()
+const { companyList } = storeToRefs(companyStore)
+
+const totalCompanys = computed(() => companyList.value.length)
+
 const widgetData = ref([
-  { title: '기업 수', value: 12689, icon: 'tabler-clipboard-check' },
+  { title: '기업 수', value: totalCompanys, icon: 'tabler-clipboard-check' },
 ])
 
 // Data table options
 const itemsPerPage = ref(12)
 const page = ref(1)
 
-const companys = ref([
-  {
-    title: '삼성전자',
-    text: 'Samsung Electronics Co., Ltd. is a South Korean multinational electronics company headquartered in the Yeongtong District of Suwon.',
-    count: '80',
-  },
-  {
-    title: 'Apple Inc.',
-    text: 'Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software, and online services.',
-    count: '49',
-  },
-  {
-    title: 'LinkedIn',
-    text: 'LinkedIn is an American business and employment-oriented online service that operates via websites and mobile apps.',
-    count: '80',
-  },
-  {
-    title: '삼성전자',
-    text: 'Samsung Electronics Co., Ltd. is a South Korean multinational electronics company headquartered in the Yeongtong District of Suwon.',
-    count: '80',
-  },
-  {
-    title: 'Apple Inc.',
-    text: 'Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software, and online services.',
-    count: '49',
-  },
-  {
-    title: 'LinkedIn',
-    text: 'LinkedIn is an American business and employment-oriented online service that operates via websites and mobile apps.',
-    count: '80',
-  },
-  {
-    title: '삼성전자',
-    text: 'Samsung Electronics Co., Ltd. is a South Korean multinational electronics company headquartered in the Yeongtong District of Suwon.',
-    count: '80',
-  },
-  {
-    title: 'Apple Inc.',
-    text: 'Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software, and online services.',
-    count: '49',
-  },
-  {
-    title: 'LinkedIn',
-    text: 'LinkedIn is an American business and employment-oriented online service that operates via websites and mobile apps.',
-    count: '80',
-  },
-  {
-    title: '삼성전자',
-    text: 'Samsung Electronics Co., Ltd. is a South Korean multinational electronics company headquartered in the Yeongtong District of Suwon.',
-    count: '80',
-  },
-  {
-    title: 'Apple Inc.',
-    text: 'Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software, and online services.',
-    count: '49',
-  },
-  {
-    title: 'LinkedIn',
-    text: 'LinkedIn is an American business and employment-oriented online service that operates via websites and mobile apps.',
-    count: '80',
-  },
-  {
-    title: '삼성전자',
-    text: 'Samsung Electronics Co., Ltd. is a South Korean multinational electronics company headquartered in the Yeongtong District of Suwon.',
-    count: '80',
-  },
-  {
-    title: 'Apple Inc.',
-    text: 'Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software, and online services.',
-    count: '49',
-  },
-  {
-    title: 'LinkedIn',
-    text: 'LinkedIn is an American business and employment-oriented online service that operates via websites and mobile apps.',
-    count: '80',
-  },
-])
-
 const paginatedData = computed(() => {
   const start = (page.value - 1) * itemsPerPage.value
   const end = start + itemsPerPage.value
 
-  return companys.value.slice(start, end)
+  return companyList.value.slice(start, end)
 })
-
-const totalCompanys = computed(() => companys.value.length)
 </script>
 
 <template>
@@ -159,7 +87,7 @@ const totalCompanys = computed(() => companys.value.length)
     <VRow>
       <VCol
         v-for="data in paginatedData"
-        :key="data.title"
+        :key="data.id"
         cols="12"
         md="6"
         lg="4"
@@ -168,17 +96,17 @@ const totalCompanys = computed(() => companys.value.length)
           <VCardItem>
             <VCardTitle class="text-white">
               <RouterLink
-                :to="{ name: 'company-id', params: { id: 12 } }"
+                :to="{ name: 'company-id', params: { id: data.id } }"
                 class="font-weight-medium"
               >
-                {{ data.title }}
+                {{ data.name }}
               </RouterLink>
             </VCardTitle>
           </VCardItem>
 
           <VCardText>
             <p class="clamp-text text-white mb-0">
-              {{ data.text }}
+              기업 요약 정보{{ data.text }}
             </p>
           </VCardText>
 
@@ -189,7 +117,7 @@ const totalCompanys = computed(() => companys.value.length)
                 color="white"
                 class="me-1"
               />
-              <span class="text-subtitle-2 text-white mt-1">{{ data.count }}</span>
+              <span class="text-subtitle-2 text-white mt-1"> 조회수 {{ data.count }}</span>
             </div>
           </VCardText>
         </VCard>
