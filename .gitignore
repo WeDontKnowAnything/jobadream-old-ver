@@ -30,6 +30,7 @@ cover/
 
 # Environments
 .venv
+venv
 
 ### Vuejs ###
 
