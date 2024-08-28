@@ -1,9 +1,13 @@
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia'
+import { useBoardStore } from '@/stores/boardStore'
+
+const boardStore = useBoardStore()
+const { newPost } = storeToRefs(boardStore)
 const router = useRouter()
-const newPost = ref({ title: '', content: '' })
 
 const savePost = () => {
-  console.log(newPost.value)
+  boardStore.addPost()
 }
 
 const resetPost = () => {

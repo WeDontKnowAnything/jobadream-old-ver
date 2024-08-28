@@ -7,6 +7,8 @@ export const useBoardStore = defineStore(
   // 스토어 이름 정의
   'board',
   () => {
+    const router = useRouter()
+
     const postList = ref([{
       post_id: 103,
       title: '질문이요',
@@ -14,7 +16,8 @@ export const useBoardStore = defineStore(
       posting_date: '2024-08-11 12:30',
     }])
 
-    const post = ref({ title: 'test', content: 'testtest', posting_date: '2021-11-23 10:11' })
+    const post = ref({ post_id: '1', title: 'test', content: 'testtest', posting_date: '2021-11-23 10:11' })
+    const newPost = ref({ title: '', content: '' })
     const newComment = ref({ post_id: '0', content: '' })
 
     const comments = ref([
@@ -46,14 +49,65 @@ export const useBoardStore = defineStore(
       }
     }
 
+    const getPost = async (id: any) => {
+      try {
+        const res = await postApi.getPost(id)
+
+        console.log('getPost: ', res)
+        post.value = res.data
+        console.log('post: ', post.value)
+      }
+      catch (error) {
+        console.log('getPost error: ', error)
+      }
+    }
+
+    const addPost = async () => {
+      try {
+        await postApi.addPost(newPost.value)
+
+        router.go(-1)
+      }
+      catch (error) {
+        console.log('addPost error: ', error)
+      }
+    }
+
+    const getComments = async (id: any) => {
+      try {
+        const res = await postApi.getComments(id)
+
+        console.log('getComments: ', res)
+        postList.value = res.data
+      }
+      catch (error) {
+        console.log('getComments error: ', error)
+      }
+    }
+
+    const addComment = async () => {
+      try {
+        await postApi.addComment(newComment.value)
+        router.go(0)
+      }
+      catch (error) {
+        console.log('addComment error: ', error)
+      }
+    }
+
     return {
       postList,
       post,
+      newPost,
       comments,
       newComment,
       commentRules,
       getRandomName,
+      getPost,
+      addPost,
       getPostList,
+      getComments,
+      addComment,
 
       // 반환값들 (위에서 생성한 객체, 함수 등등.)
     }

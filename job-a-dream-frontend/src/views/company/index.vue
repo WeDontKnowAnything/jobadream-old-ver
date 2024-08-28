@@ -7,10 +7,11 @@ const { company } = storeToRefs(companyStore)
 const route = useRoute()
 
 onMounted(() => {
-  const id = route.params.id
+  if ('id' in route.params) {
+    const id = route.params.id
 
-  console.log('id', id)
-  companyStore.getCompany(id)
+    companyStore.getCompany(id)
+  }
 })
 console.log('company', company.value)
 </script>
@@ -18,15 +19,13 @@ console.log('company', company.value)
 <template>
   <VRow>
     <!-- 👉 Radar Chart -->
-    <VCol
-      cols="12"
-      md="6"
-    >
+    <VCol cols="12">
       <VCard :title="company.name">
         <VCardText>
           {{ company.name }}
         </VCardText>
       </VCard>
     </VCol>
+    <VCol cols="12" />
   </VRow>
 </template>

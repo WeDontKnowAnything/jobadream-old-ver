@@ -10,7 +10,7 @@ const route = useRoute()
 const commentRules = [(v: string) => v.length <= 250 || '최대 250자까지 작성 가능']
 
 const saveComment = () => {
-  console.log(newComment.value)
+  boardStore.addComment()
 }
 
 const resetComment = () => {
@@ -23,7 +23,7 @@ const backToBoard = () => {
 
 onMounted(() => {
   if ('id' in route.params)
-    newComment.value.post_id = route.params.id as string
+    newComment.value.post_id = route.params.id
   else
     console.error('Route parameter id is missing')
 })

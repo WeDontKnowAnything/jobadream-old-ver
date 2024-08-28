@@ -8,10 +8,11 @@ const route = useRoute()
 const currentTab = ref(0)
 
 onMounted(() => {
-  const id = route.params.id
+  if ('id' in route.params) {
+    const id = route.params.id
 
-  console.log('id', id)
-  jobStore.getJob(id)
+    jobStore.getJob(id)
+  }
 })
 console.log('job', job.value)
 </script>
