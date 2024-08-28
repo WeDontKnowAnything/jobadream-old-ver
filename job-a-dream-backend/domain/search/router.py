@@ -24,14 +24,12 @@ def read_jobs(
     location: Annotated[list[str] | None, Query()] = None,
     position: Annotated[list[str] | None, Query()] = None,
     keyword: Annotated[list[str] | None, Query()] = None,
-    skip: int = 0,
-    limit: int = 12,
     db: Session = Depends(get_db),
 ):
     try:
-        jobs = crud.get_jobs(location, position, keyword, skip, limit, db)
+        jobs = crud.get_jobs(location, position, keyword, db)
         for job in jobs:
-            job.url = crud.get_job_urls(job.id, skip, limit, db)
+            job.url = crud.get_job_urls(job.id, db)
         return jobs
     except Exception as e:
         raise HTTPException(status_code=404, detail=str(e))
