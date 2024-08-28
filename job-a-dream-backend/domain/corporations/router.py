@@ -16,8 +16,8 @@ def read_all_corporations(db: Session = Depends(get_db)) -> List[dict]:
         raise HTTPException(status_code=404, detail=str(e))
 
 
-@router.get("/api/v1/corporation", response_model=List[schemas.CorporationBase])
-def read_corporation(corp_id: str, db: Session = Depends(get_db)) -> List[dict]:
+@router.get("/api/v1/corporation", response_model=schemas.CorporationBase)
+def read_corporation(corp_id: str, db: Session = Depends(get_db)) -> dict:
     try:
         corporation = crud.get_corporation(corp_id, db)
         return corporation

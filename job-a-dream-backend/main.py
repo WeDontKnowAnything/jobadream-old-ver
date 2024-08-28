@@ -1,15 +1,17 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
-
+from connector import Base, engine
 from domain.corporations import router as corp_router
 from domain.jobs import router as jobs_router
 from domain.posts import router as posts_router
 from domain.search import router as search_router
-from connector import Base, engine
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 Base.metadata.create_all(bind=engine)
-origins = ["http://localhost:3000", "http://jobadream.com"]  # Vue.js 개발 서버의 도메인
+origins = [
+    "http://localhost:3000",
+    "https://jobadream.com",
+]  # Vue.js 개발 서버의 도메인
 
 app = FastAPI()
 

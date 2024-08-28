@@ -5,19 +5,19 @@ from typing import List
 
 class CommentBase(BaseModel):
     post_id: int
-    content: str
+    comment: str
 
 
 class CommentCreate(CommentBase):
-    pass
+    comment_date: datetime | None
 
 
 class CommentResponse(CommentBase):
     comment_id: int
-    comment_date: str
+    comment_date: datetime | None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class PostBase(BaseModel):
@@ -31,8 +31,8 @@ class PostCreate(PostBase):
 
 class PostResponse(PostBase):
     post_id: int
-    posting_date: str
+    posting_date: datetime | None
     comments: List[CommentResponse] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True

@@ -8,8 +8,8 @@ router = APIRouter()
 
 
 @router.get("/api/v1/boards", response_model=List[schemas.PostResponse])
-def read_posts(skip: int = 0, db: Session = Depends(get_db)):
-    posts = crud.get_posts(db, skip=skip)
+def read_posts(db: Session = Depends(get_db)):
+    posts = crud.get_posts(db)
     return posts
 
 
@@ -21,7 +21,7 @@ def read_post(post_id: int, db: Session = Depends(get_db)):
     return post
 
 
-@router.post("/api/v1/posts", response_model=schemas.PostResponse)
+@router.post("/api/v1/posts", response_model=schemas.PostCreate)
 def create_new_post(post: schemas.PostCreate, db: Session = Depends(get_db)):
     try:
         created_post = crud.create_post(db=db, post=post)
@@ -38,7 +38,7 @@ def read_comments(post_id: int, db: Session = Depends(get_db)):
     return comments
 
 
-@router.post("/api/v1/posts/comments", response_model=schemas.CommentResponse)
+@router.post("/api/v1/posts/comments", response_model=schemas.CommentCreate)
 def create_new_comment(comment: schemas.CommentCreate, db: Session = Depends(get_db)):
     new_comment = crud.create_comment(db=db, comment=comment)
     return new_comment
