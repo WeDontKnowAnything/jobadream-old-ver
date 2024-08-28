@@ -16,15 +16,9 @@ export const useBoardStore = defineStore(
       posting_date: '2024-08-11 12:30',
     }])
 
-    const post = ref({ post_id: '1', title: 'test', content: 'testtest', posting_date: '2021-11-23 10:11' })
+    const post = ref({ post_id: '1', title: 'test', content: 'testtest', posting_date: '2021-11-23 10:11', comments: [{ comment: 'string', comment_date: '204', post_id: '7' }] })
     const newPost = ref({ title: '', content: '' })
     const newComment = ref({ post_id: '0', content: '' })
-
-    const comments = ref([
-      { content: '마 볶아 온나', comment_date: '2021-21-23 10:11' },
-      { content: '아직 안 볶아 왔나', comment_date: '2021-21-23 10:11' },
-      { content: '덜 볶아 졌다', comment_date: '2021-21-23 10:11' },
-    ])
 
     const commentRules = [(v: string) => v.length <= 250 || '최대 250자까지 작성 가능']
 
@@ -73,18 +67,6 @@ export const useBoardStore = defineStore(
       }
     }
 
-    const getComments = async (id: any) => {
-      try {
-        const res = await postApi.getComments(id)
-
-        console.log('getComments: ', res)
-        postList.value = res.data
-      }
-      catch (error) {
-        console.log('getComments error: ', error)
-      }
-    }
-
     const addComment = async () => {
       try {
         await postApi.addComment(newComment.value)
@@ -99,14 +81,12 @@ export const useBoardStore = defineStore(
       postList,
       post,
       newPost,
-      comments,
       newComment,
       commentRules,
       getRandomName,
       getPost,
       addPost,
       getPostList,
-      getComments,
       addComment,
 
       // 반환값들 (위에서 생성한 객체, 함수 등등.)

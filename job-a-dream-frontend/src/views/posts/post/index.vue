@@ -3,13 +3,13 @@ import { storeToRefs } from 'pinia'
 import { useBoardStore } from '@/stores/boardStore'
 
 const boardStore = useBoardStore()
-const { comments, newComment, post } = storeToRefs(boardStore)
+const { newComment, post } = storeToRefs(boardStore)
 
 const router = useRouter()
 const route = useRoute()
-const commentRules = [(v: string) => v.length <= 250 || '최대 250자까지 작성 가능']
 
 const saveComment = () => {
+  newComment.value.post_id = post.value.comments[0].post_id
   boardStore.addComment()
 }
 
@@ -23,9 +23,9 @@ const backToBoard = () => {
 
 onMounted(() => {
   if ('id' in route.params)
-    newComment.value.post_id = route.params.id
-  else
-    console.error('Route parameter id is missing')
+    boardStore.getPost(route.params.id)
+
+  else console.error('Route parameter id is missing')
 })
 </script>
 
@@ -74,10 +74,9 @@ onMounted(() => {
       <VCard title="댓글 목록">
         <VCardText>
           <AppTextarea
-            v-model="newComment"
+            v-model="newComment.content"
             prepend-inner-icon="tabler-message-2"
             rows="2"
-            :rules="commentRules"
             label="댓글 추가"
             placeholder="댓글을 '잡어드림'"
           />
@@ -109,8 +108,8 @@ onMounted(() => {
         </VCardText>
         <VDivider />
         <template
-          v-for="comment in comments"
-          :key="comment"
+          v-for="item in post.comments"
+          :key="item"
         >
           <VCardText>
             <VTimeline
@@ -129,11 +128,11 @@ onMounted(() => {
                   <div class="app-timeline-title">
                     {{ boardStore.getRandomName() }}
                   </div>
-                  <span class="app-timeline-meta">{{ comment.comment_date }}</span>
+                  <span class="app-timeline-meta">{{ item.comment_date }}</span>
                 </div>
 
                 <div class="app-timeline-text">
-                  {{ comment.content }}
+                  {{ item.comment }}
                 </div>
               </VTimelineItem>
               <!-- !SECTION -->
