@@ -80,8 +80,8 @@
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 <br /><br /><br />
 
-# ⭐⭐⭐1차 에자일 진행상황⭐⭐⭐
-<br /><br /><br />
+# ⭐⭐⭐1차 Agile 진행 상황⭐⭐⭐
+<br />
 
 ## ⭐데이터 수집 현황
 2024.08.28 기준 raw data 수집 완료 및 진행 중에 있으며, 추후 추가될 기능에 따라 데이터 용도 확인 후 전처리 진행 예정
@@ -134,3 +134,11 @@
 ## ⭐Backend
 ### API 구현 현황
 <img width="665" alt="KakaoTalk_20240828_170426357" src="https://github.com/user-attachments/assets/80f42344-cf93-44f2-991e-4ce8cc27d09d">
+<br /><br /><br />
+
+# ⭐⭐⭐이후 진행 예정 사항⭐⭐⭐
+### 데이터 수집 및 전처리 마무리
+### 데이터 수집 pipeline 구축
+### 데이터 분석 및 인공지능을 활용한 추가 기능
+    ex) 재무/비재무 데이터 등을 기반으로 한 기업의 안정성 평가
+    ex) 기타 추가적인 기능 고안
