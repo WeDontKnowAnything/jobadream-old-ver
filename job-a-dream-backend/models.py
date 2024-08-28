@@ -76,7 +76,7 @@ class Post(Base):
     id = Column(INT, primary_key=True, autoincrement=True)
     title = Column(VARCHAR, nullable=False)
     content = Column(Text, nullable=False)
-    posting_date = Column(TIMESTAMP, nullable=False, server_default=func.now())
+    posting_date = Column(TIMESTAMP, server_default=func.now())
 
 
 class Comment(Base):
@@ -84,5 +84,5 @@ class Comment(Base):
 
     id = Column(INT, primary_key=True, autoincrement=True)
     comment = Column(Text, nullable=False)
-    comment_date = Column(TIMESTAMP, nullable=False, server_default=func.now())
+    comment_date = Column(TIMESTAMP, server_default=func.now())
     post_id = Column(INT, ForeignKey("post.id"), nullable=False)
