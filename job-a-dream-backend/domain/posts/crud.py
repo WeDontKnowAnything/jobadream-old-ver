@@ -57,8 +57,8 @@ def get_comments(db: Session, post_id: int):
         {
             "comment_id": comment.id,
             "post_id": comment.post_id,
-            "content": comment.content,
-            "comment_date": comment.comment_date,
+            "comment": comment.comment,
+            "comment_date": time.strftime("%Y-%m-%d %H:%M"),
         }
         for comment in comments
     ]
@@ -77,5 +77,5 @@ def create_comment(db: Session, comment: CommentCreate):
         "comment_id": db_comment.id,
         "post_id": db_comment.post_id,
         "comment": db_comment.comment,
-        "comment_date": db_comment.comment_date,
+        "comment_date": time.strftime("%Y-%m-%d %H:%M"),
     }
