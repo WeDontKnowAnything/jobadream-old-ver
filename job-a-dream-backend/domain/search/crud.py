@@ -34,13 +34,7 @@ def get_jobs(
         )
     if position is not None:
         query = query.filter(
-            or_(
-                *[
-                    Jobs.category_code.ilike(f"%{po}%")
-                    for po in position
-                    if po is not None
-                ]
-            )
+            or_(*[Jobs.position.ilike(f"%{po}%") for po in position if po is not None])
         )
     if keyword is not None:
         query = query.filter(

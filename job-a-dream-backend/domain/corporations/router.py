@@ -34,7 +34,7 @@ def read_corporation_jobs(corp_id: str, db: Session = Depends(get_db)) -> List[d
             {
                 "corp_name": corporation_job.corp_name,
                 "title": corporation_job.title,
-                "category_code": corporation_job.category_code,
+                "position": corporation_job.position,
                 "job_url": crud.get_corporation_job_urls(corporation_job.id, db),
             }
             for corporation_job in corporation_jobs
