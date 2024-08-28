@@ -1,4 +1,4 @@
-# 🦉[jobAdream](https://jobadream.com/)
+# 🦉[jobAdream](https://jobadream.com)
 구직자의 관점으로 바라보는 취업 플랫폼   
 
 <img src="https://github.com/user-attachments/assets/0e978d37-d822-439b-90c3-186b623f49b7" width="400" height="400"/>
@@ -139,6 +139,6 @@
 # ⭐⭐⭐이후 진행 예정 사항⭐⭐⭐
 ### 데이터 수집 및 전처리 마무리
 ### 데이터 수집 pipeline 구축
-### 데이터 분석 및 인공지능을 활용한 추가 기능
+### 데이터 분석 및 인공지능을 활용한 추가 기능 구현
     ex) 재무/비재무 데이터 등을 기반으로 한 기업의 안정성 평가
     ex) 기타 추가적인 기능 고안
