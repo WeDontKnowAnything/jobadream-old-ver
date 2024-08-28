@@ -9,12 +9,12 @@ class CommentBase(BaseModel):
 
 
 class CommentCreate(CommentBase):
-    pass
+    comment_date: datetime | None
 
 
 class CommentResponse(CommentBase):
     comment_id: int
-    comment_date: str | None
+    comment_date: datetime | None
 
     class Config:
         from_attributes = True
@@ -31,7 +31,7 @@ class PostCreate(PostBase):
 
 class PostResponse(PostBase):
     post_id: int
-    posting_date: str | None
+    posting_date: datetime | None
     comments: List[CommentResponse] = []
 
     class Config:
