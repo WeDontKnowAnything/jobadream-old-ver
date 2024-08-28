@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { paginationMeta } from '@api-utils/paginationMeta'
-
 const regionCheckboxContent = [
   '서울', '경기', '인천', '부산', '대구', '광주', '대전', '울산', '세종', '강원', '경남', '경북', '전남', '전북', '충남', '충북', '제주',
 ]
@@ -40,9 +38,7 @@ const onSearch = () => {
 const itemsPerPage = ref(12)
 const page = ref(1)
 
-const totalJobs = ref<number>(1)
-
-const jobs = [
+const jobs = ref([
   {
     corp_name: '삼성전자',
     title: 'NLP Engineer, 생성형 AI',
@@ -61,11 +57,16 @@ const jobs = [
     location: '부산',
     experience: '경력 10년 이상',
   },
-]
+])
 
-onMounted(() => {
-  totalJobs.value = jobs.length
+const paginatedData = computed(() => {
+  const start = (page.value - 1) * itemsPerPage.value
+  const end = start + itemsPerPage.value
+
+  return jobs.value.slice(start, end)
 })
+
+const totalJobs = computed(() => jobs.value.length)
 </script>
 
 <template>
@@ -206,7 +207,7 @@ onMounted(() => {
     <!-- 채용공고 카드 -->
     <VRow>
       <VCol
-        v-for="data in jobs"
+        v-for="data in paginatedData"
         :key="data.title"
         cols="12"
         md="6"

@@ -1,9 +1,15 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
 import { VDataTableServer } from 'vuetify/labs/VDataTable'
-import { paginationMeta } from '@api-utils/paginationMeta'
+import { useBoardStore } from '@/stores/boardStore'
+
+const boardStore = useBoardStore()
+const { posts } = storeToRefs(boardStore)
+
+const totalPost = computed(() => posts.value.length)
 
 const widgetData = ref([
-  { title: '작성된 게시글 수', value: 12689, icon: 'tabler-clipboard-check' },
+  { title: '작성된 게시글 수', value: totalPost, icon: 'tabler-clipboard-check' },
 ])
 
 const searchQuery = ref('')
@@ -28,22 +34,6 @@ const updateOptions = (options: any) => {
   sortBy.value = options.sortBy[0]?.key
   orderBy.value = options.sortBy[0]?.order
 }
-
-// Fetch Orders
-const { data: ordersData } = await useApi<any>(createUrl('/apps/ecommerce/orders',
-  {
-    query: {
-      q: searchQuery,
-      page,
-      itemsPerPage,
-      sortBy,
-      orderBy,
-    },
-  },
-))
-
-const orders = computed(() => ordersData.value.orders)
-const totalOrder = computed(() => ordersData.value.total)
 </script>
 
 <template>
@@ -133,33 +123,33 @@ const totalOrder = computed(() => ordersData.value.total)
         v-model:items-per-page="itemsPerPage"
         v-model:page="page"
         :headers="headers"
-        :items="orders"
-        :items-length="totalOrder"
+        :items="posts"
+        :items-length="totalPost"
         show-select
         class="text-no-wrap"
         @update:options="updateOptions"
       >
-        <!-- Order ID -->
+        <!-- Post ID -->
         <template #item.order="{ item }">
-          {{ item.order }}
+          {{ item.post_id }}
         </template>
-        <!-- Order ID -->
+        <!-- Title -->
         <template #item.title="{ item }">
           <RouterLink
-            :to="{ name: 'posts-post-id', params: { id: item.order } }"
+            :to="{ name: 'posts-post-id', params: { id: item.post_id } }"
             class="font-weight-medium"
           >
-            #{{ item.order }}
+            {{ item.title }}
           </RouterLink>
         </template>
 
         <!-- Date -->
         <template #item.date="{ item }">
-          {{ new Date(item.date).toDateString() }}
+          {{ item.posting_date }}
         </template>
         <!-- Count -->
         <template #item.count="{ item }">
-          {{ item.order }}
+          {{ item.count }}
         </template>
 
         <!-- pagination -->
@@ -168,13 +158,13 @@ const totalOrder = computed(() => ordersData.value.total)
 
           <div class="d-flex align-center justify-sm-space-between justify-center flex-wrap gap-3 pa-5 pt-3">
             <p class="text-sm text-disabled mb-0">
-              {{ paginationMeta({ page, itemsPerPage }, totalOrder) }}
+              {{ paginationMeta({ page, itemsPerPage }, totalPost) }}
             </p>
 
             <VPagination
               v-model="page"
-              :length="Math.ceil(totalOrder / itemsPerPage)"
-              :total-visible="$vuetify.display.xs ? 1 : Math.min(Math.ceil(totalOrder / itemsPerPage), 5)"
+              :length="Math.ceil(totalPost / itemsPerPage)"
+              :total-visible="$vuetify.display.xs ? 1 : Math.min(Math.ceil(totalPost / itemsPerPage), 5)"
             >
               <template #prev="slotProps">
                 <VBtn

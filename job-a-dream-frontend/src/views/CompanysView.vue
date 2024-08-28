@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { paginationMeta } from '@api-utils/paginationMeta'
-
 const widgetData = ref([
   { title: '기업 수', value: 12689, icon: 'tabler-clipboard-check' },
 ])
@@ -8,9 +6,8 @@ const widgetData = ref([
 // Data table options
 const itemsPerPage = ref(12)
 const page = ref(1)
-const totalCompanys = ref<number>(1)
 
-const companys = [
+const companys = ref([
   {
     title: '삼성전자',
     text: 'Samsung Electronics Co., Ltd. is a South Korean multinational electronics company headquartered in the Yeongtong District of Suwon.',
@@ -86,18 +83,16 @@ const companys = [
     text: 'LinkedIn is an American business and employment-oriented online service that operates via websites and mobile apps.',
     count: '80',
   },
-]
+])
 
 const paginatedData = computed(() => {
   const start = (page.value - 1) * itemsPerPage.value
   const end = start + itemsPerPage.value
 
-  return companys.slice(start, end)
+  return companys.value.slice(start, end)
 })
 
-onMounted(() => {
-  totalCompanys.value = companys.length
-})
+const totalCompanys = computed(() => companys.value.length)
 </script>
 
 <template>
@@ -218,7 +213,7 @@ onMounted(() => {
             v-bind="slotProps"
             :icon="false"
           >
-            Previous
+            이전
           </VBtn>
         </template>
 
@@ -229,7 +224,7 @@ onMounted(() => {
             v-bind="slotProps"
             :icon="false"
           >
-            Next
+            다음
           </VBtn>
         </template>
       </VPagination>

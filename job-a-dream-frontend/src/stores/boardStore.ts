@@ -6,7 +6,13 @@ export const useBoardStore = defineStore(
   // 스토어 이름 정의
   'board',
   () => {
-    const posts = ref([{ title: '', content: '' }])
+    const posts = ref([{
+      post_id: 103,
+      title: '질문이요',
+      count: 103,
+      posting_date: '2024-08-11 12:30',
+    }])
+
     const post = ref({ title: 'test', content: 'testtest', posting_date: '2021-11-23 10:11' })
     const newComment = ref({ post_id: '0', content: '' })
 
