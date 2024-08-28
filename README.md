@@ -1,4 +1,4 @@
-# 🦉jobAdream
+# 🦉[jobAdream](https://jobadream.com/)
 구직자의 관점으로 바라보는 취업 플랫폼   
 
 <img src="https://github.com/user-attachments/assets/0e978d37-d822-439b-90c3-186b623f49b7" width="400" height="400"/>
@@ -59,7 +59,7 @@
 ![CodePipeline](https://img.shields.io/badge/AWS_CodePipeline-4A154B?style=for-the-badge&logo=aws-codepipeline&logoColor=white)
 ![CodeBuild](https://img.shields.io/badge/AWS_CodeBuild-4A154B?style=for-the-badge&logo=aws-codebuild&logoColor=white)
 ![CodeDeploy](https://img.shields.io/badge/AWS_CodeDeploy-4A154B?style=for-the-badge&logo=aws-codedeploy&logoColor=white)
-!
+
 
 ## 🌐 Frameworks
 ![Vue.js](https://img.shields.io/badge/Vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)
@@ -81,12 +81,9 @@
 <br /><br /><br />
 
 # ⭐⭐⭐1차 에자일 진행상황⭐⭐⭐
-- Database 구축
-- 프론트엔드 홈, 기업, 채용정보, 게시판 페이지
-- 도메인 등록
 <br /><br /><br />
 
-## 데이터 수집 현황
+## ⭐데이터 수집 현황
 2024.08.28 기준 raw data 수집 완료 및 진행 중에 있으며, 추후 추가될 기능에 따라 데이터 용도 확인 후 전처리 진행 예정
 
 - [X] 재무 정보 데이터
@@ -109,8 +106,8 @@
    - 채용 플랫폼 API를 통해 채용공고 데이터를 주기적으로 수집하는 pipline 구축 예정
 <br /><br /><br />
 
-## DB 현황
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
+## ⭐DB 현황
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)<br />
 <img src="https://github.com/user-attachments/assets/3bc9e148-261b-4efe-ae9d-c27de25b30bf" width="600" height="600"/>
 
 - **corporation**
@@ -127,7 +124,12 @@
 - **comment**
     - 게시글 ID, 댓글
     - 댓글 ID, 댓글 내용, 작성일, 게시글 ID
+<br /><br /><br />
 
-## Frontend
-### 👉 jobAdream:  https://jobadream.com/home
+## ⭐Frontend
+### jobAdream 👉 https://jobadream.com/
 - 홈, 기업, 채용정보, 게시판 페이지 구현 완료
+<br /><br /><br />
+
+## ⭐Backend
+### API 구현 현황
