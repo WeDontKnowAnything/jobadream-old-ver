@@ -18,7 +18,7 @@ class Corporation(Base):
 
     id = Column(VARCHAR, primary_key=True)
     name = Column(VARCHAR, nullable=False)
-    category_code = Column(VARCHAR)
+    category_code = Column(INT)
     size_code = Column(VARCHAR)
     employee_cnt = Column(INT)
     reg_gender = Column(INT)
@@ -31,7 +31,7 @@ class Jobs(Base):
     id = Column(VARCHAR, primary_key=True)
     corp_name = Column(VARCHAR, nullable=False)
     title = Column(VARCHAR)
-    category_code = Column(INT)
+    position = Column(VARCHAR)
     location = Column(VARCHAR, nullable=False)
     experience_code = Column(INT)
     opening_date = Column(Date)
