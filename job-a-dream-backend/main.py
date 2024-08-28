@@ -9,10 +9,7 @@ from domain.search import router as search_router
 from connector import Base, engine
 
 Base.metadata.create_all(bind=engine)
-origins = [
-    "http://localhost:3000",  # Vue.js 개발 서버의 도메인
-    # 필요시 추가 도메인 등록 가능
-]
+origins = ["http://localhost:3000", "http://jobadream.com"]  # Vue.js 개발 서버의 도메인
 
 app = FastAPI()
 
