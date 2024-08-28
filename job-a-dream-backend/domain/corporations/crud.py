@@ -4,10 +4,8 @@ from models import Corporation, Jobs, JobUrl
 from typing import List
 
 
-def get_all_corporations(skip: int, limit: int, db: Session) -> List[dict]:
-    corporations = (
-        db.execute(select(Corporation).offset(skip).limit(limit)).scalars().all()
-    )
+def get_all_corporations(db: Session) -> List[dict]:
+    corporations = db.execute(select(Corporation)).scalars().all()
     return corporations
 
 
@@ -20,16 +18,9 @@ def get_corporation(corp_id: str, db: Session) -> List[dict]:
     return corporation
 
 
-def get_corporation_jobs(
-    corp_id: str, skip: int, limit: int, db: Session
-) -> List[dict]:
+def get_corporation_jobs(corp_id: str, db: Session) -> List[dict]:
     corporation_name = (
-        db.execute(
-            select(Corporation.name)
-            .filter(Corporation.id == corp_id)
-            .offset(skip)
-            .limit(limit)
-        )
+        db.execute(select(Corporation.name).filter(Corporation.id == corp_id))
         .scalars()
         .first()
     )
@@ -42,15 +33,9 @@ def get_corporation_jobs(
     return corporation_jobs
 
 
-def get_corporation_job_urls(
-    job_id: str, skip: int, limit: int, db: Session
-) -> List[dict]:
+def get_corporation_job_urls(job_id: str, db: Session) -> List[dict]:
     job_urls = (
-        db.execute(
-            select(JobUrl).filter(JobUrl.job_id == job_id).offset(skip).limit(limit)
-        )
-        .scalars()
-        .all()
+        db.execute(select(JobUrl).filter(JobUrl.job_id == job_id)).scalars().all()
     )
 
     result = [

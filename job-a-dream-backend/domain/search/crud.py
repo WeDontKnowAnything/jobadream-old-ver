@@ -4,18 +4,11 @@ from models import Corporation, Jobs, JobUrl, Post
 from typing import List
 
 
-def get_corporations(
-    keyword: str, db: Session, skip: int = 0, limit: int = 12
-) -> List[dict]:
+def get_corporations(keyword: str, db: Session) -> List[dict]:
     if keyword:
         search = "%%{}%%".format(keyword)
         corporations = (
-            db.execute(
-                select(Corporation)
-                .filter(Corporation.name.ilike(search))
-                .offset(skip)
-                .limit(limit)
-            )
+            db.execute(select(Corporation).filter(Corporation.name.ilike(search)))
             .scalars()
             .all()
         )
@@ -26,8 +19,6 @@ def get_jobs(
     location: list[str | None] | None,
     position: list[str | None] | None,
     keyword: list[str | None] | None,
-    skip: int,
-    limit: int,
     db: Session,
 ):
     query = db.query(Jobs)
@@ -56,17 +47,13 @@ def get_jobs(
             or_(*[Jobs.title.ilike(f"%{key}%") for key in keyword if key is not None])
         )
 
-    jobs = query.offset(skip).limit(limit).all()
+    jobs = query.all()
     return jobs
 
 
-def get_job_urls(job_id: str, skip: int, limit: int, db: Session) -> List[dict]:
+def get_job_urls(job_id: str, db: Session) -> List[dict]:
     job_urls = (
-        db.execute(
-            select(JobUrl).filter(JobUrl.job_id == job_id).offset(skip).limit(limit)
-        )
-        .scalars()
-        .all()
+        db.execute(select(JobUrl).filter(JobUrl.job_id == job_id)).scalars().all()
     )
 
     result = [
@@ -76,14 +63,10 @@ def get_job_urls(job_id: str, skip: int, limit: int, db: Session) -> List[dict]:
     return result
 
 
-def get_posts(keyword: str, db: Session, skip: int = 0, limit: int = 12) -> List[dict]:
+def get_posts(keyword: str, db: Session) -> List[dict]:
     if keyword:
         search = "%%{}%%".format(keyword)
         posts = (
-            db.execute(
-                select(Post).filter(Post.title.ilike(search)).offset(skip).limit(limit)
-            )
-            .scalars()
-            .all()
+            db.execute(select(Post).filter(Post.title.ilike(search))).scalars().all()
         )
     return posts

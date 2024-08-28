@@ -12,7 +12,7 @@ class SearchJobs(BaseModel):
     id: str
     corp_name: str
     title: str | None
-    category_code: int | None
+    category_code: str | None
     url: List | None
     opening_date: date | None
     closing_date: date | None
