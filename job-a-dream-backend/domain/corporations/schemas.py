@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import date
+from typing import List
 
 
 # Corporation schema
@@ -9,7 +9,7 @@ class CorporationBase(BaseModel):
 
 
 class Corporation(CorporationBase):
-    category_code: str | None
+    category_code: int | None
     size_code: str | None
     employee_cnt: int | None
     reg_gender: int | None
@@ -19,8 +19,11 @@ class Corporation(CorporationBase):
         from_attributes = True
 
 
-class CorporationJobs(BaseModel):
+class Jobs(BaseModel):
     corp_name: str
     title: str | None
-    category_code: int | None
-    job_url: str | None
+    position: str | None
+    job_url: List | None
+
+    class Config:
+        from_attributes = True
