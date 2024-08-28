@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useJobStore } from '@/stores/jobStore'
+import { useJobStore } from '@/stores/jobtore'
 
 const jobStore = useJobStore()
 const { job } = storeToRefs(jobStore)
