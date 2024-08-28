@@ -5,9 +5,9 @@ export function getCorporationList() {
 }
 
 export function getCorporation(id: any) {
-  return http.get('/api/v1/corporations', { params: id })
+  return http.get('/api/v1/corporation', { params: { corp_id: id } })
 }
 
 export function getCorporationJob(id: any) {
-  return http.get('/api/v1/corporations/jobs', { params: id })
+  return http.get('/api/v1/corporations/jobs', { params: { corp_id: id } })
 }

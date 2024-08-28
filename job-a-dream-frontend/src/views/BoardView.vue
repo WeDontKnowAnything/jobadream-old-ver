@@ -4,9 +4,9 @@ import { VDataTableServer } from 'vuetify/labs/VDataTable'
 import { useBoardStore } from '@/stores/boardStore'
 
 const boardStore = useBoardStore()
-const { posts } = storeToRefs(boardStore)
+const { postList } = storeToRefs(boardStore)
 
-const totalPost = computed(() => posts.value.length)
+const totalPost = computed(() => postList.value.length)
 
 const widgetData = ref([
   { title: '작성된 게시글 수', value: totalPost, icon: 'tabler-clipboard-check' },
@@ -34,6 +34,10 @@ const updateOptions = (options: any) => {
   sortBy.value = options.sortBy[0]?.key
   orderBy.value = options.sortBy[0]?.order
 }
+
+onMounted(() => {
+  boardStore.getPostList()
+})
 </script>
 
 <template>
@@ -123,7 +127,7 @@ const updateOptions = (options: any) => {
         v-model:items-per-page="itemsPerPage"
         v-model:page="page"
         :headers="headers"
-        :items="posts"
+        :items="postList"
         :items-length="totalPost"
         show-select
         class="text-no-wrap"

@@ -36,8 +36,8 @@ const formData = ref({
   keyword: '',
 })
 
-const onSearch = () => {
-  console.log(formData.value)
+const onSearchJob = () => {
+  jobStore.getSearchJob(formData.value.location, formData.value.position, formData.value.keyword)
 }
 
 // Data table options
@@ -52,6 +52,10 @@ const paginatedData = computed(() => {
 })
 
 const totalJobs = computed(() => jobList.value.length)
+
+onMounted(() => {
+  jobStore.getJobList()
+})
 </script>
 
 <template>
@@ -165,7 +169,7 @@ const totalJobs = computed(() => jobList.value.length)
                 <VBtn
                   v-if="numberedSteps.length - 1 === currentStep"
                   color="success"
-                  @click="onSearch"
+                  @click="onSearchJob"
                 >
                   검색
                 </VBtn>
@@ -202,7 +206,7 @@ const totalJobs = computed(() => jobList.value.length)
           <VCardItem>
             <VCardTitle class="text-white">
               <RouterLink
-                :to="{ name: 'job-id', params: { id: 12 } }"
+                :to="{ name: 'job-id', params: { id: data.id } }"
                 class="font-weight-medium"
               >
                 {{ data.corp_name }}
@@ -226,14 +230,16 @@ const totalJobs = computed(() => jobList.value.length)
                 />
                 <span class="text-subtitle-2 text-white mt-1">{{ data.location }}</span>
               </span>
-              <span>
+              <!--
+                <span>
                 <IconBtn
-                  icon="tabler-user-circle"
-                  color="white"
-                  class="me-1"
+                icon="tabler-user-circle"
+                color="white"
+                class="me-1"
                 />
-                <span class="text-subtitle-2 text-white mt-1">{{ data.experience_type }}</span>
-              </span>
+                <span class="text-subtitle-2 text-white mt-1">{{ data.experience_type }}</?span>
+                </span>
+              -->
               <span>
                 <IconBtn
                   icon="tabler-layout-align-bottom"

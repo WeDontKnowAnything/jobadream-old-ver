@@ -11,6 +11,8 @@ const widgetData = ref([
   { title: '기업 수', value: totalCompanys, icon: 'tabler-clipboard-check' },
 ])
 
+const search = ref('')
+
 // Data table options
 const itemsPerPage = ref(12)
 const page = ref(1)
@@ -21,6 +23,14 @@ const paginatedData = computed(() => {
 
   return companyList.value.slice(start, end)
 })
+
+const onSearchCompany = () => {
+  companyStore.getSearchCompany(search.value)
+}
+
+onMounted(() => {
+  companyStore.getCompanyList()
+})
 </script>
 
 <template>
@@ -29,13 +39,21 @@ const paginatedData = computed(() => {
       <!-- 👉 Widgets  -->
       <VCol
         cols="12"
-        class="px-6 py-6"
+        class="d-flex px-6 py-6 align-end"
       >
         <AppTextField
+          v-model="search"
           label="기업 검색"
           prepend-inner-icon="tabler-search"
           placeholder="기업 이름"
+          class="me-3"
         />
+        <VBtn
+          color="primary"
+          @click="onSearchCompany"
+        >
+          검색
+        </VBtn>
       </VCol>
       <VDivider />
       <VCardText>

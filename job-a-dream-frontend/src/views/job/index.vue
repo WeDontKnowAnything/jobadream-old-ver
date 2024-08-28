@@ -4,18 +4,16 @@ import { useJobStore } from '@/stores/jobStore'
 
 const jobStore = useJobStore()
 const { job } = storeToRefs(jobStore)
-
-// const job = ref({
-//   corp_name: 'Toss',
-//   title: 'NLP Engineer, 생성형 AI',
-//   category_code: '13',
-//   location: '서울',
-//   experience_type: '신입',
-//   job_url: [{ saramin: 'https://...' }, { jobkorea: 'https://...' }],
-//   opening_date: '2024-08-01',
-//   closing_date: '2024-09-01',
-// })
+const route = useRoute()
 const currentTab = ref(0)
+
+onMounted(() => {
+  const id = route.params.id
+
+  console.log('id', id)
+  jobStore.getJob(id)
+})
+console.log('job', job.value)
 </script>
 
 <template>
@@ -47,7 +45,7 @@ const currentTab = ref(0)
             color="info"
             label
           >
-            {{ job.experience_type }}
+            {{ job.position }}
           </VChip>
         </div>
       </div>

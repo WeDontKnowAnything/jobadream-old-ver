@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import * as postApi from '@/api/post'
 
 export const useBoardStore = defineStore(
 
   // 스토어 이름 정의
   'board',
   () => {
-    const posts = ref([{
+    const postList = ref([{
       post_id: 103,
       title: '질문이요',
       count: 103,
@@ -33,13 +34,26 @@ export const useBoardStore = defineStore(
       return randomName.value[randomIndex]
     }
 
+    const getPostList = async () => {
+      try {
+        const res = await postApi.getPostList()
+
+        console.log('getPostList: ', res)
+        postList.value = res.data
+      }
+      catch (error) {
+        console.log('getPostList error: ', error)
+      }
+    }
+
     return {
-      posts,
+      postList,
       post,
       comments,
       newComment,
       commentRules,
       getRandomName,
+      getPostList,
 
       // 반환값들 (위에서 생성한 객체, 함수 등등.)
     }

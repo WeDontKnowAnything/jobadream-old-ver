@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import * as corporationApi from '@/api/job'
+import * as corporationApi from '@/api/corporation'
+import * as searchApi from '@/api/search'
 
 export const useCompanyStore = defineStore(
 
@@ -13,20 +14,47 @@ export const useCompanyStore = defineStore(
 
     const getCompanyList = async () => {
       try {
-        const res = await corporationApi.getJobList()
+        const res = await corporationApi.getCorporationList()
 
-        console.log('getJobList: ', res)
+        console.log('getCompanyList: ', res)
         companyList.value = res.data
       }
       catch (error) {
-        console.log('getJobList error: ', error)
+        console.log('getCompanyList error: ', error)
+      }
+    }
+
+    const getSearchCompany = async (keyword: string) => {
+      try {
+        const res = await searchApi.getCorpSearch(keyword)
+
+        console.log('getCompanyList: ', res)
+        companyList.value = res.data
+      }
+      catch (error) {
+        console.log('getCompanyList error: ', error)
+      }
+    }
+
+    const getCompany = async (id: any) => {
+      try {
+        const res = await corporationApi.getCorporation(id)
+
+        console.log('getCompany: ', res)
+        company.value = res.data
+        console.log('company: ', company.value)
+      }
+      catch (error) {
+        console.log('getCompany error: ', error)
       }
     }
 
     return {
       company,
       companyList,
+      getCompany,
       getCompanyList,
+      getSearchCompany,
 
       // 반환값들 (위에서 생성한 객체, 함수 등등.)
     }
