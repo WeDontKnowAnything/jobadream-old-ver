@@ -133,3 +133,4 @@
 
 ## ⭐Backend
 ### API 구현 현황
+<img width="665" alt="KakaoTalk_20240828_170426357" src="https://github.com/user-attachments/assets/80f42344-cf93-44f2-991e-4ce8cc27d09d">
