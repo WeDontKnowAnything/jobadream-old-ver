@@ -6,14 +6,15 @@ import time
 
 def _build_post_response(post: Post, comments: list[Comment]):
     return {
-        "post_id": post.id,
         "title": post.title,
+        "content": post.content,
+        "post_id": post.id,
         "posting_date": post.posting_date,
         "comments": [
             {
                 "comment_id": comment.id,
                 "post_id": comment.post_id,
-                "content": comment.content,
+                "comment": comment.comment,
                 "comment_date": comment.comment_date,
             }
             for comment in comments
@@ -58,7 +59,7 @@ def get_comments(db: Session, post_id: int):
             "comment_id": comment.id,
             "post_id": comment.post_id,
             "comment": comment.comment,
-            "comment_date": time.strftime("%Y-%m-%d %H:%M"),
+            "comment_date": comment.comment_date,
         }
         for comment in comments
     ]
@@ -77,5 +78,5 @@ def create_comment(db: Session, comment: CommentCreate):
         "comment_id": db_comment.id,
         "post_id": db_comment.post_id,
         "comment": db_comment.comment,
-        "comment_date": time.strftime("%Y-%m-%d %H:%M"),
+        "comment_date": comment.comment_date,
     }
