@@ -41,13 +41,41 @@
 <br /><br /><br />
 
 # ⭐5. 개발환경⭐
-- Server : Docker, Ubuntu, Nginx
-- AWS : Relationship Database Service, S3, CloudFront, Route53, Elastic Container Registry, Elastic Container Service, Code Pipeline, Code Build, Code Deploy, Elastic Load Balancing, Certificate Manager, Lambda
-(이하 : RDS, S3, CloudFront, Route53, ECR, ECS, Code Pipeline, Code Build, Code Deploy, ELB, CM, Lambda)
-- 프레임워크 : Vue.js, FastAPI, Spark
-- 사용 언어 : Python, Javascript
-- 데이터베이스 : PostgreSQL
-- ETC : Swagger, VSCode, Git/Github
+
+## ⚙️ Server
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
+![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
+
+## ☁️ AWS
+![RDS](https://img.shields.io/badge/Amazon_RDS-527FFF?style=for-the-badge&logo=amazon-rds&logoColor=white)
+![S3](https://img.shields.io/badge/Amazon_S3-569A31?style=for-the-badge&logo=amazon-s3&logoColor=white)
+![CloudFront](https://img.shields.io/badge/Amazon_CloudFront-232F3E?style=for-the-badge&logo=amazon-cloudfront&logoColor=white)
+![Route53](https://img.shields.io/badge/Amazon_Route_53-232F3E?style=for-the-badge&logo=amazon-route53&logoColor=white)
+![ECR](https://img.shields.io/badge/Amazon_ECR-FF9900?style=for-the-badge&logo=amazon-ecr&logoColor=white)
+![ECS](https://img.shields.io/badge/Amazon_ECS-FF9900?style=for-the-badge&logo=amazon-ecs&logoColor=white)
+![CodePipeline](https://img.shields.io/badge/AWS_CodePipeline-4A154B?style=for-the-badge&logo=aws-codepipeline&logoColor=white)
+![CodeBuild](https://img.shields.io/badge/AWS_CodeBuild-4A154B?style=for-the-badge&logo=aws-codebuild&logoColor=white)
+![CodeDeploy](https://img.shields.io/badge/AWS_CodeDeploy-4A154B?style=for-the-badge&logo=aws-codedeploy&logoColor=white)
+!
+
+## 🌐 Frameworks
+![Vue.js](https://img.shields.io/badge/Vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![Apache Spark](https://img.shields.io/badge/Apache_Spark-E25A1C?style=for-the-badge&logo=apache-spark&logoColor=white)
+
+## 📝 Languages
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+
+## 🗄️ Database
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
+
+## 🔧 Tools
+![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)
+![VSCode](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 <br /><br /><br />
 
 # 1차 에자일 진행상황
