@@ -35,7 +35,7 @@ def read_jobs(
         raise HTTPException(status_code=404, detail=str(e))
 
 
-@router.get("/api/v1/posts", response_model=List[schemas.SearchPosts])
+@router.get("/api/v1/search/posts", response_model=List[schemas.SearchPosts])
 def read_posts(keyword: str, db: Session = Depends(get_db)):
     try:
         posts = crud.get_posts(keyword, db)
