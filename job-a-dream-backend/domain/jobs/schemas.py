@@ -7,7 +7,7 @@ from typing import List
 class JobsBase(BaseModel):
     corp_name: str
     title: str | None
-    category_code: int | None
+    category_code: str | None
     location: str
     experience_code: int | None
     job_url: list | None

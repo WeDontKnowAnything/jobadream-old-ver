@@ -22,7 +22,7 @@ class Corporation(CorporationBase):
 class Jobs(BaseModel):
     corp_name: str
     title: str | None
-    category_code: int | None
+    category_code: str | None
     job_url: List | None
 
     class Config:

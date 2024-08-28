@@ -29,7 +29,6 @@ def read_jobs(
     db: Session = Depends(get_db),
 ):
     try:
-
         jobs = crud.get_jobs(location, position, keyword, skip, limit, db)
         for job in jobs:
             job.url = crud.get_job_urls(job.id, skip, limit, db)
