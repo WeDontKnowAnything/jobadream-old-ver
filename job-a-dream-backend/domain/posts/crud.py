@@ -39,7 +39,7 @@ def get_posts(db: Session):
 
 
 def create_post(db: Session, post: PostCreate):
-    db_post = Post(title=post.title, contents=post.content)
+    db_post = Post(title=post.title, content=post.content)
     db.add(db_post)
     db.commit()
     db.refresh(db_post)
@@ -60,13 +60,13 @@ def get_comments(db: Session, post_id: int):
 
 
 def create_comment(db: Session, comment: CommentCreate):
-    db_comment = Comment(post_id=comment.post_id, content=comment.content)
+    db_comment = Comment(post_id=comment.post_id, comment=comment.comment)
     db.add(db_comment)
     db.commit()
     db.refresh(db_comment)
     return {
         "comment_id": db_comment.id,
         "post_id": db_comment.post_id,
-        "content": db_comment.content,
+        "comment": db_comment.comment,
         "comment_date": db_comment.comment_date.strftime("%Y-%m-%d %H:%M"),
     }

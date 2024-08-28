@@ -8,8 +8,8 @@ router = APIRouter()
 
 
 @router.get("/api/v1/boards", response_model=List[schemas.PostResponse])
-def read_posts(skip: int = 0, db: Session = Depends(get_db)):
-    posts = crud.get_posts(db, skip=skip)
+def read_posts(db: Session = Depends(get_db)):
+    posts = crud.get_posts(db)
     return posts
 
 

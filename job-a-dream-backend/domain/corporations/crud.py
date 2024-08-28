@@ -13,7 +13,7 @@ def get_corporation(corp_id: str, db: Session) -> List[dict]:
     corporation = (
         db.execute(select(Corporation).filter(Corporation.id == corp_id))
         .scalars()
-        .all()
+        .first()
     )
     return corporation
 

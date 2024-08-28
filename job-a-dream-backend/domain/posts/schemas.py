@@ -5,7 +5,7 @@ from typing import List
 
 class CommentBase(BaseModel):
     post_id: int
-    content: str
+    comment: str
 
 
 class CommentCreate(CommentBase):
@@ -17,7 +17,7 @@ class CommentResponse(CommentBase):
     comment_date: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class PostBase(BaseModel):
@@ -35,4 +35,4 @@ class PostResponse(PostBase):
     comments: List[CommentResponse] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
