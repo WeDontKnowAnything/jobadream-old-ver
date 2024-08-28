@@ -33,7 +33,7 @@
 <br /><br /><br />
 
 # ⭐3. Database 설계⭐
-![image](https://github.com/user-attachments/assets/c0ec4088-eddb-4f6a-bdc9-bdc31e52a0eb)
+![image](https://github.com/user-attachments/assets/cd927f45-1cdd-438f-9c82-19171514b339)
 <br /><br /><br />
 
 # ⭐4. UI 설계⭐
