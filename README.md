@@ -8,46 +8,96 @@
 ![image](https://github.com/user-attachments/assets/6ccbaa49-516b-40fd-87c7-89067eb20b5d)
 | 박중헌 (PM) | 문희선 | 오승민 | 송영빈 |
 |:----------:|:----------:|:----------:|:----------:|
-| 프로젝트 총괄/기획<br>팀 관리 및 조정<br>프론트엔드 개발<br>깃 관리|데이터베이스/ERD 설계<br>데이터 전처리/분석<br>백엔드 개발<br>회의 문서 작성|아키텍처 설계<br>데이터 전처리/분석<br>백엔드 개발|프론트엔드 설계<br>데이터 전처리|
+| 프로젝트 총괄/기획<br>팀 관리 및 조정<br>프론트엔드 개발<br>깃 관리|데이터베이스/ERD 설계<br>데이터 전처리/분석<br>백엔드 개발|아키텍처 설계<br>데이터 전처리/분석<br>백엔드 개발<br>AWS 배포|프론트엔드 설계<br>데이터 전처리|
 | [@qjrm1430](https://github.com/qjrm1430) | [@MoonHeesun](https://github.com/MoonHeesun) | [@artemIntellectus](https://github.com/artemIntellectus) | [@GETSPRING8230](https://github.com/GETSPRING8230) |
+<br /><br /><br />
 
+# ⭐1. 프로젝트 개요⭐
+최근 금융 위기와 글로벌화 기술 발전 산업 구조 변화 등으로 인해 중소기업과 스타트업의 경영 환경이 급격히 변화하고 있다. 이러한 상황에서 기업의 휴폐업을 정확하게 예측하는 모델의 필요성이 증가하고 있다. 본 프로젝트는 **대기업, 중견기업, 강소기업 뿐 아니라 비재무 데이터를 활용한 중소기업 및 스타트업의 휴폐업을 예측하는 모델을 개발**하여, 이를 기반으로 **구직자가 신뢰성 있는 기업 안정성 평가 정보를 제공받을 수 있는 채용 정보 제공 사이트를 구축**하고자 한다.   
+<br />
 
-
-
-## 1. 프로젝트 개요
-최근 금융 위기와 글로벌화 기술 발전 산업 구조 변화 등으로 인해 중소기업과 스타트업의 경영 환경이 급격히 변화하고 있다. 이러한 상황에서 기업의 휴폐업을 정확하게 예측하는 모델의 필요성이 증가하고 있다. 본 프로젝트는 대기업, 중견기업, 강소기업 뿐 아니라 비재무 데이터를 활용한 중소기업 및 스타트업의 휴폐업을 예측하는 모델을 개발하여, 이를 기반으로 구직자가 신뢰성 있는 기업 평가 정보를 제공받을 수 있는 구인구직 사이트를 구축하고자 한다.   
-
-### 📌 프로젝트 목표
+## 📌 프로젝트 목표
 - 구직자가 지원하려는 기업에 대한 종합적인 평가를 제공하여 정보 불균형을 해소
 - 재무 및 비재무 데이터를 통합하여 유동적인 환경에 맞춘 객관적이고 신뢰성 있는 정보를 제공
 - 구직자가 신뢰성 있는 기업 평가 정보를 제공받을 수 있도록 지원
 
 
-### 📌 프로젝트 주요 기능
-- 기업 평가 데이터 제공
-- 해당 기업에 대한 채용공고 플랫폼 링크 조회 시각화
-- 기업 조회 검색 및 필터 기능
+## 📌 프로젝트 주요 기능
+- 기업 안정성 평가 정보 제공
+- 기업에 대한 채용 공고 플랫폼 링크 조회 시각화
+- 기업/채용 공고 조회 검색 및 필터 기능   
+<br /><br /><br />
 
-## 2. 아키텍처 설계
+# ⭐2. 아키텍처 설계⭐
 ![JOBADREAM drawio](https://github.com/user-attachments/assets/bffa0e80-22ac-4bcb-aa43-f1bf6c51bf46)
+<br /><br /><br />
 
-## 3. Database 설계
+# ⭐3. Database 설계⭐
 ![image](https://github.com/user-attachments/assets/c0ec4088-eddb-4f6a-bdc9-bdc31e52a0eb)
+<br /><br /><br />
 
-## 4. UI 설계
+# ⭐4. UI 설계⭐
 ![image](https://github.com/user-attachments/assets/aacbaa45-4db8-4837-8d6e-f0a602f43199)
+<br /><br /><br />
 
-## 5. 개발환경
-- Server : Docker, Ubuntu, Nginx
-- AWS : Relationship Database Service, S3, CloudFront, Route53, Elastic Container Registry, Elastic Container Service, Code Pipeline, Code Build, Code Deploy, Elastic Load Balancing, Certificate Manager, Lambda
-(이하 : RDS, S3, CloudFront, Route53, ECR, ECS, Code Pipeline, Code Build, Code Deploy, ELB, CM, Lambda)
-- 프레임워크 : Vue.js, FastAPI, Spark
-- 사용 언어 : Python, Javascript
-- 데이터베이스 : PostgreSQL
-- ETC : Swagger, VSCode, Git/Github
+# ⭐5. 개발환경⭐
 
-## 1차 에자일 진행상황
+## ⚙️ Server
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
+![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
+
+## ☁️ AWS
+![RDS](https://img.shields.io/badge/Amazon_RDS-527FFF?style=for-the-badge&logo=amazon-rds&logoColor=white)
+![S3](https://img.shields.io/badge/Amazon_S3-569A31?style=for-the-badge&logo=amazon-s3&logoColor=white)
+![CloudFront](https://img.shields.io/badge/Amazon_CloudFront-232F3E?style=for-the-badge&logo=amazon-cloudfront&logoColor=white)
+![Route53](https://img.shields.io/badge/Amazon_Route_53-232F3E?style=for-the-badge&logo=amazon-route53&logoColor=white)
+![ECR](https://img.shields.io/badge/Amazon_ECR-FF9900?style=for-the-badge&logo=amazon-ecr&logoColor=white)
+![ECS](https://img.shields.io/badge/Amazon_ECS-FF9900?style=for-the-badge&logo=amazon-ecs&logoColor=white)
+![CodePipeline](https://img.shields.io/badge/AWS_CodePipeline-4A154B?style=for-the-badge&logo=aws-codepipeline&logoColor=white)
+![CodeBuild](https://img.shields.io/badge/AWS_CodeBuild-4A154B?style=for-the-badge&logo=aws-codebuild&logoColor=white)
+![CodeDeploy](https://img.shields.io/badge/AWS_CodeDeploy-4A154B?style=for-the-badge&logo=aws-codedeploy&logoColor=white)
+!
+
+## 🌐 Frameworks
+![Vue.js](https://img.shields.io/badge/Vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![Apache Spark](https://img.shields.io/badge/Apache_Spark-E25A1C?style=for-the-badge&logo=apache-spark&logoColor=white)
+
+## 📝 Languages
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+
+## 🗄️ Database
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
+
+## 🔧 Tools
+![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)
+![VSCode](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+<br /><br /><br />
+
+# 1차 에자일 진행상황
 - Database 구축
 - 프론트엔드 홈, 기업, 채용정보, 게시판 페이지
-- 도메인 등록 
-
+- 도메인 등록
+  
+## 데이터 수집상황
+- [X] 재무 정보 데이터
+  - DART(전자공시시스템)에서 기업 공시 정보 및 결산 기준 재무비율에 대한 데이터 수집
+- [X] 시장 정보 데이터
+  - 금융위원회-주식시세정보에서 상장 기업의 주식 거래 관련 정보 데이터 수집
+  - 주가, 시가총액 등등
+- [X] 스타트업 투자 정보 데이터
+  - 투자 유치 사이트에서 스타트업의 투자 유치 정보 데이터 수집
+- [ ] 거시 경제 지표 및 금융시장 지표 데이터
+  - 한국은행, 통계청 등 주요 기관에서 집계 및 발표한 거시 경제 지표 및 금융시장 지표 데이터 수집
+- [X] 비정형(텍스트) 정보 데이터
+  - 네이버 뉴스 등 뉴스 정보 페이지에서 비정형 정보 데이터 수집
+- [ ] 연봉 정보 데이터
+  - 국민 연금에서 기업의 연봉 및 기타 연금 정보 데이터 수집
+- [ ] 기타 비재무 정보 데이터
+  - 통계청에서 수집 가능한 다양한 비재무 기업 정보 데이터 수
+- [ ] 채용공고 데이터
+   - 채용 플랫폼 API를 통해 채용공고 데이터를 주기적으로 수집

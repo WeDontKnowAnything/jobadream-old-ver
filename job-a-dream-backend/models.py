@@ -1,5 +1,6 @@
-from sqlalchemy import Column, INT, TIMESTAMP, VARCHAR, Text, Date
+from sqlalchemy import Column, INT, TIMESTAMP, VARCHAR, Text, Date, ForeignKey
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
 from connector import Base
 
 
@@ -17,7 +18,7 @@ class Corporation(Base):
 
     id = Column(VARCHAR, primary_key=True)
     name = Column(VARCHAR, nullable=False)
-    category_code = Column(VARCHAR)
+    category_code = Column(INT)
     size_code = Column(VARCHAR)
     employee_cnt = Column(INT)
     reg_gender = Column(INT)
@@ -30,12 +31,20 @@ class Jobs(Base):
     id = Column(VARCHAR, primary_key=True)
     corp_name = Column(VARCHAR, nullable=False)
     title = Column(VARCHAR)
-    category_code = Column(INT)
+    position = Column(VARCHAR)
     location = Column(VARCHAR, nullable=False)
     experience_code = Column(INT)
-    job_url = Column(VARCHAR)
     opening_date = Column(Date)
     closing_date = Column(Date)
+
+
+class JobUrl(Base):
+    __tablename__ = "job_url"
+
+    id = Column(INT, primary_key=True, autoincrement=True)
+    platform_name = Column(VARCHAR, nullable=False)
+    url = Column(VARCHAR, nullable=False)
+    job_id = Column(VARCHAR, nullable=False)
 
 
 class StartupIR(Base):
@@ -66,8 +75,8 @@ class Post(Base):
 
     id = Column(INT, primary_key=True, autoincrement=True)
     title = Column(VARCHAR, nullable=False)
-    contents = Column(Text, nullable=False)
-    posting_date = Column(TIMESTAMP, nullable=False)
+    content = Column(Text, nullable=False)
+    posting_date = Column(TIMESTAMP, nullable=False, server_default=func.now())
 
 
 class Comment(Base):
@@ -75,5 +84,5 @@ class Comment(Base):
 
     id = Column(INT, primary_key=True, autoincrement=True)
     comment = Column(Text, nullable=False)
-    comment_date = Column(TIMESTAMP, nullable=False)
-    post_id = Column(INT, nullable=False)
+    comment_date = Column(TIMESTAMP, nullable=False, server_default=func.now())
+    post_id = Column(INT, ForeignKey("post.id"), nullable=False)

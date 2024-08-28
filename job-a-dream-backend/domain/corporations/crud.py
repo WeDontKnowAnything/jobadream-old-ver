@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
-from models import Corporation, Jobs
+from models import Corporation, Jobs, JobUrl
 from typing import List
 
 
@@ -31,3 +31,15 @@ def get_corporation_jobs(corp_id: str, db: Session) -> List[dict]:
         .all()
     )
     return corporation_jobs
+
+
+def get_corporation_job_urls(job_id: str, db: Session) -> List[dict]:
+    job_urls = (
+        db.execute(select(JobUrl).filter(JobUrl.job_id == job_id)).scalars().all()
+    )
+
+    result = [
+        {"platform_name": job_url.platform_name, "url": job_url.url}
+        for job_url in job_urls
+    ]
+    return result
