@@ -111,7 +111,7 @@
 
 ## DB 현황
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
-[이미지]
+<img src="https://github.com/user-attachments/assets/3bc9e148-261b-4efe-ae9d-c27de25b30bf" width="600" height="600"/>
 
 - **corporation**
     - 기업 ID, 기업명
