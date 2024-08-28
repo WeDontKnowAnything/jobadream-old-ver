@@ -31,7 +31,7 @@
 <br /><br /><br />
 
 # ⭐2. 아키텍처 설계⭐
-![JOBADREAM drawio](https://github.com/user-attachments/assets/bffa0e80-22ac-4bcb-aa43-f1bf6c51bf46)
+![KakaoTalk_20240828_171049951](https://github.com/user-attachments/assets/e1c54108-4a18-4f48-8377-6941be4e4617)
 <br /><br /><br />
 
 # ⭐3. Database 설계⭐
