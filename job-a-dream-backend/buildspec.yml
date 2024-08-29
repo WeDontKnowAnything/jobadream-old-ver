@@ -30,4 +30,3 @@ phases:
 artifacts:
   files:
     - imagedefinitions.json
-    - job-a-dream-backend/appspec.yml
