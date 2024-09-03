@@ -4,11 +4,12 @@ from typing import List
 
 
 class CommentBase(BaseModel):
-    post_id: int
     comment: str
 
 
 class CommentCreate(CommentBase):
+    comment_id: int
+    post_id: int
     comment_date: datetime | None
 
 
@@ -33,6 +34,7 @@ class PostResponse(PostBase):
     post_id: int
     posting_date: datetime | None
     comments: List[CommentResponse] = []
+    view_count: int
 
     class Config:
         from_attributes = True

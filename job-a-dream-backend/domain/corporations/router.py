@@ -7,7 +7,7 @@ from typing import List
 router = APIRouter()
 
 
-@router.get("/api/v1/corporations", response_model=List[schemas.CorporationBase])
+@router.get("/api/v1/corporation/all", response_model=List[schemas.CorporationBase])
 def read_all_corporations(db: Session = Depends(get_db)) -> List[dict]:
     try:
         corporations = crud.get_all_corporations(db)
@@ -25,7 +25,7 @@ def read_corporation(corp_id: str, db: Session = Depends(get_db)) -> dict:
         raise HTTPException(status_code=404, detail=str(e))
 
 
-@router.get("/api/v1/corporations/jobs", response_model=List[schemas.Jobs])
+@router.get("/api/v1/corporation/jobs", response_model=List[schemas.Jobs])
 def read_corporation_jobs(corp_id: str, db: Session = Depends(get_db)) -> List[dict]:
     try:
         corporation_jobs = crud.get_corporation_jobs(corp_id, db)
