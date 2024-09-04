@@ -34,7 +34,7 @@ class S3DirectoryCreator:
         return corporations
 
     def create_directory(self, corporation, year, quarter, statement_type):
-        key = f"etl/raw_data/financial_statements/corporation_name={corporation}/year={year}/quarter={quarter}/statement_type={statement_type}/"
+        key = f"category=etl/data_status=raw_data/dataset=financial_statements/corporation_name={corporation}/year={year}/quarter={quarter}/statement_type={statement_type}/"
         self.s3.put_object(Bucket=self.bucket_name, Key=key)
         print(f"Created directory: {key}")
 
