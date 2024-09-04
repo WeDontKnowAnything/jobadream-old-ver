@@ -7,7 +7,7 @@ from typing import List
 router = APIRouter()
 
 
-@router.get("/api/v1/jobs", response_model=List[schemas.Jobs])
+@router.get("/api/v1/job/all", response_model=List[schemas.Jobs])
 def read_all_jobs(db: Session = Depends(get_db)) -> List[dict]:
     try:
         jobs = crud.get_all_jobs(db)

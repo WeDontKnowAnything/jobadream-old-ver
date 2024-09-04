@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from models import Post, Comment
 from domain.posts.schemas import PostCreate, CommentCreate
-import time
+from datetime import datetime
 
 
 def _build_post_response(post: Post, comments: list[Comment]):
@@ -10,6 +10,7 @@ def _build_post_response(post: Post, comments: list[Comment]):
         "content": post.content,
         "post_id": post.id,
         "posting_date": post.posting_date,
+        "view_count": post.view_count,
         "comments": [
             {
                 "comment_id": comment.id,
@@ -26,6 +27,12 @@ def get_post(db: Session, post_id: int):
     post = db.query(Post).filter(Post.id == post_id).first()
     if not post:
         return None
+
+    # 조회수 증가
+    post.view_count += 1
+    db.commit()
+    db.refresh(post)  # 변경된 내용을 반영
+
     comments = db.query(Comment).filter(Comment.post_id == post_id).all()
     return _build_post_response(post, comments)
 
@@ -41,11 +48,7 @@ def get_posts(db: Session):
 
 
 def create_post(db: Session, post: PostCreate):
-    db_post = Post(
-        title=post.title,
-        content=post.content,
-        posting_date=time.strftime("%Y-%m-%d %H:%M"),
-    )
+    db_post = Post(title=post.title, content=post.content)
     db.add(db_post)
     db.commit()
     db.refresh(db_post)
@@ -65,12 +68,8 @@ def get_comments(db: Session, post_id: int):
     ]
 
 
-def create_comment(db: Session, comment: CommentCreate):
-    db_comment = Comment(
-        post_id=comment.post_id,
-        comment=comment.comment,
-        comment_date=time.strftime("%Y-%m-%d %H:%M"),
-    )
+def create_comment(db: Session, comment: str, post_id):
+    db_comment = Comment(post_id=post_id, comment=comment)
     db.add(db_comment)
     db.commit()
     db.refresh(db_comment)
@@ -78,5 +77,5 @@ def create_comment(db: Session, comment: CommentCreate):
         "comment_id": db_comment.id,
         "post_id": db_comment.post_id,
         "comment": db_comment.comment,
-        "comment_date": comment.comment_date,
+        "comment_date": db_comment.comment_date.strftime("%Y-%m-%d %H:%M"),
     }
