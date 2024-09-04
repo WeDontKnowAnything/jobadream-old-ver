@@ -9,8 +9,8 @@ export const useCompanyStore = defineStore(
   'company',
   () => {
     // 객체, 함수 선언 스코프
-    const companyList = ref([{ id: '', name: '', text: '', count: '' }])
-    const company = ref({ id: '', name: '' })
+    const companyList = ref([{ id: '1', name: '2', text: '2', count: '1' }])
+    const company = ref({ id: '1', name: '2' })
 
     const getCompanyList = async () => {
       try {

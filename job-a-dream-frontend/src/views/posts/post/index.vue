@@ -14,7 +14,7 @@ const saveComment = () => {
 }
 
 const resetComment = () => {
-  newComment.value.content = ''
+  newComment.value.comment = ''
 }
 
 const backToBoard = () => {
@@ -74,7 +74,7 @@ onMounted(() => {
       <VCard title="댓글 목록">
         <VCardText>
           <AppTextarea
-            v-model="newComment.content"
+            v-model="newComment.comment"
             prepend-inner-icon="tabler-message-2"
             rows="2"
             label="댓글 추가"

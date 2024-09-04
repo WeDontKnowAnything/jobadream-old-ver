@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { VDataTableServer } from 'vuetify/labs/VDataTable'
+import { VDataTable } from 'vuetify/labs/VDataTable'
 import { useBoardStore } from '@/stores/boardStore'
 
 const boardStore = useBoardStore()
@@ -22,10 +22,10 @@ const orderBy = ref()
 
 // Data table Headers
 const headers = [
-  { title: '번호', key: 'order' },
+  { title: '번호', key: 'post_id' },
   { title: '제목', key: 'title' },
-  { title: '날짜', key: 'date' },
-  { title: '조회수', key: 'count' },
+  { title: '날짜', key: 'posting_date' },
+  { title: '조회수', key: 'view_count' },
 ]
 
 // Update data table options
@@ -34,6 +34,17 @@ const updateOptions = (options: any) => {
   sortBy.value = options.sortBy[0]?.key
   orderBy.value = options.sortBy[0]?.order
 }
+
+// 필터링된 postList
+const filteredPosts = computed(() => {
+  if (!searchQuery.value)
+    return postList.value
+
+  // 제목(title)에 searchQuery 값이 포함된 게시글만 필터링
+  return postList.value.filter(post =>
+    post.title.toLowerCase().includes(searchQuery.value.toLowerCase()),
+  )
+})
 
 onMounted(() => {
   boardStore.getPostList()
@@ -101,7 +112,6 @@ onMounted(() => {
             placeholder="게시글 검색"
             style=" max-inline-size: 400px; min-inline-size: 400px;"
           />
-
           <div class="d-flex gap-x-4 align-center">
             <AppSelect
               v-model="itemsPerPage"
@@ -123,18 +133,18 @@ onMounted(() => {
       <VDivider />
 
       <!-- 👉 Order Table -->
-      <VDataTableServer
+      <VDataTable
         v-model:items-per-page="itemsPerPage"
         v-model:page="page"
         :headers="headers"
-        :items="postList"
+        :items="filteredPosts"
         :items-length="totalPost"
         show-select
-        class="text-no-wrap"
+        class="text-no-wrap fixed-width-table"
         @update:options="updateOptions"
       >
         <!-- Post ID -->
-        <template #item.order="{ item }">
+        <template #item.post_id="{ item }">
           {{ item.post_id }}
         </template>
         <!-- Title -->
@@ -148,12 +158,12 @@ onMounted(() => {
         </template>
 
         <!-- Date -->
-        <template #item.date="{ item }">
+        <template #item.posting_date="{ item }">
           {{ item.posting_date }}
         </template>
         <!-- Count -->
-        <template #item.count="{ item }">
-          {{ item.count }}
+        <template #item.view_count="{ item }">
+          {{ item.view_count }}
         </template>
 
         <!-- pagination -->
@@ -177,7 +187,7 @@ onMounted(() => {
                   v-bind="slotProps"
                   :icon="false"
                 >
-                  Previous
+                  이전
                 </VBtn>
               </template>
 
@@ -188,13 +198,13 @@ onMounted(() => {
                   v-bind="slotProps"
                   :icon="false"
                 >
-                  Next
+                  다음
                 </VBtn>
               </template>
             </VPagination>
           </div>
         </template>
-      </VDataTableServer>
+      </VDataTable>
     </VCard>
   </div>
 </template>
@@ -207,5 +217,18 @@ onMounted(() => {
 .product-widget{
   border-block-end: 1px solid rgba(var(--v-theme-on-surface), var(--v-border-opacity));
   padding-block-end: 1rem;
+}
+
+.fixed-width-table {
+  inline-size: 100%;
+  table-layout: fixed; /* 열 간격 고정 */
+}
+
+.fixed-width-table th,
+.fixed-width-table td {
+  overflow: hidden;
+  inline-size: 25%; /* 각 열에 고정된 비율로 너비를 지정 (예: 4개의 열이라면 각 열을 25%씩) */
+  text-overflow: ellipsis; /* 내용이 넘치면 생략(...) */
+  white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 */
 }
 </style>

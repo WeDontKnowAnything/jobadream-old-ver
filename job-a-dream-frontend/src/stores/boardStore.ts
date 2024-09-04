@@ -12,13 +12,13 @@ export const useBoardStore = defineStore(
     const postList = ref([{
       post_id: 103,
       title: '질문이요',
-      count: 103,
+      view_count: 103,
       posting_date: '2024-08-11 12:30',
     }])
 
     const post = ref({ post_id: '1', title: 'test', content: 'testtest', posting_date: '2021-11-23 10:11', comments: [{ comment: 'string', comment_date: '204', post_id: '7' }] })
     const newPost = ref({ title: '', content: '' })
-    const newComment = ref({ post_id: '0', content: '' })
+    const newComment = ref({ post_id: '0', comment: '' })
 
     const commentRules = [(v: string) => v.length <= 250 || '최대 250자까지 작성 가능']
 
@@ -59,7 +59,8 @@ export const useBoardStore = defineStore(
     const addPost = async () => {
       try {
         await postApi.addPost(newPost.value)
-
+        newPost.value.title = ''
+        newPost.value.content = ''
         router.go(-1)
       }
       catch (error) {
@@ -70,6 +71,7 @@ export const useBoardStore = defineStore(
     const addComment = async () => {
       try {
         await postApi.addComment(newComment.value)
+        newComment.value.comment = ''
         router.go(0)
       }
       catch (error) {
