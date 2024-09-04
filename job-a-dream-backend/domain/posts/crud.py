@@ -68,14 +68,14 @@ def get_comments(db: Session, post_id: int):
     ]
 
 
-def create_comment(db: Session, comment: str, post_id):
-    db_comment = Comment(post_id=post_id, comment=comment)
+def create_comment(db: Session, comment: CommentCreate):
+    db_comment = Comment(post_id=comment.post_id, comment=comment.comment)
     db.add(db_comment)
     db.commit()
     db.refresh(db_comment)
     return {
+        "comment": db_comment.comment,
         "comment_id": db_comment.id,
         "post_id": db_comment.post_id,
-        "comment": db_comment.comment,
-        "comment_date": db_comment.comment_date.strftime("%Y-%m-%d %H:%M"),
+        "comment_date": str(db_comment.comment_date),
     }
