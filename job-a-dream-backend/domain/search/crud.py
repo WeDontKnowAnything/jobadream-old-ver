@@ -18,7 +18,7 @@ def get_corporations(keyword: str, db: Session) -> List[dict]:
 def get_jobs(
     location: list[str | None] | None,
     position: list[str | None] | None,
-    keyword: list[str | None] | None,
+    keyword: str | None,
     db: Session,
 ):
     query = db.query(Jobs)

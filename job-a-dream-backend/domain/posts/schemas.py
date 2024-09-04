@@ -8,7 +8,6 @@ class CommentBase(BaseModel):
 
 
 class CommentCreate(CommentBase):
-    comment_id: int
     post_id: int
     comment_date: datetime | None
 

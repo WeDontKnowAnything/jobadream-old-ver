@@ -38,7 +38,7 @@ def read_comments(post_id: int, db: Session = Depends(get_db)):
     return comments
 
 
-@router.post("/api/v1/post/comments", response_model=schemas.CommentCreate)
-def create_new_comment(post_id: int, comment: str, db: Session = Depends(get_db)):
-    new_comment = crud.create_comment(db=db, comment=comment, post_id=post_id)
+@router.post("/api/v1/post/comments")
+def create_new_comment(comment: schemas.CommentCreate, db: Session = Depends(get_db)):
+    new_comment = crud.create_comment(db=db, comment=comment)
     return new_comment
