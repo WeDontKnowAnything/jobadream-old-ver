@@ -77,5 +77,5 @@ def create_comment(db: Session, comment: CommentCreate):
         "comment": db_comment.comment,
         "comment_id": db_comment.id,
         "post_id": db_comment.post_id,
-        "comment_date": str(db_comment.comment_date),
+        "comment_date": db_comment.comment_date,
     }

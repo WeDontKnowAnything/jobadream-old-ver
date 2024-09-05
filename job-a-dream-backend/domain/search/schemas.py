@@ -13,6 +13,7 @@ class SearchJobs(BaseModel):
     corp_name: str
     title: str | None
     position: str | None
+    location: str | None
     url: List | None
     opening_date: date | None
     closing_date: date | None
