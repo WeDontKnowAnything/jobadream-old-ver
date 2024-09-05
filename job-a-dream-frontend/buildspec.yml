@@ -21,9 +21,14 @@ phases:
     commands:
       - echo Building frontend with pnpm and Vite...
       - pnpm run build  # Vite를 사용해 프로젝트 빌드
+      - ls -al ./dist/  # dist 디렉토리 확인 (디버깅용)
   post_build:
     commands:
       - echo Deploying frontend to S3...
       - aws s3 sync ./dist/ s3://$FRONTEND_BUCKET_NAME --delete  # dist 디렉토리를 S3로 업로드
       - echo Invalidating CloudFront cache...
       - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
+
+artifacts:
+  files:
+    - dist/**/*  # 빌드된 정적 파일을 아티팩트로 설정
