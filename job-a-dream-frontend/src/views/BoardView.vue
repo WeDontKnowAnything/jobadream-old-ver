@@ -129,9 +129,7 @@ onMounted(() => {
           </div>
         </div>
       </VCardText>
-
       <VDivider />
-
       <!-- 👉 Order Table -->
       <VDataTable
         v-model:items-per-page="itemsPerPage"

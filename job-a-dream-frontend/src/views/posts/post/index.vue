@@ -9,7 +9,6 @@ const router = useRouter()
 const route = useRoute()
 
 const saveComment = () => {
-  newComment.value.post_id = post.value.comments[0].post_id
   boardStore.addComment()
 }
 
@@ -24,7 +23,6 @@ const backToBoard = () => {
 onMounted(() => {
   if ('id' in route.params)
     boardStore.getPost(route.params.id)
-
   else console.error('Route parameter id is missing')
 })
 </script>

@@ -34,7 +34,6 @@ export const useJobStore = defineStore(
       try {
         const res = await jobApi.getJobList()
 
-        console.log('getJobList: ', res)
         jobList.value = res.data
       }
       catch (error) {
@@ -61,7 +60,6 @@ export const useJobStore = defineStore(
       try {
         const res = await searchApi.getJobSearch(location, position, keyword)
 
-        console.log('getJobSearch: ', res)
         jobList.value = res.data
       }
       catch (error) {
@@ -76,8 +74,5 @@ export const useJobStore = defineStore(
       getJobList,
       getSearchJob,
     }
-  },
-  {
-    persist: true, // 지속성-persistence store이 되게 설정 (Composition API)
   },
 )
