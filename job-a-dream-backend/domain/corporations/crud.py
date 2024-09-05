@@ -9,16 +9,16 @@ def get_all_corporations(db: Session) -> List[dict]:
     return corporations
 
 
-def get_corporation(corp_id: str, db: Session) -> List[dict]:
-    corporation = (
-        db.execute(select(Corporation).filter(Corporation.id == corp_id))
-        .scalars()
-        .first()
+def _get_corporation_job_urls(job_id: str, db: Session) -> List[dict]:
+    job_urls = (
+        db.execute(select(JobUrl).filter(JobUrl.job_id == job_id)).scalars().all()
     )
-    return corporation
+
+    result = [job_url.url for job_url in job_urls]
+    return result
 
 
-def get_corporation_jobs(corp_id: str, db: Session) -> List[dict]:
+def _get_corporation_jobs(corp_id: str, db: Session) -> List[dict]:
     corporation_name = (
         db.execute(select(Corporation.name).filter(Corporation.id == corp_id))
         .scalars()
@@ -30,16 +30,26 @@ def get_corporation_jobs(corp_id: str, db: Session) -> List[dict]:
         .scalars()
         .all()
     )
-    return corporation_jobs
+
+    jobs = [
+        {
+            "title": corporation_job.title,
+            "position": corporation_job.position,
+            "job_url": _get_corporation_job_urls(corporation_job.id, db),
+        }
+        for corporation_job in corporation_jobs
+    ]
+    return jobs
 
 
-def get_corporation_job_urls(job_id: str, db: Session) -> List[dict]:
-    job_urls = (
-        db.execute(select(JobUrl).filter(JobUrl.job_id == job_id)).scalars().all()
+def get_corporation(corp_id: str, db: Session) -> List[dict]:
+    corporation = (
+        db.execute(select(Corporation).filter(Corporation.id == corp_id))
+        .scalars()
+        .first()
     )
 
-    result = [
-        {"platform_name": job_url.platform_name, "url": job_url.url}
-        for job_url in job_urls
-    ]
+    jobs = _get_corporation_jobs(corp_id, db)
+
+    result = {"id": corporation.id, "name": corporation.name, "jobs": jobs}
     return result
