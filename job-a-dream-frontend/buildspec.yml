@@ -10,9 +10,10 @@ env:
 phases:
   pre_build:
     commands:
-      - echo Installing pnpm...
-      - npm install -g pnpm  # npm을 사용해 pnpm 설치
-      - pnpm add --global pnpm
+      - echo Installing pnpm using npm...
+      - npm install -g pnpm  # pnpm을 npm을 통해 전역 설치
+      - export PNPM_HOME=$(npm root -g)/pnpm
+      - export PATH=$PNPM_HOME:$PATH
       - echo Installing frontend dependencies with pnpm...
       - cd job-a-dream-frontend  # 프론트엔드 경로로 이동
       - pnpm install  # pnpm을 사용해 의존성 설치
