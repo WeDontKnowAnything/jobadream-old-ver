@@ -1,7 +1,7 @@
 import { http } from '@/api/http'
 
 export function getJobList() {
-  return http.get('/api/v1/jobs')
+  return http.get('/api/v1/job/all')
 }
 
 export function getJob(id: any) {

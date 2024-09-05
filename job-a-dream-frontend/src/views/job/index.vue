@@ -14,7 +14,6 @@ onMounted(() => {
     jobStore.getJob(id)
   }
 })
-console.log('job', job.value)
 </script>
 
 <template>

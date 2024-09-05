@@ -1,7 +1,8 @@
-from sqlalchemy.orm import Session
-from sqlalchemy import select
-from models import Corporation, Jobs, JobUrl
 from typing import List
+
+from models import Corporation, Jobs, JobUrl
+from sqlalchemy import select
+from sqlalchemy.orm import Session
 
 
 def get_all_corporations(db: Session) -> List[dict]:
@@ -14,7 +15,10 @@ def _get_corporation_job_urls(job_id: str, db: Session) -> List[dict]:
         db.execute(select(JobUrl).filter(JobUrl.job_id == job_id)).scalars().all()
     )
 
-    result = [job_url.url for job_url in job_urls]
+    result = [
+        {"platform_name": job_url.platform_name, "url": job_url.url}
+        for job_url in job_urls
+    ]
     return result
 
 

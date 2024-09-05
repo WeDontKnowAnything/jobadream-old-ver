@@ -11,7 +11,7 @@ class CorporationBase(BaseModel):
 class JobBase(BaseModel):
     title: str | None
     position: str | None
-    job_url: List | None
+    job_url: list | None
 
     class Config:
         from_attributes = True
