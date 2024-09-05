@@ -9,12 +9,11 @@ const router = useRouter()
 const route = useRoute()
 
 const saveComment = () => {
-  newComment.value.post_id = post.value.comments[0].post_id
   boardStore.addComment()
 }
 
 const resetComment = () => {
-  newComment.value.content = ''
+  newComment.value.comment = ''
 }
 
 const backToBoard = () => {
@@ -24,7 +23,6 @@ const backToBoard = () => {
 onMounted(() => {
   if ('id' in route.params)
     boardStore.getPost(route.params.id)
-
   else console.error('Route parameter id is missing')
 })
 </script>
@@ -74,7 +72,7 @@ onMounted(() => {
       <VCard title="댓글 목록">
         <VCardText>
           <AppTextarea
-            v-model="newComment.content"
+            v-model="newComment.comment"
             prepend-inner-icon="tabler-message-2"
             rows="2"
             label="댓글 추가"

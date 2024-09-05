@@ -7,10 +7,6 @@ const { companyList } = storeToRefs(companyStore)
 
 const totalCompanys = computed(() => companyList.value.length)
 
-const widgetData = ref([
-  { title: '기업 수', value: totalCompanys, icon: 'tabler-clipboard-check' },
-])
-
 const search = ref('')
 
 // Data table options
@@ -55,52 +51,6 @@ onMounted(() => {
           검색
         </VBtn>
       </VCol>
-      <VDivider />
-      <VCardText>
-        <VRow>
-          <template
-            v-for="(data, id) in widgetData"
-            :key="id"
-          >
-            <VCol
-              cols="12"
-              sm="6"
-              md="3"
-              class="px-6"
-            >
-              <div
-                class="d-flex justify-space-between"
-                :class="$vuetify.display.xs
-                  ? 'product-widget'
-                  : $vuetify.display.sm
-                    ? id < 2 ? 'product-widget' : ''
-                    : ''"
-              >
-                <div class="d-flex flex-column gap-y-1">
-                  <h4 class="text-h4">
-                    {{ data.value }}
-                  </h4>
-
-                  <h6 class="text-h6">
-                    {{ data.title }}
-                  </h6>
-                </div>
-
-                <VAvatar
-                  variant="tonal"
-                  rounded
-                  size="38"
-                >
-                  <VIcon
-                    :icon="data.icon"
-                    size="28"
-                  />
-                </VAvatar>
-              </div>
-            </VCol>
-          </template>
-        </VRow>
-      </VCardText>
     </VCard>
     <VRow>
       <VCol

@@ -23,7 +23,7 @@ def read_corporations(keyword: str, db: Session = Depends(get_db)):
 def read_jobs(
     location: Annotated[list[str] | None, Query()] = None,
     position: Annotated[list[str] | None, Query()] = None,
-    keyword: Annotated[list[str] | None, Query()] = None,
+    keyword: str | None = None,
     db: Session = Depends(get_db),
 ):
     try:
