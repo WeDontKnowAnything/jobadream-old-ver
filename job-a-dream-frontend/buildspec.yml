@@ -1,0 +1,28 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_DEFAULT_REGION: ap-northeast-2
+    AWS_ACCOUNT_ID: 009160047497
+    FRONTEND_BUCKET_NAME: job-a-dream-frontend
+    DISTRIBUTION_ID: E2NS2PMHDJZ9LA
+
+phases:
+  pre_build:
+    commands:
+      - echo Installing pnpm...
+      - curl -f https://get.pnpm.io/v6.16.js | node  # pnpm 설치
+      - pnpm add --global pnpm
+      - echo Installing frontend dependencies with pnpm...
+      - cd job-a-dream-frontend  # 프론트엔드 경로로 이동
+      - pnpm install  # pnpm을 사용해 의존성 설치
+  build:
+    commands:
+      - echo Building frontend with pnpm and Vite...
+      - pnpm run build  # Vite를 사용해 프로젝트 빌드
+  post_build:
+    commands:
+      - echo Deploying frontend to S3...
+      - aws s3 sync ./dist/ s3://$FRONTEND_BUCKET_NAME --delete  # dist 디렉토리를 S3로 업로드
+      - echo Invalidating CloudFront cache...
+      - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
