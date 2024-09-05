@@ -7,13 +7,13 @@ from typing import List
 router = APIRouter()
 
 
-@router.get("/api/v1/boards", response_model=List[schemas.PostResponse])
+@router.get("/api/v1/post/all", response_model=List[schemas.PostResponse])
 def read_posts(db: Session = Depends(get_db)):
     posts = crud.get_posts(db)
     return posts
 
 
-@router.get("/api/v1/posts", response_model=schemas.PostResponse)
+@router.get("/api/v1/post", response_model=schemas.PostResponse)
 def read_post(post_id: int, db: Session = Depends(get_db)):
     post = crud.get_post(db, post_id=post_id)
     if post is None:
@@ -21,7 +21,7 @@ def read_post(post_id: int, db: Session = Depends(get_db)):
     return post
 
 
-@router.post("/api/v1/posts", response_model=schemas.PostCreate)
+@router.post("/api/v1/post", response_model=schemas.PostCreate)
 def create_new_post(post: schemas.PostCreate, db: Session = Depends(get_db)):
     try:
         created_post = crud.create_post(db=db, post=post)
@@ -30,7 +30,7 @@ def create_new_post(post: schemas.PostCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@router.get("/api/v1/posts/comments", response_model=List[schemas.CommentResponse])
+@router.get("/api/v1/post/comments", response_model=List[schemas.CommentResponse])
 def read_comments(post_id: int, db: Session = Depends(get_db)):
     comments = crud.get_comments(db, post_id=post_id)
     if not comments:
@@ -38,7 +38,7 @@ def read_comments(post_id: int, db: Session = Depends(get_db)):
     return comments
 
 
-@router.post("/api/v1/posts/comments", response_model=schemas.CommentCreate)
+@router.post("/api/v1/post/comments")
 def create_new_comment(comment: schemas.CommentCreate, db: Session = Depends(get_db)):
     new_comment = crud.create_comment(db=db, comment=comment)
     return new_comment

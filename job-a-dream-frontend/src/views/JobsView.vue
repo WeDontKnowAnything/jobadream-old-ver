@@ -36,10 +36,6 @@ const formData = ref({
   keyword: '',
 })
 
-const onSearchJob = () => {
-  jobStore.getSearchJob(formData.value.location, formData.value.position, formData.value.keyword)
-}
-
 // Data table options
 const itemsPerPage = ref(12)
 const page = ref(1)
@@ -50,6 +46,10 @@ const paginatedData = computed(() => {
 
   return jobList.value.slice(start, end)
 })
+
+const onSearchJob = () => {
+  jobStore.getSearchJob(formData.value.location, formData.value.position, formData.value.keyword)
+}
 
 const totalJobs = computed(() => jobList.value.length)
 

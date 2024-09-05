@@ -8,6 +8,7 @@ const router = useRouter()
 
 const savePost = () => {
   boardStore.addPost()
+  router.go(-1)
 }
 
 const resetPost = () => {
