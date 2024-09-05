@@ -9,7 +9,6 @@ class CommentBase(BaseModel):
 
 class CommentCreate(CommentBase):
     post_id: int
-    comment_date: datetime | None
 
 
 class CommentResponse(CommentBase):
