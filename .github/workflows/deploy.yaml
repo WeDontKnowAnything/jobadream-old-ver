@@ -1,0 +1,36 @@
+name: Build
+on:
+  push:
+    branches:
+      - main #빌드하고싶은 브랜치
+    paths:
+      - "job-a-dream-frontend/**" # 프론트엔드 변경 사항이 있을 때만 실행
+jobs:
+  build:
+    runs-on: ubuntu-latest # 실행 환경
+    strategy:
+      matrix:
+        node-version: [18.x] # 노드 버전
+
+    steps:
+      - uses: actions/checkout@v1 # 코드 체크아웃
+      - name: Use Node.js ${{ matrix.node-version }} # 노드 버전 설정
+        uses: actions/setup-node@v1 # 노드 설정
+        with:
+          node-version: ${{ matrix.node-version }} # 노드 버전
+      - name: Pnpm Install # 패키지 설치
+        run: |
+          pnpm install
+      - name: Pnpm Build # 빌드
+        run: |
+          pnpm build
+      - name: Deploy to S3 # S3 배포
+        uses: jakejarvis/s3-sync-action@master
+        with: # 옵션
+          args: --delete # 삭제된 파일 동기화
+        env: # 환경 변수
+          AWS_S3_BUCKET: ${{ secrets.AWS_STAGING_BUCKET_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          SOURCE_DIR: "dist"
