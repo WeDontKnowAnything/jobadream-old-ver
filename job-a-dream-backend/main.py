@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 Base.metadata.create_all(bind=engine)
 origins = [
-    "http://localhost:3000",
+    # "http://localhost:3000",
     "https://jobadream.com",
 ]  # Vue.js 개발 서버의 도메인
 
