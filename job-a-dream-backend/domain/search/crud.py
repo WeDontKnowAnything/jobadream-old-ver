@@ -21,6 +21,13 @@ def get_jobs(
     keyword: str | None,
     db: Session,
 ):
+    """
+    *확인 후 지우세요.
+
+    ilike(): 대소문자 구분없이, 양옆에 붙는 글자 상관없이 {input} 포함하는 데이터 가져옴
+        그런데 몇번 테스트해보니, 한글의 경우 비슷한 글자도 가져오는 것으로 보임
+        예시) keyword="경령" -> "경력", "경영" 등 비슷한 단어가 포함된 데이터 return
+    """
     query = db.query(Jobs)
     if location is not None:
         query = query.filter(

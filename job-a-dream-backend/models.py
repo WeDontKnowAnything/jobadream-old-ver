@@ -18,7 +18,7 @@ class Corporation(Base):
 
     id = Column(VARCHAR, primary_key=True)
     name = Column(VARCHAR, nullable=False)
-    category_code = Column(INT)
+    category_code = Column(VARCHAR)
     size_code = Column(VARCHAR)
     employee_cnt = Column(INT)
     reg_gender = Column(INT)
@@ -43,7 +43,7 @@ class JobUrl(Base):
 
     id = Column(INT, primary_key=True, autoincrement=True)
     platform_name = Column(VARCHAR, nullable=False)
-    url = Column(VARCHAR, nullable=False)
+    url = Column(VARCHAR)
     job_id = Column(VARCHAR, nullable=False)
 
 
@@ -54,8 +54,8 @@ class StartupIR(Base):
     product = Column(VARCHAR)
     corp_desc = Column(Text)
     total_investment = Column(VARCHAR)
-    keyword = Column(VARCHAR)
-    ir_code = Column(INT)
+    keyword = Column(Text)
+    ir_code = Column(VARCHAR)
     startup_id = Column(VARCHAR, nullable=False)
 
 
