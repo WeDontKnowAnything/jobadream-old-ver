@@ -30,9 +30,9 @@
 <br /><br /><br />
 
 # ⭐2. 아키텍처 설계⭐
-![KakaoTalk_20240828_171049951](https://github.com/user-attachments/assets/e1c54108-4a18-4f48-8377-6941be4e4617)
-<br /><br /><br />
 
+<br /><br /><br />
+![jobadream_architecture](https://github.com/user-attachments/assets/5c3dc1ad-e378-4d44-9bc0-2fe364705491)
 # ⭐3. Database 설계⭐
 ![image](https://github.com/user-attachments/assets/cd927f45-1cdd-438f-9c82-19171514b339)
 <br /><br /><br />
@@ -100,7 +100,7 @@
   - 국민 연금에서 기업의 연봉 및 기타 연금 정보 데이터 수집 및 전처리 진행 중
 - [ ] 기타 비재무 정보 데이터
   - 통계청에서 수집 가능한 다양한 비재무 기업 정보 데이터 수집 예정
-- [ ] 채용공고 
+- [X] 채용공고 
    - 사람인 API 승인 요청 확인 후 수집 진행 예정 
    - 채용 플랫폼 API를 통해 채용공고 데이터를 주기적으로 수집하는 pipline 구축 예정
 <br /><br /><br />
@@ -135,9 +135,13 @@
 <img width="665" alt="KakaoTalk_20240828_170426357" src="https://github.com/user-attachments/assets/80f42344-cf93-44f2-991e-4ce8cc27d09d">
 <br /><br /><br />
 
-# ⭐⭐⭐이후 진행 예정 사항⭐⭐⭐
+# ⭐⭐⭐진행 예정 사항⭐⭐⭐
 ### 데이터 수집 및 전처리 마무리
 ### 데이터 수집 pipeline 구축
 ### 데이터 분석 및 인공지능을 활용한 추가 기능 구현
     ex) 재무/비재무 데이터 등을 기반으로 한 기업의 안정성 평가
     ex) 기타 추가적인 기능 고안
+
+# 사항 보고
+- 본 프로젝트는 2024년 09월 이후로 팀원 개인 사정으로 인한 팀 해체로 인해 갑작스럽게 종료된 프로젝트입니다.
+- 혹여 참여의사가 있으신 분은 qjrm1430@gmail.com으로 연락주시기 바랍니다.
