@@ -6,10 +6,10 @@
 ## 👥 팀원 소개
 
 ![image](https://github.com/user-attachments/assets/6ccbaa49-516b-40fd-87c7-89067eb20b5d)
-| 박중헌 (PM) | 문희선 | 오승민 | 송영빈 |
+| 박중헌 (PM) | 오승민 (PE) | 송영빈 (PE) | 문희선 (PE) |
 |:----------:|:----------:|:----------:|:----------:|
-| 프로젝트 총괄/기획<br>데이터 전처리/분석<br>팀 관리 및 조정<br>프론트엔드 개발<br>깃 관리<br>AWS 전체 관리|데이터베이스/ERD 설계<br>데이터 전처리/분석<br>백엔드 개발<br>AWS RDS/S3 관리|<br>데이터 전처리/분석<br>백엔드 개발<br>AWS CI/CD 구축|화면 설계<br>데이터 수집|
-| [@qjrm1430](https://github.com/qjrm1430) | [@MoonHeesun](https://github.com/MoonHeesun) | [@artemIntellectus](https://github.com/artemIntellectus) | [@GETSPRING8230](https://github.com/GETSPRING8230) |
+| 프로젝트 총괄/기획<br>팀 관리<br>깃 관리<br>AWS 아키텍처 설계 및 <br>데이터 전처리/분석<br>프론트엔드 개발 | 데이터 전처리/분석<br>백엔드 개발<br>AWS CI/CD 구축 | 화면 설계<br>데이터 수집 | 데이터베이스/ERD 설계<br>데이터 전처리/분석<br>백엔드 개발<br>AWS RDS/S3 관리 |
+| [@qjrm1430](https://github.com/qjrm1430) | [@artemIntellectus](https://github.com/artemIntellectus) | [@GETSPRING8230](https://github.com/GETSPRING8230) | [@MoonHeesun](https://github.com/MoonHeesun) |
 
 # ⭐1. 프로젝트 개요⭐
 최근 금융 위기와 글로벌화 기술 발전 산업 구조 변화 등으로 인해 중소기업과 스타트업의 경영 환경이 급격히 변화하고 있다. 이러한 상황에서 기업의 휴폐업을 정확하게 예측하는 모델의 필요성이 증가하고 있다.   
